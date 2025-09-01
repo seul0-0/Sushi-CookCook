@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9e0aedc52bf5d44a624061d962e9f3, type: 3}
   m_Name: PlayerStatus
   m_EditorClassIdentifier: 
-  attack: 0
-  money: 0
+  attack: 1
   critical: 0
+  criticalDamage: 1.5
+  money: 100
   luck: 0

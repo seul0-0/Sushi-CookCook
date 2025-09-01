@@ -834,11 +834,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 126853429}
-  m_Father: {fileID: 2028645445}
+  m_Father: {fileID: 1853672010}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -2}
+  m_AnchoredPosition: {x: 433, y: -933}
   m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1063345558
@@ -935,6 +935,7 @@ GameObject:
   - component: {fileID: 1620640720}
   - component: {fileID: 1620640719}
   - component: {fileID: 1620640718}
+  - component: {fileID: 1620640721}
   m_Layer: 5
   m_Name: Player Status Upgrade btn
   m_TagString: Untagged
@@ -1044,6 +1045,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1620640716}
   m_CullTransparentMesh: 1
+--- !u!114 &1620640721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620640716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3417b1602f9400e46ad203a86ec39562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusbtn: {fileID: 1620640718}
+  content: {fileID: 1950778574}
+  upgradeWindow: {fileID: 616549338}
+  upgradeWindowPrefabs: {fileID: 2611877094659238255, guid: a88e193067684964da63e00afbe3d879, type: 3}
 --- !u!1 &1773785926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,6 +1223,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1063345557}
   - {fileID: 2028645445}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1300,7 +1318,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2028645445}
-  - component: {fileID: 2028645446}
   m_Layer: 5
   m_Name: Upgrade
   m_TagString: Untagged
@@ -1320,7 +1337,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1063345557}
   - {fileID: 1620640717}
   - {fileID: 616549339}
   m_Father: {fileID: 1853672010}
@@ -1330,22 +1346,6 @@ RectTransform:
   m_AnchoredPosition: {x: 103, y: 249}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &2028645446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2028645444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3417b1602f9400e46ad203a86ec39562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statusbtn: {fileID: 1620640718}
-  content: {fileID: 1950778574}
-  upgradeWindow: {fileID: 616549338}
-  upgradeWindowPrefabs: {fileID: 2611877094659238255, guid: a88e193067684964da63e00afbe3d879, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

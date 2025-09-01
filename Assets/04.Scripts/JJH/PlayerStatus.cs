@@ -6,30 +6,39 @@ using UnityEngine;
 public class PlayerStatus : ScriptableObject
 {
     [Header("status")]                     // === 플레이어 스텟 ===
-    public int attack;
-    public int critical;
+    public int attack = 1;
+    public float critical = 0;
+    public float criticalDamage = 1.5f; 
 
     [Header("recipt")]                     // === 결산 ===
-    public int money;
-    public int luck;
-     
-    [Header("upgrade")]                    // === 업그레이드 수치 ===
-    public int attackUpgrade;
-    public int criticalUpgrade;
-    public int luckUpgrade;
+    public int money = 100;
+    public int luck = 0;                   // === 행운 수치 ==
+
+    // === 업그레이드 수치 ===
+    private int _attack_Upgrade = 1;
+    private float _critical_Upgrade = 0.5f;
+    private float _critical_Damage_Upgrade = 0.01f;
+    private int _luck_Upgrade = 1;            
 
     public int UpgradeAttackValue(int bonus)
     {
-        return attack + (attackUpgrade * bonus);
+        return attack + (_attack_Upgrade * bonus);
     }
 
-    public int UpgradeCriticalValue(int bonus) 
+    public float UpgradeCriticalValue(int bonus) 
     {
-        return critical + (criticalUpgrade * bonus);
+        float value = Mathf.Min(critical + (_critical_Upgrade * bonus), 100);
+
+        return value;
+    }
+
+    public float UpgradeCriticalDamageValue(int bonus) 
+    {
+        return criticalDamage + (_critical_Damage_Upgrade * bonus);
     }
 
     public int UpgradeLuckValue(int bonus)
     {
-        return luck + (luckUpgrade * bonus);
+        return luck + (_luck_Upgrade * bonus);
     }
 }

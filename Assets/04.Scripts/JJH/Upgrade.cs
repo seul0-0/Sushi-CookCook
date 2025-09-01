@@ -7,7 +7,7 @@ public class Upgrade : MonoBehaviour
 {
     public Button statusbtn;
     public Transform content;
-
+    [Header("upgrade")]
     public GameObject upgradeWindow;
     public GameObject upgradeWindowPrefabs;
 
