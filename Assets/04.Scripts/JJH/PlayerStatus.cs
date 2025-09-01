@@ -9,10 +9,10 @@ public class PlayerStatus : ScriptableObject
     public int attack = 1;
     public float critical = 0;
     public float criticalDamage = 1.5f; 
-
-    [Header("recipt")]                     // === 결산 ===
-    public int money = 100;
     public int luck = 0;                   // === 행운 수치 ==
+
+    [Header("recipt")]                    
+    public int money = 100;
 
     // === 업그레이드 수치 ===
     private int _attack_Upgrade = 1;

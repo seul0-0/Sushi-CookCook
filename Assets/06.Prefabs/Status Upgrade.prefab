@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: 6749697417495177331}
   - component: {fileID: 2584334225472958974}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Text (Legacy) status upgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
