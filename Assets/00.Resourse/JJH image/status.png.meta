@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: status_0
+      name: status_0 atk
       rect:
         serializedVersion: 2
         x: 120
@@ -144,7 +144,7 @@ TextureImporter:
         width: 337
         height: 352
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -157,7 +157,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: status_1
+      name: status_1 critical
       rect:
         serializedVersion: 2
         x: 573
@@ -165,7 +165,7 @@ TextureImporter:
         width: 337
         height: 352
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -188,8 +188,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      status_0: 203524061
-      status_1: -1624880674
+      status_0 atk: 203524061
+      status_1 critical: -1624880674
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

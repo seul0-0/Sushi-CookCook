@@ -36,6 +36,10 @@ public class Upgrade : MonoBehaviour
             GameObject newWindow = Instantiate(upgradeWindowPrefabs);
 
             newWindow.transform.SetParent(content);
+
+            StatusUpgradePanel panel = newWindow.GetComponent<StatusUpgradePanel>();
+
+            panel.SetPanel(i);
         }
     }
 

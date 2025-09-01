@@ -15,5 +15,5 @@ MonoBehaviour:
   attack: 1
   critical: 0
   criticalDamage: 1.5
-  money: 100
   luck: 0
+  money: 10

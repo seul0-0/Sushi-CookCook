@@ -10,6 +10,7 @@ public class StatusDisplay : MonoBehaviour
     public TextMeshProUGUI currentAtk;
     public TextMeshProUGUI currentMoney;
 
+    // === 현재의 스텟 정보를 알려주기 ===
     private void Start()
     {
         currentAtk.text = status.attack.ToString();
