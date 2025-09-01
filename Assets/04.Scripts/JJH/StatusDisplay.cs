@@ -13,6 +13,11 @@ public class StatusDisplay : MonoBehaviour
     // === 현재의 스텟 정보를 알려주기 ===
     private void Start()
     {
+        Refresh();
+    }
+
+    public void Refresh()
+    {
         currentAtk.text = status.attack.ToString();
         currentMoney.text = status.money.ToString();
     }

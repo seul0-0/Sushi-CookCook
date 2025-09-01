@@ -17,3 +17,7 @@ MonoBehaviour:
   criticalDamage: 1.5
   luck: 0
   money: 10
+  attackLevel: 0
+  criticalLevel: 0
+  criticalDamageLevel: 0
+  luckLevel: 0
