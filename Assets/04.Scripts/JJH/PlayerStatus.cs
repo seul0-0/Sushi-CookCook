@@ -87,10 +87,10 @@ public class PlayerStatus : ScriptableObject
         return luck + 1;
     }
 
-    // === 입력한 만큼 돈이 + 됨 ===
+    // === 입력한 만큼 돈이 + 됨 최소 0 ===
     public int ChangeMoney(int amount)
     {
-        money += amount;
+        money = Mathf.Max(0, money + amount);
 
         return money;
     }

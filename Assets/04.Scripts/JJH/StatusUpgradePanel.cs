@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,23 +43,51 @@ public class StatusUpgradePanel : MonoBehaviour
 
     public void UpgradeStatus()
     {
+        // === 비용 계산 ===
+        int upgradeCost;
+
+        switch (upgrade_id)
+        {
+            case 0:
+                upgradeCost = 1 * status.attackLevel;
+                break;
+            case 1:
+                upgradeCost = 2 * status.criticalLevel;
+                break;
+            case 2:
+                upgradeCost = 5 * status.criticalDamageLevel;
+                break;
+            case 3:
+                upgradeCost = 10 * status.luckLevel;
+                break;
+            default:
+                return; 
+        }
+
+        // === 돈이 부족할 경우 ===
+        if (status.money < upgradeCost)
+        {
+            return;
+        }
+
+        // === 돈이 충분 할 경우 ===
         switch (upgrade_id)
         {
             case 0:
                 status.UpgradeAttackValue();
-                status.ChangeMoney(-1 * status.attackLevel);
+                status.ChangeMoney(-upgradeCost);
                 break;
             case 1:
                 status.UpgradeCriticalValue();
-                status.ChangeMoney(-2 * status.criticalLevel);
+                status.ChangeMoney(-upgradeCost);
                 break;
             case 2:
                 status.UpgradeCriticalDamageValue();
-                status.ChangeMoney(-5 * status.criticalDamageLevel);
+                status.ChangeMoney(-upgradeCost);
                 break;
             case 3:
                 status.UpgradeLuckValue();
-                status.ChangeMoney(-10 * status.luckLevel);
+                status.ChangeMoney(-upgradeCost);
                 break;
             default:
                 break;
