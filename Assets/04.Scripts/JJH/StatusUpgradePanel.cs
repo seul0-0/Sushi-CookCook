@@ -7,12 +7,14 @@ using UnityEngine.UI;
 
 public class StatusUpgradePanel : MonoBehaviour
 {
-    [SerializeField]
     private int upgrade_id = 5;                        // === 현재 panel의 번호 ===
 
     public PlayerStatus status;
-
+    [Header("Info")]
     public Image panelicon;
+    public TextMeshProUGUI upgradeName;
+
+    [Header("Next")]
     public TextMeshProUGUI nextUpgradeValue;
     public Button upgradeBtn;
 
@@ -30,13 +32,21 @@ public class StatusUpgradePanel : MonoBehaviour
         upgrade_id = id;
 
         panelicon.sprite = staticons[id];
+        upgradeName.text = id switch
+        {
+            0 => "공격력",
+            1 => "크리티컬",
+            2 => "크리티컬 \n데미지",
+            3 => "운",
+            _ => "",
+        };
 
         nextUpgradeValue.text = id switch
         {
-            0 => $"공격력 :\n {status.attack} => {status.CalculateNextAttackValue()}",
-            1 => $"치명타 :\n {status.critical} => {status.CalculateNextCriticalValue()}",
-            2 => $"치명타 데미지 :\n {status.criticalDamage} => {status.CalculateNextCriticalDamageValue()}",
-            3 => $"행운 :\n {status.luck} => {status.CalculateNextLuckValue()}",
+            0 => $" {status.attack} => {status.CalculateNextAttackValue()}",
+            1 => $" {status.critical} => {status.CalculateNextCriticalValue()}",
+            2 => $" {status.criticalDamage} => {status.CalculateNextCriticalDamageValue()}",
+            3 => $" {status.luck} => {status.CalculateNextLuckValue()}",
             _ => $"",
         };
     }
