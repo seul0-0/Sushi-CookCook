@@ -22,23 +22,31 @@ public class PlayerStatus : ScriptableObject
 
     public int UpgradeAttackValue(int bonus)
     {
-        return attack + (_attack_Upgrade * bonus);
+        attack += (_attack_Upgrade * bonus);
+
+        return attack ;
     }
 
     public float UpgradeCriticalValue(int bonus) 
     {
         float value = Mathf.Min(critical + (_critical_Upgrade * bonus), 100);
 
-        return value;
+        critical = value;
+
+        return critical;
     }
 
     public float UpgradeCriticalDamageValue(int bonus) 
     {
-        return criticalDamage + (_critical_Damage_Upgrade * bonus);
+        criticalDamage += (_critical_Damage_Upgrade * bonus);
+
+        return criticalDamage;
     }
 
     public int UpgradeLuckValue(int bonus)
     {
-        return luck + (_luck_Upgrade * bonus);
+        luck += (_luck_Upgrade * bonus);
+
+        return luck;
     }
 }
