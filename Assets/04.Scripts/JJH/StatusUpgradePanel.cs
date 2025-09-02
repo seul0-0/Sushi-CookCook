@@ -22,22 +22,14 @@ public class StatusUpgradePanel : MonoBehaviour
     public Sprite[] staticons;                         // === iconÀ» ¹Ì¸® ÇÒ´ç ===
 
     // ===   0    ,  1    ,     2      ,     3     ,  4        ===
-    // ===   ³»°ø , ¼Ø¾¾  , ¼Ø¾¾ µ¥¹ÌÁö, Çà¿î ½ºÅÝ , ÀÚµ¿ Á¶¸® ===
+    // ===   ³»°ø , ¼Ø¾¾  , ¼Ø¾¾ °­È­, Çà¿î ½ºÅÝ , ÀÚµ¿ Á¶¸® ===
     public void SetPanel(int id)
     {
         upgrade_id = id;
 
         panelicon.sprite = staticons[id];
 
-        upgradeName.text = id switch
-        {
-            0 => " ³»°ø",
-            1 => " ¼Ø¾¾",
-            2 => " ¼Ø¾¾ \n °­È­",
-            3 => " Çà¿î",
-            4 => " ÀÚµ¿ \n Á¶¸®",
-            _ => "",
-        };
+        upgradeName.text = status.stats[id].name;
 
         NextValue();
     }

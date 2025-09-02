@@ -16,6 +16,7 @@ public enum StatType
 public struct StatData
 {
     public StatType type;
+    public string name;
     public float value;
     public int level;
 }
