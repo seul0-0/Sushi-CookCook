@@ -14,7 +14,7 @@ public class PlayerAttack : MonoBehaviour
     }
     void OnAttack() // Player 클릭을 받아들인 후 처리
     {
-        float damage = playerStatus.attack * 0.1f;
+        float damage = 0.1f;
         Debug.Log("플레이어 공격력: " + damage);
 
         enemyHp.fillAmount -= damage;

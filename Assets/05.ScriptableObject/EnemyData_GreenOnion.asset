@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f7f7bd60b84daa458ef50b4c2543abe, type: 3}
-  m_Name: EnemyData_Egg
+  m_Name: EnemyData_GreenOnion
   m_EditorClassIdentifier: 
-  enemyName: Egg
-  health: 10
-  enemySprite: {fileID: 21300000, guid: b7e52a11c2c6d5f46815610c334a8dea, type: 3}
-  Gold: 10
+  enemyName: "\uB300\uD30C"
+  health: 15
+  enemySprite: {fileID: 21300000, guid: e98847e43ad355f46b4484d3735df086, type: 3}
+  Gold: 15
