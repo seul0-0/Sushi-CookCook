@@ -10,5 +10,6 @@ public class WeaponScriptableObject : ScriptableObject
     public int ItemAttack;
     public int CriticalChance;
     public int ItemLevel;
-    public Image ItemImage;
+    public Sprite ItemImage;
+    public bool isEquipped;
 }
