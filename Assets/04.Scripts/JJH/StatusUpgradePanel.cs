@@ -20,7 +20,7 @@ public class StatusUpgradePanel : MonoBehaviour
 
     public Sprite[] staticons;                         // === iconÀ» ¹Ì¸® ÇÒ´ç ===
 
-    // ===   0    ,  1    ,     2      ,     3     ,  4        ===
+    // ===   0    ,  1    ,     2    ,     3     ,  4        ===
     // ===   ³»°ø , ¼Ø¾¾  , ¼Ø¾¾ °­È­, Çà¿î ½ºÅÝ , ÀÚµ¿ Á¶¸® ===
     public void SetPanel(int id)
     {

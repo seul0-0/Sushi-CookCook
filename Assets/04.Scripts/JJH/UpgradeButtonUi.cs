@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class UpgradeButtonUi : MonoBehaviour
@@ -21,6 +22,8 @@ public class UpgradeButtonUi : MonoBehaviour
     private int _upgradeCost;
     // === 업그레이드 true일 경우 가능 ===
     private bool _isUpgradeReady;
+    // === 클릭시 활성화 ===
+    private bool _isClick;
 
     public void Start()
     {
@@ -30,11 +33,21 @@ public class UpgradeButtonUi : MonoBehaviour
 
             SetButtonPanel();
 
-            upgradeBtn.onClick.AddListener(UpgradeStatus);
+            //upgradeBtn.onClick.AddListener(OnClick);
 
             PlayerStatus.OnMoneyChanged += CheckCost;
         }
 
+    }
+
+    // === 버튼에 할당 ===
+    public void OnClick()
+    {
+        Debug.Log("클릭");
+
+        _isClick = !_isClick;
+
+        UpgradeStatus();
     }
 
     // === 다음 레벨 확인 ===
@@ -71,6 +84,8 @@ public class UpgradeButtonUi : MonoBehaviour
 
         statusUpgradePanel.status.ChangeMoneyValue(-_upgradeCost);
 
+        // StartCoroutine(UpgradeCorutine());
+
         // === 업그레이드 체크를 다시 활성화 하기 위해 ===
         _isUpgradeReady = false;
 
@@ -82,5 +97,32 @@ public class UpgradeButtonUi : MonoBehaviour
 
         // === 현재 스텟 창 갱신 ===
         OnStatusRefreshed?.Invoke();
+    }
+
+    public IEnumerator UpgradeCorutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        while (_isClick && _isUpgradeReady)
+        {
+            // === 업그레이드 ===
+            statusUpgradePanel.status.UpgradeValue(statusUpgradePanel.status.stats[_buttonindex].type);
+
+            statusUpgradePanel.status.ChangeMoneyValue(-_upgradeCost);
+
+            CheckCost();
+
+            // === 패널 창 갱신 ===
+            statusUpgradePanel.NextValue();
+
+            // === 다음 비용 갱신 ===
+            SetButtonPanel();
+
+            // === 현재 스텟 창 갱신 ===
+            OnStatusRefreshed?.Invoke();
+
+            yield return new WaitForSeconds(0.2f);
+        }
+
     }
 }
