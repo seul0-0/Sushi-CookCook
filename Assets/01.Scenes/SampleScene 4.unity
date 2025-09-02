@@ -419,6 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3417b1602f9400e46ad203a86ec39562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: {fileID: 11400000, guid: b02ba359e3f5db04986d02665c9237a4, type: 2}
   content: {fileID: 4513570886109291914}
   upgradeWindowPrefabs: {fileID: 2611877094659238255, guid: a88e193067684964da63e00afbe3d879, type: 3}
 --- !u!114 &853191155832002626
