@@ -10,7 +10,6 @@ public class UpgradeButtonUi : MonoBehaviour
     public static Action OnStatusRefreshed;            // === 델리 게이트 호출 ===
 
     public StatusUpgradePanel statusUpgradePanel;
-    public PlayerStatus status;
 
     [Header("UpgradeBtn")]
     public TextMeshProUGUI nextCost;
@@ -25,7 +24,7 @@ public class UpgradeButtonUi : MonoBehaviour
 
     public void Start()
     {
-        if(statusUpgradePanel != null && status != null)
+        if(statusUpgradePanel != null && statusUpgradePanel.status != null)
         {
             _buttonindex = statusUpgradePanel.upgrade_id;
 
@@ -41,7 +40,7 @@ public class UpgradeButtonUi : MonoBehaviour
     // === 다음 레벨 확인 ===
     public void SetButtonPanel()
     {
-        _upgradeCost = status.CheckMoney(status.stats[_buttonindex].type);
+        _upgradeCost = statusUpgradePanel.status.CheckMoney(statusUpgradePanel.status.stats[_buttonindex].type);
 
         nextCost.text = $"{_upgradeCost}";
 
@@ -51,7 +50,7 @@ public class UpgradeButtonUi : MonoBehaviour
     public void CheckCost()
     {
         // === 돈이 부족할 경우 ===
-        if (status.money < _upgradeCost)
+        if (statusUpgradePanel.status.money < _upgradeCost)
         {
             upgradeBtn.image.color = Color.red;
             _isUpgradeReady = false;
@@ -68,9 +67,9 @@ public class UpgradeButtonUi : MonoBehaviour
         if (_isUpgradeReady == false) { return; }
 
         // === 업그레이드 ===
-        status.UpgradeValue((status.stats[_buttonindex].type));
+        statusUpgradePanel.status.UpgradeValue(statusUpgradePanel.status.stats[_buttonindex].type);
 
-        status.ChangeMoneyValue(-_upgradeCost);
+        statusUpgradePanel.status.ChangeMoneyValue(-_upgradeCost);
 
         // === 업그레이드 체크를 다시 활성화 하기 위해 ===
         _isUpgradeReady = false;

@@ -7,6 +7,7 @@ public class StatusDisplay : MonoBehaviour
 {
     public PlayerStatus status;
 
+    [Header("Ui")]
     public TextMeshProUGUI currentAtk;
     public TextMeshProUGUI currentMoney;
 
