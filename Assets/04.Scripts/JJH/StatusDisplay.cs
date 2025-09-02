@@ -7,6 +7,7 @@ public class StatusDisplay : MonoBehaviour
 {
     public PlayerStatus status;
 
+    [Header("Ui")]
     public TextMeshProUGUI currentAtk;
     public TextMeshProUGUI currentMoney;
 
@@ -14,11 +15,15 @@ public class StatusDisplay : MonoBehaviour
     private void Start()
     {
         Refresh();
+
+        UpgradeButtonUi.OnStatusRefreshed += Refresh;
     }
 
     public void Refresh()
     {
-        currentAtk.text = status.attack.ToString();
+        int index = status.GetStatType(StatType.attack);
+
+        currentAtk.text = status.stats[index].value.ToString();
         currentMoney.text = status.money.ToString();
     }
 }
