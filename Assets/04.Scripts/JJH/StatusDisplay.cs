@@ -14,6 +14,8 @@ public class StatusDisplay : MonoBehaviour
     private void Start()
     {
         Refresh();
+
+        StatusUpgradePanel.OnStatusRefreshed += Refresh;
     }
 
     public void Refresh()

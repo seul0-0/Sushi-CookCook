@@ -1,13 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StatusUpgradePanel : MonoBehaviour
 {
-    private int upgrade_id = 5;                        // === 현재 panel의 번호 ===
+    public static Action OnStatusRefreshed;            // === 이벤트 호출 ===
+
+    private int upgrade_id;                            // === 현재 panel의 번호 ===
 
     public PlayerStatus status;
     [Header("Info")]
@@ -15,10 +17,11 @@ public class StatusUpgradePanel : MonoBehaviour
     public TextMeshProUGUI upgradeName;
 
     [Header("Next")]
+    public TextMeshProUGUI nextCost;
     public TextMeshProUGUI nextUpgradeValue;
     public Button upgradeBtn;
 
-    public Sprite[] staticons;                     // === icon을 미리 할당 ===
+    public Sprite[] staticons;                         // === icon을 미리 할당 ===
 
     private void Start()
     {
@@ -43,10 +46,19 @@ public class StatusUpgradePanel : MonoBehaviour
 
         nextUpgradeValue.text = id switch
         {
-            0 => $" {status.attack} => {status.CalculateNextAttackValue()}",
-            1 => $" {status.critical} => {status.CalculateNextCriticalValue()}",
+            0 => $" {status.attack} =>\n {status.CalculateNextAttackValue()}",
+            1 => $" {status.critical} =>\n {status.CalculateNextCriticalValue()}",
             2 => $" {status.criticalDamage} =>\n {status.CalculateNextCriticalDamageValue()}",
-            3 => $" {status.luck} => {status.CalculateNextLuckValue()}",
+            3 => $" {status.luck} =>\n {status.CalculateNextLuckValue()}",
+            _ => $"",
+        };
+
+        nextCost.text = id switch
+        {
+            0 => $"{1 * (status.attackLevel + 1)}",
+            1 => $"{2 * (status.criticalLevel + 1)}",
+            2 => $"{5 * (status.criticalDamageLevel + 1)}",
+            3 => $"{10 * (status.luckLevel + 1)}",
             _ => $"",
         };
     }
@@ -103,5 +115,8 @@ public class StatusUpgradePanel : MonoBehaviour
                 break;
         }
         SetPanel(upgrade_id);
+
+        // === 현재 스텟 창 갱신 ===
+        OnStatusRefreshed?.Invoke();
     }
 }

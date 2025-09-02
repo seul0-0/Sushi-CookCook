@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Upgrade : MonoBehaviour
+public class UpgradeUi : MonoBehaviour
 {
-    public Transform content;
+    public Transform content;                 // === 생성 위치 ===
+
     [Header("upgrade")]
     public GameObject upgradeWindowPrefabs;
 
