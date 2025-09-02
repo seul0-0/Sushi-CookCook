@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Gloves
   m_EditorClassIdentifier: 
   ItemName: "\uC7A5\uAC11"
-  ItemAttack: 10
+  ItemAttack: 2
   CriticalChance: 0
+  ItemLevel: 0
   ItemImage: {fileID: 0}

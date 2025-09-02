@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RicePaddle
   m_EditorClassIdentifier: 
   ItemName: "\uC8FC\uAC71"
-  ItemAttack: 15
+  ItemAttack: 5
   CriticalChance: 5
+  ItemLevel: 0
   ItemImage: {fileID: 0}

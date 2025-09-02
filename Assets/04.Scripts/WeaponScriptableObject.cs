@@ -9,5 +9,6 @@ public class WeaponScriptableObject : ScriptableObject
     public string ItemName;
     public int ItemAttack;
     public int CriticalChance;
+    public int ItemLevel;
     public Image ItemImage;
 }

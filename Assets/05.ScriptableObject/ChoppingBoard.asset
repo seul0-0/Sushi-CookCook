@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: "\uB3C4\uB9C8"
   ItemAttack: 15
-  CriticalChance: 15
+  CriticalChance: 10
+  ItemLevel: 0
   ItemImage: {fileID: 0}
