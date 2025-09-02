@@ -5,20 +5,22 @@ using UnityEngine.UI;
 
 public class ClickEvent : MonoBehaviour
 {
-    public Image HealthGauge;
     public Button AttackButton;
-    
+    public Toggle autoAttackToggle;
+
     void Start()
     {
-        AttackButton.onClick.AddListener(Test);
-        EventManager.attackClick?.Invoke();
+        AttackButton.onClick.AddListener(ClickButton);
+        autoAttackToggle.onValueChanged.AddListener(delegate { AutoToggleEvent(); });
     }
 
-    void Test()
+    void ClickButton()
     {
-        float reduceHp = -0.2f;
-        Debug.Log("버튼 클릭");
-        HealthGauge.fillAmount += reduceHp; 
+        EventManager.attackClick?.Invoke();
+    }
+    void AutoToggleEvent()
+    {
+        EventManager.autoAttack?.Invoke();
     }
 
 }
