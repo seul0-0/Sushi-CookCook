@@ -77,6 +77,7 @@ GameObject:
   - component: {fileID: 2599804292679808923}
   - component: {fileID: 7621808060339215189}
   - component: {fileID: 3761625539822396937}
+  - component: {fileID: 248061121405821567}
   m_Layer: 5
   m_Name: Status Upgrade
   m_TagString: Untagged
@@ -182,17 +183,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e2c958b6ac556e408a0e6c4215cb604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgrade_id: 0
   status: {fileID: 11400000, guid: b02ba359e3f5db04986d02665c9237a4, type: 2}
   panelicon: {fileID: 8153416475131954867}
   upgradeName: {fileID: 3447249640586297119}
-  nextCost: {fileID: 8488117801833892708}
   nextUpgradeValue: {fileID: 1748938664957308431}
-  upgradeBtn: {fileID: 2752020982587532484}
   staticons:
   - {fileID: 203524061, guid: d12d0f80e2e2eb14fab151775d41a020, type: 3}
   - {fileID: -1624880674, guid: d12d0f80e2e2eb14fab151775d41a020, type: 3}
   - {fileID: 1493697645, guid: bed98a114011da44b94ff5256d0f270d, type: 3}
   - {fileID: 1717257276, guid: bed98a114011da44b94ff5256d0f270d, type: 3}
+--- !u!114 &248061121405821567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2611877094659238255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfcbee716988204f9f44c5e8a0dcb17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusUpgradePanel: {fileID: 3761625539822396937}
+  nextCost: {fileID: 8488117801833892708}
+  upgradeBtn: {fileID: 2752020982587532484}
 --- !u!1 &3142215334593026498
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,8 +282,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -389,7 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -926,7 +941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
