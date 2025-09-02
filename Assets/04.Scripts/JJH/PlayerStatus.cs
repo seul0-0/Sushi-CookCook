@@ -6,10 +6,11 @@ using UnityEngine;
 public class PlayerStatus : ScriptableObject
 {
     [Header("Status")]                     // === 플레이어 스텟 ===
-    public int attack = 1;                 // === 내공 ===
-    public float critical = 0;             // === 솜씨 ===
-    public float criticalDamage = 1.5f;    // === 솜씨 강화 ===
-    public int luck = 0;                   // === 행운 수치 ===
+    public int attack = 1;                 
+    public float critical = 0;             
+    public float criticalDamage = 1.5f;    
+    public int luck = 0;                   
+    public int autoattack = 0;
 
     [Header("Recipt")]                    
     public int money = 10;
@@ -19,7 +20,8 @@ public class PlayerStatus : ScriptableObject
     public int attackLevel = 0;
     public int criticalLevel = 0;
     public int criticalDamageLevel = 0;
-    public int luckLevel = 0;            
+    public int luckLevel = 0;
+    public int autoAttackLevel = 0;
 
     // === 레벨당 내공 상승량 ===
     public int UpgradeAttackValue()
@@ -85,6 +87,22 @@ public class PlayerStatus : ScriptableObject
     public int CalculateNextLuckValue()
     {
         return luck + 1;
+    }
+
+    // === 레벨당 자동 공격 표시 ===
+    public int UpgradeAutoAttackValue()
+    { 
+        autoAttackLevel++;
+
+        autoattack += 2;
+
+        return autoattack;
+    }
+
+    // === 다음 자동 공격 증가량 표시 ==
+    public int CalculateNextAutoAttackValue()
+    {
+        return autoattack + 2;
     }
 
     // === 입력한 만큼 돈이 + 됨 최소 0 ===

@@ -182,7 +182,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 553
-        y: 546
+        y: 548
         width: 373
         height: 397
       alignment: 0
@@ -194,6 +194,27 @@ TextureImporter:
       bones: []
       spriteID: 1ba035aa14074794dafa4d110cbb6c11
       internalID: 1493697645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: status2_3 auto
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 553
+        width: 373
+        height: 397
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46b5e590ed8930f459c7da61e2246f76
+      internalID: 357651013
       vertices: []
       indices: 
       edges: []
@@ -212,6 +233,7 @@ TextureImporter:
       status2_0 luck: 1717257276
       status2_1 money: 1268500423
       status2_2 criticasl_Damage: 1493697645
+      status2_3 auto: 357651013
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

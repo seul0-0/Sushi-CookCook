@@ -41,6 +41,7 @@ public class UpgradeButtonUi : MonoBehaviour
             1 => $"{2 * (statusUpgradePanel.status.criticalLevel + 1)}",
             2 => $"{5 * (statusUpgradePanel.status.criticalDamageLevel + 1)}",
             3 => $"{10 * (statusUpgradePanel.status.luckLevel + 1)}",
+            4 => $"{100 * (statusUpgradePanel.status.autoAttackLevel + 1)}",
             _ => $"",
         };
 
@@ -62,6 +63,9 @@ public class UpgradeButtonUi : MonoBehaviour
                 break;
             case 3:
                 _upgradeCost = 10 * (statusUpgradePanel.status.luckLevel + 1);
+                break;
+            case 4:
+                _upgradeCost = 100 * (statusUpgradePanel.status.autoAttackLevel + 1);
                 break;
             default:
                 return;
@@ -100,6 +104,10 @@ public class UpgradeButtonUi : MonoBehaviour
                 break;
             case 3:
                 statusUpgradePanel.status.UpgradeLuckValue();
+                statusUpgradePanel.status.ChangeMoney(-_upgradeCost);
+                break;
+            case 4:
+                statusUpgradePanel.status.UpgradeAutoAttackValue();
                 statusUpgradePanel.status.ChangeMoney(-_upgradeCost);
                 break;
             default:

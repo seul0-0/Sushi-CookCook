@@ -16,7 +16,7 @@ public class UpgradeCreateUi : MonoBehaviour
 
     private void MakeWindow()
     {
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             GameObject newWindow = Instantiate(upgradeWindowPrefabs);
 
@@ -27,5 +27,4 @@ public class UpgradeCreateUi : MonoBehaviour
             panel.SetPanel(i);
         }
     }
-
 }

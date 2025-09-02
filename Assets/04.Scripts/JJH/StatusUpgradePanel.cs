@@ -20,8 +20,8 @@ public class StatusUpgradePanel : MonoBehaviour
 
     public Sprite[] staticons;                         // === iconÀ» ¹Ì¸® ÇÒ´ç ===
 
-    // ===   0    ,  1    ,     2      ,     3     ===
-    // ===   ³»°ø , ¼Ø¾¾  , ¼Ø¾¾ µ¥¹ÌÁö, Çà¿î ½ºÅÝ ===
+    // ===   0    ,  1    ,     2      ,     3     ,  4        ===
+    // ===   ³»°ø , ¼Ø¾¾  , ¼Ø¾¾ µ¥¹ÌÁö, Çà¿î ½ºÅÝ , ÀÚµ¿ Á¶¸® ===
     public void SetPanel(int id)
     {
         upgrade_id = id;
@@ -34,6 +34,7 @@ public class StatusUpgradePanel : MonoBehaviour
             1 => " ¼Ø¾¾",
             2 => " ¼Ø¾¾ \n °­È­",
             3 => " Çà¿î",
+            4 => " ÀÚµ¿ \n Á¶¸®",
             _ => "",
         };
 
@@ -48,6 +49,7 @@ public class StatusUpgradePanel : MonoBehaviour
             1 => $" {status.critical} =>\n {status.CalculateNextCriticalValue()}",
             2 => $" {status.criticalDamage} =>\n {status.CalculateNextCriticalDamageValue()}",
             3 => $" {status.luck} =>\n {status.CalculateNextLuckValue()}",
+            4 => $" {status.autoattack} =>\n {status.CalculateNextAutoAttackValue()}",
             _ => $"",
         };
     }
