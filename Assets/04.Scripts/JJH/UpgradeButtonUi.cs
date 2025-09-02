@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class UpgradeButtonUi : MonoBehaviour
 {
-    public static Action OnStatusRefreshed;            // === 이벤트 호출 ===
+    public static Action OnStatusRefreshed;            // === 델리 게이트 호출 ===
 
     public StatusUpgradePanel statusUpgradePanel;
 
@@ -18,7 +18,6 @@ public class UpgradeButtonUi : MonoBehaviour
     // === 업그레이드 비용 ===
     private int _upgradeCost;
     // === 업그레이드 true일 경우 가능 ===
-    [SerializeField]
     private bool _isUpgradeReady;
 
     public void Start()

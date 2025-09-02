@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpgradeUi : MonoBehaviour
+public class UpgradeCreateUi : MonoBehaviour
 {
     public Transform content;                 // === 생성 위치 ===
 
