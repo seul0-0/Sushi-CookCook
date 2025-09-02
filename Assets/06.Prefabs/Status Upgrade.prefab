@@ -207,6 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusUpgradePanel: {fileID: 3761625539822396937}
+  status: {fileID: 11400000, guid: b02ba359e3f5db04986d02665c9237a4, type: 2}
   nextCost: {fileID: 8488117801833892708}
   upgradeBtn: {fileID: 2752020982587532484}
 --- !u!1 &3142215334593026498

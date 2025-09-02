@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,14 +44,11 @@ public class StatusUpgradePanel : MonoBehaviour
 
     public void NextValue()
     {
-        nextUpgradeValue.text = upgrade_id switch
-        {
-            0 => $" {status.attack} =>\n {status.CalculateNextAttackValue()}",
-            1 => $" {status.critical} =>\n {status.CalculateNextCriticalValue()}",
-            2 => $" {status.criticalDamage} =>\n {status.CalculateNextCriticalDamageValue()}",
-            3 => $" {status.luck} =>\n {status.CalculateNextLuckValue()}",
-            4 => $" {status.autoattack} =>\n {status.CalculateNextAutoAttackValue()}",
-            _ => $"",
-        };
+        StatType type = (StatType)upgrade_id;
+
+        float currentValue = status.stats[upgrade_id].value;
+        float nextValue = status.NextStatValue(type);
+
+        nextUpgradeValue.text = $"{currentValue} =>\n {nextValue}";
     }
 }

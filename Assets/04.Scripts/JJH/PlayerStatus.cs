@@ -1,115 +1,153 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum StatType
+{
+    attack,
+    critical,
+    criticalDamage,
+    luck,
+    autoattack
+}
+
+[System.Serializable]
+public struct StatData
+{
+    public StatType type;
+    public float value;
+    public int level;
+}
+
+
 [CreateAssetMenu (fileName ="PlayerStatus", menuName = "Player")]
 public class PlayerStatus : ScriptableObject
 {
+    public static Action OnMoneyChanged;   // === 돈 변화 델리게이트 ===
+
     [Header("Status")]                     // === 플레이어 스텟 ===
-    public int attack = 1;                 
-    public float critical = 0;             
-    public float criticalDamage = 1.5f;    
-    public int luck = 0;                   
-    public int autoattack = 0;
+    public StatData[] stats;
 
     [Header("Recipt")]                    
     public int money = 10;
 
-    [Header("Level")]
-    // === 현재 업그레이드 수치 ===
-    public int attackLevel = 0;
-    public int criticalLevel = 0;
-    public int criticalDamageLevel = 0;
-    public int luckLevel = 0;
-    public int autoAttackLevel = 0;
-
-    // === 레벨당 내공 상승량 ===
-    public int UpgradeAttackValue()
+    // === Player Stat 찾기 ===
+    public int GetStatType(StatType type)
     {
-        attackLevel++;
-
-        attack += 1;
-
-        return attack ;
+        for (int i = 0; i < stats.Length; i++) 
+        {
+           if( stats[i].type == type)
+           {
+                return i;
+           }
+        }
+        return 0;
     }
 
-    // === 다음 내공 증가량 표시 ===
-    public int CalculateNextAttackValue()
+    // === 다음 강화 수치 ===
+    public float NextStatValue(StatType type)
     {
-        return attack + 1;
+        int index = GetStatType(type);
+
+        switch (type)
+        {
+            case StatType.attack:
+                return stats[index].value + 1;
+
+            case StatType.critical:
+                float value = Mathf.Min(stats[index].value + 0.5f, 100);
+                return value;
+
+            case StatType.criticalDamage:
+                return stats[index].value + 0.01f;
+
+            case StatType.luck:
+                return stats[index].value + 1;
+
+            case StatType.autoattack:
+                return stats[index].value + 2;
+
+            default:
+                return 0f;
+
+        }
     }
 
-    // === 레벨당 솜씨 상승량 ===
-    public float UpgradeCriticalValue() 
+    // === 스텟 업그레이드 ===
+    public float UpgradeValue(StatType type)
     {
-        criticalLevel++;
+        int index = GetStatType(type);
 
-        float value = Mathf.Min(critical + 0.5f, 100);
+        switch (type)
+        {
+            case StatType.attack:
+                stats[index].level++;
 
-        critical = value;
+                stats[index].value += 1;
 
-        return critical;
-    }
+                return stats[index].value;
 
-    // === 다음 솜씨 증가량 표시 ===
-    public float CalculateNextCriticalValue()
-    {
-        return critical + 0.5f;
-    }
+            case StatType.critical:
+                stats[index].level++;
 
-    // === 레벨당 솜씨 강화 표시 ===
-    public float UpgradeCriticalDamageValue() 
-    {
-        criticalDamageLevel++;
+                float value = Mathf.Min(stats[index].value + 0.5f, 100);
 
-        criticalDamage +=  0.01f;
+                stats[index].value = value;
 
-        return criticalDamage;
-    }
-    
-    // === 다음 솜씨 강화 증가량 표시 ===
-    public float CalculateNextCriticalDamageValue()
-    {
-        return criticalDamage + 0.01f;
-    }
+                return value;
 
-    // === 레벨당 행운 표시 ===
-    public int UpgradeLuckValue()
-    { 
-        luckLevel++;
+            case StatType.criticalDamage:
+                stats[index].level++;
 
-        luck += 1;
+                stats[index].value += 0.01f;
 
-        return luck;
-    }
+                return stats[index].value;
 
-    // === 다음 행운 증가량 표시 ==
-    public int CalculateNextLuckValue()
-    {
-        return luck + 1;
-    }
+            case StatType.luck:
+                stats[index].level++;
 
-    // === 레벨당 자동 공격 표시 ===
-    public int UpgradeAutoAttackValue()
-    { 
-        autoAttackLevel++;
+                stats[index].value += 1;
 
-        autoattack += 2;
+                return stats[index].value;
 
-        return autoattack;
-    }
+            case StatType.autoattack:
+                stats[index].level++;
 
-    // === 다음 자동 공격 증가량 표시 ==
-    public int CalculateNextAutoAttackValue()
-    {
-        return autoattack + 2;
+                stats[index].value += 2;
+
+                return stats[index].value;
+
+            default:
+                return 0f;
+
+        }
     }
 
     // === 입력한 만큼 돈이 + 됨 최소 0 ===
-    public int ChangeMoney(int amount)
+    public int ChangeMoneyValue(int amount)
     {
         money = Mathf.Max(0, money + amount);
 
+        OnMoneyChanged?.Invoke();
+
         return money;
     }
+
+    // === 강화시 사용되는 돈 ===
+    public int CheckMoney(StatType type)
+    {
+        int index = GetStatType(type);
+
+        return type switch
+        {
+            StatType.attack => 1 * (stats[index].level + 1),
+            StatType.critical => 2 * (stats[index].level + 1),
+            StatType.criticalDamage => 5 * (stats[index].level + 1),
+            StatType.luck => 10 * (stats[index].level + 1),
+            StatType.autoattack => 100 * (stats[index].level + 1),
+            _ => 0,
+        };
+    }
+
 }
