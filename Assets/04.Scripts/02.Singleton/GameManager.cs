@@ -1,7 +1,9 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using Zenject;
 
 public interface IGameManager
 {
@@ -10,20 +12,26 @@ public interface IGameManager
 
 public class GameManager : MonoBehaviour, IGameManager
 {
+    [SerializeField] private UI_SettingPanel _settingPanel;
+
+    [Inject] private IAudioManager _audioManager;
+
     public int gameLevel {  get;  set; }
 
     public EventMediator mediator;
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        _settingPanel ??= GetComponentInChildren<UI_SettingPanel>(); 
     }
 
-    void Start()
+    async void Start()
     {
         // Mediator 생성 (PlayerDataM을 IPlayerData로 전달)
         PlayerStatsTest statsData = Resources.Load<PlayerStatsTest>("PlayerStats");
         mediator = new EventMediator(new PlayerDataM(statsData));
+
+        _audioManager.PlayBGM("1");
     }
 
     public void AddLevel(int value)
