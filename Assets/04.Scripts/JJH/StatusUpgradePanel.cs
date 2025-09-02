@@ -26,7 +26,7 @@ public class StatusUpgradePanel : MonoBehaviour
     }
 
     // ===   0    ,  1    ,     2       ,     3     ===
-    // === 공격력 ,치명타, 치명타 데미지, 행운 스텟 ===
+    // ===   내공 , 솜씨  , 솜씨 데미지, 행운 스텟 ===
     public void SetPanel(int id)
     {
         upgrade_id = id;
@@ -34,10 +34,10 @@ public class StatusUpgradePanel : MonoBehaviour
         panelicon.sprite = staticons[id];
         upgradeName.text = id switch
         {
-            0 => "공격력",
-            1 => "크리티컬",
-            2 => "크리티컬 \n데미지",
-            3 => "운",
+            0 => " 내공",
+            1 => " 솜씨",
+            2 => " 솜씨 \n 강화",
+            3 => " 행운",
             _ => "",
         };
 
@@ -45,7 +45,7 @@ public class StatusUpgradePanel : MonoBehaviour
         {
             0 => $" {status.attack} => {status.CalculateNextAttackValue()}",
             1 => $" {status.critical} => {status.CalculateNextCriticalValue()}",
-            2 => $" {status.criticalDamage} => {status.CalculateNextCriticalDamageValue()}",
+            2 => $" {status.criticalDamage} =>\n {status.CalculateNextCriticalDamageValue()}",
             3 => $" {status.luck} => {status.CalculateNextLuckValue()}",
             _ => $"",
         };
@@ -59,16 +59,16 @@ public class StatusUpgradePanel : MonoBehaviour
         switch (upgrade_id)
         {
             case 0:
-                upgradeCost = 1 * status.attackLevel;
+                upgradeCost = 1 * (status.attackLevel + 1);
                 break;
             case 1:
-                upgradeCost = 2 * status.criticalLevel;
+                upgradeCost = 2 * (status.criticalLevel + 1);
                 break;
             case 2:
-                upgradeCost = 5 * status.criticalDamageLevel;
+                upgradeCost = 5 * (status.criticalDamageLevel + 1);
                 break;
             case 3:
-                upgradeCost = 10 * status.luckLevel;
+                upgradeCost = 10 * (status.luckLevel + 1);
                 break;
             default:
                 return; 

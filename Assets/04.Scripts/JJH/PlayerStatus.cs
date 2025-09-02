@@ -6,10 +6,10 @@ using UnityEngine;
 public class PlayerStatus : ScriptableObject
 {
     [Header("Status")]                     // === 플레이어 스텟 ===
-    public int attack = 1;
-    public float critical = 0;
-    public float criticalDamage = 1.5f; 
-    public int luck = 0;                   // === 행운 수치 ==
+    public int attack = 1;                 // === 내공 ===
+    public float critical = 0;             // === 솜씨 ===
+    public float criticalDamage = 1.5f;    // === 솜씨 강화 ===
+    public int luck = 0;                   // === 행운 수치 ===
 
     [Header("Recipt")]                    
     public int money = 10;
@@ -21,7 +21,7 @@ public class PlayerStatus : ScriptableObject
     public int criticalDamageLevel = 0;
     public int luckLevel = 0;            
 
-    // === 레벨당 공격 상승량 ===
+    // === 레벨당 내공 상승량 ===
     public int UpgradeAttackValue()
     {
         attackLevel++;
@@ -31,13 +31,13 @@ public class PlayerStatus : ScriptableObject
         return attack ;
     }
 
-    // === 다음 공격 증가량 표시 ===
+    // === 다음 내공 증가량 표시 ===
     public int CalculateNextAttackValue()
     {
         return attack + 1;
     }
 
-    // === 레벨당 크리티컬 상승량 ===
+    // === 레벨당 솜씨 상승량 ===
     public float UpgradeCriticalValue() 
     {
         criticalLevel++;
@@ -49,13 +49,13 @@ public class PlayerStatus : ScriptableObject
         return critical;
     }
 
-    // === 다음 크리티컬 증가량 표시 ===
+    // === 다음 솜씨 증가량 표시 ===
     public float CalculateNextCriticalValue()
     {
         return critical + 0.5f;
     }
 
-    // === 레벨당 크리티컬 데미지 표시 ===
+    // === 레벨당 솜씨 강화 표시 ===
     public float UpgradeCriticalDamageValue() 
     {
         criticalDamageLevel++;
@@ -65,13 +65,13 @@ public class PlayerStatus : ScriptableObject
         return criticalDamage;
     }
     
-    // === 다음 크리티컬 데미지 증가량 표시 ===
+    // === 다음 솜씨 강화 증가량 표시 ===
     public float CalculateNextCriticalDamageValue()
     {
         return criticalDamage + 0.01f;
     }
 
-    // === 레벨당 운 표시 ===
+    // === 레벨당 행운 표시 ===
     public int UpgradeLuckValue()
     { 
         luckLevel++;
@@ -81,7 +81,7 @@ public class PlayerStatus : ScriptableObject
         return luck;
     }
 
-    // === 다음 운 증가량 표시 ==
+    // === 다음 행운 증가량 표시 ==
     public int CalculateNextLuckValue()
     {
         return luck + 1;
