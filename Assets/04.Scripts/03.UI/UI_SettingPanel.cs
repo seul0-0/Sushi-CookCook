@@ -1,0 +1,140 @@
+using Cysharp.Threading.Tasks;
+using System.Collections;
+using System.Collections.Generic;
+using UniRx;
+using UniRx.Triggers;
+using UnityEditor.SearchService;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.Video;
+using Zenject;
+using Scene = UnityEngine.SceneManagement.Scene;
+
+public class UI_SettingPanel : MonoBehaviour
+{
+    [Header("Sliders")]
+    [SerializeField] private Slider _bgmSlider;
+    [SerializeField] private Slider _sfxSlider;
+
+    [Header("Panels")]
+    [SerializeField] private GameObject _savePanel;
+    [SerializeField] private GameObject _overPanel;
+
+    [Header("Buttons")]
+    [SerializeField] private Button _resumeButton;
+    [SerializeField] private Button _saveButton;
+    [SerializeField] private Button _loadButton;
+    [SerializeField] private Button _quitButton;
+
+    [SerializeField] private Button _saveAcceptButton;
+    [SerializeField] private Button _saveDeclineButton;
+    [SerializeField] private Button _overAcceptButton;
+    [SerializeField] private Button _overDeclineButton;
+
+    [Inject] private IAudioManager _audioManager;
+
+    public void InitPanel()
+    {
+        // 초기 슬라이더 값 세팅
+        _bgmSlider.value = _audioManager.bgmVolume;
+        _sfxSlider.value = _audioManager.sfxVolume;
+
+        // 슬라이더 이벤트 구독
+        _bgmSlider.OnValueChangedAsObservable()
+                  .Subscribe(value => _audioManager.SetBgmVolume(value)).AddTo(this);
+
+        _sfxSlider.OnValueChangedAsObservable()
+                  .Subscribe(value => _audioManager.SetSfxVolume(value)).AddTo(this);
+
+        // 버튼 이벤트 구독
+        _resumeButton.OnClickAsObservable()
+                     .Subscribe(_ => OnToggleSettings())
+                     .AddTo(this);
+
+        _saveButton.OnClickAsObservable()
+                   .Subscribe(_ => OnSavePanelOpen())
+                   .AddTo(this);
+
+        _loadButton.OnClickAsObservable()
+                   .Subscribe(_ => OnSavePanelOpen())
+                   .AddTo(this);
+
+        _quitButton.OnClickAsObservable()
+                   .Subscribe(_ => OnCloseTheScene())
+                   .AddTo(this);
+
+        // 패널 초기 상태
+        _savePanel.SetActive(false);
+        _overPanel.SetActive(false);
+        gameObject.SetActive(false);
+    }
+
+
+    public void OnToggleSettings()
+    {
+        bool isActive = !gameObject.activeSelf;
+        gameObject.SetActive(isActive);
+        Time.timeScale = isActive ? 0f : 1f;
+
+        if (isActive)
+        {
+            // 켰을 때 슬라이더 값 동기화
+            _bgmSlider.value = _audioManager.bgmVolume;
+            _sfxSlider.value = _audioManager.sfxVolume;
+        }
+    }
+
+    public void OnSavePanelOpen()
+    {
+        _savePanel.SetActive(!_savePanel.activeSelf);
+
+        if (_savePanel.activeSelf)
+        {
+            // Save Panel 열릴 때 버튼 이벤트 등록
+            _saveAcceptButton.onClick.RemoveAllListeners();
+            _saveAcceptButton.onClick.AddListener(() =>
+            {
+                // 나중에 실제 Save 로직 연결
+                _savePanel.SetActive(false);
+            });
+
+            _saveDeclineButton.onClick.RemoveAllListeners();
+            _saveDeclineButton.onClick.AddListener(() =>
+            {
+                // 나중에 취소 로직 연결
+                _savePanel.SetActive(false);
+            });
+        }
+    }
+
+    public void OnLoadPanelOpen()
+    {
+    }
+
+    public void OnCloseTheScene()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void OnLoadNextScene()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex; // 현재 씬 인덱스
+        SceneManager.LoadScene(currentSceneIndex + 1); // 다음 씬으로 이동
+    }
+    public void OnGodMode()
+    {
+
+    }
+
+    public void OnGameOver()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; // 에디터 플레이 모드 종료
+#else
+              Application.Quit(); // 빌드된 게임 종료
+#endif
+    }
+}

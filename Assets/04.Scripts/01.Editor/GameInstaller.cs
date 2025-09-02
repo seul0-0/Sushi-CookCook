@@ -13,12 +13,12 @@ public class GameInstaller : MonoInstaller
         // ProjectContext에서는 Prefab으로 FromComponentInNewPrefab을 사용해 한 번만 생성
         Container.Bind<IAudioManager>()
                  .To<AudioManager>()
-                 .FromComponentInNewPrefab(audioManagerPrefab)
+                 .FromComponentInHierarchy()  // 기존 오브젝트 참조
                  .AsSingle()
                  .NonLazy(); // 즉시 생성
         Container.Bind<IGameManager>()
                  .To<GameManager>()
-                 .FromComponentInNewPrefab(gameManagerPrefab)
+                 .FromComponentInHierarchy()
                  .AsSingle()
                  .NonLazy();
         Debug.Log("[Installer] 바인딩 완료");
