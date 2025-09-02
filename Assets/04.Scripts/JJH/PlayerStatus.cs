@@ -12,14 +12,13 @@ public enum StatType
     autoattack
 }
 
-[System.Serializable]
+[Serializable]
 public struct StatData
 {
     public StatType type;
     public float value;
     public int level;
 }
-
 
 [CreateAssetMenu (fileName ="PlayerStatus", menuName = "Player")]
 public class PlayerStatus : ScriptableObject
