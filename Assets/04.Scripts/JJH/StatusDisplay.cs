@@ -20,7 +20,9 @@ public class StatusDisplay : MonoBehaviour
 
     public void Refresh()
     {
-        currentAtk.text = status.stats[0].value.ToString();
+        int index = status.GetStatType(StatType.attack);
+
+        currentAtk.text = status.stats[index].value.ToString();
         currentMoney.text = status.money.ToString();
     }
 }

@@ -46,7 +46,7 @@ public class PlayerStatus : ScriptableObject
     }
 
     // === 다음 강화 수치 ===
-    public float NextStatValue(StatType type)
+    public float NextStatValueDisplay(StatType type)
     {
         int index = GetStatType(type);
 

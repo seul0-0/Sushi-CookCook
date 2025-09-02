@@ -47,7 +47,7 @@ public class StatusUpgradePanel : MonoBehaviour
         StatType type = (StatType)upgrade_id;
 
         float currentValue = status.stats[upgrade_id].value;
-        float nextValue = status.NextStatValue(type);
+        float nextValue = status.NextStatValueDisplay(type);
 
         nextUpgradeValue.text = $"{currentValue} =>\n {nextValue}";
     }
