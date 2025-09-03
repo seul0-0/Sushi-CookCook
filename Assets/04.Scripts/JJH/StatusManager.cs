@@ -76,6 +76,7 @@ public class StatusManager : Singleton<StatusManager>
                 return currentStatus.stats[index].value;
 
             case StatType.critical:
+                if (currentStatus.stats[index].value >= 100) return currentStatus.stats[index].value;
                 currentStatus.stats[index].level++;
 
                 float value = Mathf.Min(currentStatus.stats[index].value + 0.5f, 100);
