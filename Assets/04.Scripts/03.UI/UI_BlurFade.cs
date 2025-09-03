@@ -16,21 +16,16 @@ public class UI_BlurFade : MonoBehaviour
     public Image blurPanel;
 
     [Header("설정")]
-    public float fadeDuration = 0.5f;
-    public float blurScale = 1.05f; // 퍼짐 정도
-    public float blurAlpha = 0.3f;  // 블러 알파
-
-
-    private void Start()
-    {
-         LoadSceneWithBlurFade(GameScene.Level1).Forget();
-    }
+    float fadeDuration = 3f;
+    float blurScale = 1.05f; // 퍼짐 정도
+    float blurAlpha = 0.3f;  // 블러 알파
 
     /// <summary>
     /// 씬 전환 호출
     /// </summary>
-    public async UniTaskVoid LoadSceneWithBlurFade(GameScene scene)
+    public async UniTask LoadSceneWithBlurFade(GameScene scene)
     {
+        gameObject.SetActive(true);
         //  블러 + 페이드 인
         blurPanel.gameObject.SetActive(true);
         blurPanel.color = new Color(1f, 1f, 1f, 0f);
@@ -40,31 +35,32 @@ public class UI_BlurFade : MonoBehaviour
         fadePanel.color = new Color(0f, 0f, 0f, 0f);
 
         // DOTween으로 동시에 블러와 페이드 인
-        var fadeTween = fadePanel.DOFade(1f, fadeDuration).SetEase(Ease.InOutQuad);
-        var blurTween = DOTween.Sequence()
-            .Join(blurPanel.DOFade(blurAlpha, fadeDuration).SetEase(Ease.InOutQuad))
-            .Join(blurPanel.transform.DOScale(blurScale, fadeDuration).SetEase(Ease.OutQuad));
-
-        // Tween을 UniTask로 래핑
-        await UniTask.WhenAll(
-            TweenToUniTask(fadePanel.DOFade(1f, fadeDuration)),
-            TweenToUniTask(blurPanel.DOFade(blurAlpha, fadeDuration)),
-            TweenToUniTask(blurPanel.transform.DOScale(blurScale, fadeDuration))
-        );
-
-        //  씬 로드
-        await SceneManager.LoadSceneAsync((int)scene).ToUniTask();
-
-        //  페이드 + 블러 아웃
-        await UniTask.WhenAll(
-            TweenToUniTask(fadePanel.DOFade(0f, fadeDuration)),
-            TweenToUniTask(blurPanel.DOFade(0f, fadeDuration)),
-            TweenToUniTask(blurPanel.transform.DOScale(1f, fadeDuration))
-        );
+       var fadeTween = fadePanel.DOFade(1f, fadeDuration).SetEase(Ease.InOutQuad);
+       var blurTween = DOTween.Sequence()
+           .Join(blurPanel.DOFade(blurAlpha, fadeDuration).SetEase(Ease.InOutQuad))
+           .Join(blurPanel.transform.DOScale(blurScale, fadeDuration).SetEase(Ease.OutQuad));
+    
+       // Tween을 UniTask로 래핑
+       await UniTask.WhenAll(
+           TweenToUniTask(fadePanel.DOFade(1f, fadeDuration)),
+         TweenToUniTask(blurPanel.DOFade(blurAlpha, fadeDuration)),
+           TweenToUniTask(blurPanel.transform.DOScale(blurScale, fadeDuration))
+       );
+    
+       //  씬 로드
+       await SceneManager.LoadSceneAsync((int)scene).ToUniTask();
+    
+       //  페이드 + 블러 아웃
+       await UniTask.WhenAll(
+           TweenToUniTask(fadePanel.DOFade(0f, fadeDuration)),
+           TweenToUniTask(blurPanel.DOFade(0f, fadeDuration)),
+           TweenToUniTask(blurPanel.transform.DOScale(1f, fadeDuration))
+       );
 
         // 최종 비활성화
         blurPanel.gameObject.SetActive(false);
         fadePanel.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     /// <summary>

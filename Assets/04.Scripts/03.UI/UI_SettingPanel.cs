@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UniRx;
@@ -20,14 +21,18 @@ public class UI_SettingPanel : MonoBehaviour
     [SerializeField] private Slider _sfxSlider;
 
     [Header("Panels")]
+    [SerializeField] private GameObject _startPanel;
     [SerializeField] private GameObject _savePanel;
     [SerializeField] private GameObject _overPanel;
+    [SerializeField] private UI_BlurFade _blurPanel;
+    [SerializeField] private GameObject _loadingPanel;
 
     [Header("Buttons")]
     [SerializeField] private Button _resumeButton;
     [SerializeField] private Button _saveButton;
     [SerializeField] private Button _loadButton;
     [SerializeField] private Button _quitButton;
+    [SerializeField] private Button _startButton;
 
     [SerializeField] private Button _saveAcceptButton;
     [SerializeField] private Button _saveDeclineButton;
@@ -66,10 +71,18 @@ public class UI_SettingPanel : MonoBehaviour
                    .Subscribe(_ => OnCloseTheScene())
                    .AddTo(this);
 
+        _startButton.OnClickAsObservable()
+           .Subscribe(_ => OnGameStart())
+           .AddTo(this);
+
+
         // 패널 초기 상태
+        _startPanel.SetActive(true);
         _savePanel.SetActive(false);
         _overPanel.SetActive(false);
         gameObject.SetActive(false);
+        _blurPanel.gameObject.SetActive(false);
+        _loadingPanel.SetActive(false);
     }
 
 
@@ -110,13 +123,34 @@ public class UI_SettingPanel : MonoBehaviour
         }
     }
 
-    public void OnLoadPanelOpen()
+    public void OnGameStart()
     {
+        _startPanel.SetActive(false);
+        DelayAndLoad(GameScene.Level1).Forget();
     }
+    private async UniTask DelayAndLoad(GameScene scene)
+    {
+        _loadingPanel.SetActive(true);
+        // 5초 대기
+        await UniTask.Delay(TimeSpan.FromSeconds(5));
+
+        // 로딩판넬 비활성화
+        _loadingPanel.SetActive(false);
+
+        // 블러 + 페이드 씬 전환 실행
+        await _blurPanel.LoadSceneWithBlurFade(scene);
+    }
+
 
     public void OnCloseTheScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneUtility.GetSceneName(GameScene.MainMenu));
+        _startPanel.SetActive(true);
+        OnToggleSettings();
+    }
+
+    public void OnLoadPanelOpen()
+    {
     }
 
     public void OnLoadNextScene()

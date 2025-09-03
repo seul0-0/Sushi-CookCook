@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UniRx;
@@ -9,10 +10,28 @@ using Zenject;
 
 public enum GameScene
 {
-    MainMenu,
-    Level1,
-    Level2,
-    GameOver
+    [SceneName("CJH_GameManager")] MainMenu,
+    [SceneName("Test2")] Level1,
+    [SceneName("Level2")] Level2,
+    [SceneName("GameOver")] GameOver
+}
+
+[AttributeUsage(AttributeTargets.Field)]
+public class SceneNameAttribute : Attribute
+{
+    public string Name { get; }
+    public SceneNameAttribute(string name) => Name = name;
+}
+
+public static class SceneUtility
+{
+    public static string GetSceneName(GameScene scene)
+    {
+        var type = typeof(GameScene);
+        var memInfo = type.GetMember(scene.ToString());
+        var attr = memInfo[0].GetCustomAttributes(typeof(SceneNameAttribute), false);
+        return (attr.Length > 0) ? ((SceneNameAttribute)attr[0]).Name : scene.ToString();
+    }
 }
 
 public interface IGameManager
