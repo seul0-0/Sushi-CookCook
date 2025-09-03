@@ -40,7 +40,6 @@ public class UpgradeButtonUi : MonoBehaviour
             // === 돈 변화 감지후 ui 갱신 ===
             PlayerStatus.OnMoneyChanged += CheckCost;
         }
-
     }
 
     // === 버튼을 누름 ===
@@ -124,7 +123,5 @@ public class UpgradeButtonUi : MonoBehaviour
 
             yield return new WaitForSeconds(0.2f);
         }
-
-
     }
 }

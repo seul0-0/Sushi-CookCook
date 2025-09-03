@@ -149,5 +149,4 @@ public class PlayerStatus : ScriptableObject
             _ => 0,
         };
     }
-
 }
