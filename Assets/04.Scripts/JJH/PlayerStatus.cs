@@ -32,6 +32,9 @@ public class PlayerStatus : ScriptableObject
     [Header("Recipt")]                    
     public int money = 10;
 
+    [Header("Sprite")]
+    public Sprite[] staticons;             // === icon을 미리 할당 ===
+
     // === Player Stat 찾기 ===
     public int GetStatType(StatType type)
     {

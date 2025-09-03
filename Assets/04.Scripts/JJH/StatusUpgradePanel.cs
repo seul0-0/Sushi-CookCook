@@ -23,7 +23,7 @@ public class StatusUpgradePanel : MonoBehaviour
     {
         upgrade_id = id;
 
-        panelicon.sprite = StatusManager.Instance.staticons[id];
+        panelicon.sprite = StatusManager.Instance.status.staticons[id];
 
         upgradeName.text = StatusManager.Instance.status.stats[id].name;
 
