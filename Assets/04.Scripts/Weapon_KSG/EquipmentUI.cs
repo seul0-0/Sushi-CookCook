@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class EquipmentUI : MonoBehaviour
 {
-    [Header("스크립터블 오브젝트 연결")]
+    public PlayerStatus playerStatus;
+    [Header("스크립터블 오브젝트 연결 (원본)")]
+    public List<WeaponScriptableObject> originalWeaponDatas = new List<WeaponScriptableObject>();
+
+    [Header("클론된 무기 데이터")]
     public List<WeaponScriptableObject> weaponDatas = new List<WeaponScriptableObject>();
 
     [Header("슬롯 연결")]
@@ -23,6 +27,15 @@ public class EquipmentUI : MonoBehaviour
 
     void Start()
     {
+        weaponDatas.Clear();
+        foreach (var weapon in originalWeaponDatas)
+        {
+            if (weapon != null)
+            {
+                var clone = Instantiate(weapon);  // ScriptableObject 복제
+                weaponDatas.Add(clone);
+            }
+        }
         UpdateUI();
     }
 
@@ -140,6 +153,12 @@ public class EquipmentUI : MonoBehaviour
             ItemAttack.text = "공격력: " + data.ItemAttack;
         if (ItemCritical != null)
             ItemCritical.text = "치명타 확률: " + data.CriticalChance + "%";
+    }
+
+    public void OnPurchase()
+    {
+        // 이 버튼이 속한 부모(UnknownItem)를 찾아서 비활성화
+        gameObject.transform.parent.gameObject.SetActive(false);
     }
 }
 
