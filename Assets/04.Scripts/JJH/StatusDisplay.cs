@@ -19,7 +19,7 @@ public class StatusDisplay : MonoBehaviour
 
     public void Refresh()
     {
-        int index = StatusManager.Instance.status.GetStatType(StatType.attack);
+        int index = StatusManager.Instance.GetStatType(StatType.attack);
 
         currentAtk.text = StatusManager.Instance.status.stats[index].value.ToString();
         currentMoney.text = StatusManager.Instance.status.money.ToString();

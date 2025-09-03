@@ -28,7 +28,7 @@ public class UpgradeButtonUi : MonoBehaviour
 
     public void Start()
     {
-        if(statusUpgradePanel != null && StatusManager.Instance.status != null)
+        if(statusUpgradePanel != null && StatusManager.Instance.currentStatus != null)
         {
             _buttonindex = statusUpgradePanel.upgrade_id;
 
@@ -37,7 +37,7 @@ public class UpgradeButtonUi : MonoBehaviour
             upgradeBtn.onClick.AddListener(OnClick);
 
             // === 돈 변화 감지후 ui 갱신 ===
-            PlayerStatus.OnMoneyChanged += CheckButtonUi;
+            StatusManager.OnMoneyChanged += CheckButtonUi;
         }
     }
 
@@ -82,9 +82,9 @@ public class UpgradeButtonUi : MonoBehaviour
         if (_isUpgradeReady == false) { return; }
 
         // === 업그레이드 ===
-        StatusManager.Instance.status.UpgradeValue(StatusManager.Instance.status.stats[_buttonindex].type);
+        StatusManager.Instance.UpgradeValue(StatusManager.Instance.currentStatus.stats[_buttonindex].type);
 
-        StatusManager.Instance.status.ChangeMoneyValue(-_upgradeCost);
+        StatusManager.Instance.ChangeMoneyValue(-_upgradeCost);
 
         // === 업그레이드 체크를 다시 활성화 하기 위해 ===
         _isUpgradeReady = false;
@@ -102,7 +102,7 @@ public class UpgradeButtonUi : MonoBehaviour
     // === 다음 레벨 확인 ===
     public void SetButtonPanel()
     {
-        _upgradeCost = StatusManager.Instance.status.CheckMoney(StatusManager.Instance.status.stats[_buttonindex].type);
+        _upgradeCost = StatusManager.Instance.CheckMoney(StatusManager.Instance.currentStatus.stats[_buttonindex].type);
 
         nextCost.text = $"{_upgradeCost}";
 
@@ -113,7 +113,7 @@ public class UpgradeButtonUi : MonoBehaviour
     public void CheckButtonUi()
     {
         // === 돈이 부족할 경우 ===
-        if (StatusManager.Instance.status.money < _upgradeCost)
+        if (StatusManager.Instance.currentStatus.money < _upgradeCost)
         {
             upgradeBtn.image.color = Color.red;
             _isUpgradeReady = false;

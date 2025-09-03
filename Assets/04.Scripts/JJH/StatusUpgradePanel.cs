@@ -16,16 +16,15 @@ public class StatusUpgradePanel : MonoBehaviour
     [Header("Next")]
     public TextMeshProUGUI nextUpgradeValue;
 
-
     // ===   0    ,  1    ,     2    ,     3     ,  4        ===
     // ===   ³»°ø , ¼Ø¾¾  , ¼Ø¾¾ °­È­, Çà¿î ½ºÅÝ , ÀÚµ¿ Á¶¸® ===
     public void SetPanel(int id)
     {
         upgrade_id = id;
 
-        panelicon.sprite = StatusManager.Instance.status.staticons[id];
+        panelicon.sprite = StatusManager.Instance.currentStatus.staticons[id];
 
-        upgradeName.text = StatusManager.Instance.status.stats[id].name;
+        upgradeName.text = StatusManager.Instance.currentStatus.stats[id].name;
 
         NextValue();
     }
@@ -34,8 +33,8 @@ public class StatusUpgradePanel : MonoBehaviour
     {
         StatType type = (StatType)upgrade_id;
 
-        float currentValue = StatusManager.Instance.status.stats[upgrade_id].value;
-        float nextValue = StatusManager.Instance.status.NextStatValueDisplay(type);
+        float currentValue = StatusManager.Instance.currentStatus.stats[upgrade_id].value;
+        float nextValue = StatusManager.Instance.NextStatValueDisplay(type);
 
         nextUpgradeValue.text = $"{currentValue} =>\n {nextValue}";
     }
