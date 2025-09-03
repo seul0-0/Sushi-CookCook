@@ -9,8 +9,6 @@ public class StatusUpgradePanel : MonoBehaviour
     [HideInInspector]
     public int upgrade_id;                            // === ÇöÀç panelÀÇ ¹øÈ£ ===
 
-    public PlayerStatus status;
-
     [Header("Info")]
     public Image panelicon;
     public TextMeshProUGUI upgradeName;
@@ -18,17 +16,15 @@ public class StatusUpgradePanel : MonoBehaviour
     [Header("Next")]
     public TextMeshProUGUI nextUpgradeValue;
 
-    public Sprite[] staticons;                         // === iconÀ» ¹Ì¸® ÇÒ´ç ===
-
     // ===   0    ,  1    ,     2    ,     3     ,  4        ===
     // ===   ³»°ø , ¼Ø¾¾  , ¼Ø¾¾ °­È­, Çà¿î ½ºÅÝ , ÀÚµ¿ Á¶¸® ===
     public void SetPanel(int id)
     {
         upgrade_id = id;
 
-        panelicon.sprite = staticons[id];
+        panelicon.sprite = StatusManager.Instance.currentStatus.staticons[id];
 
-        upgradeName.text = status.stats[id].name;
+        upgradeName.text = StatusManager.Instance.currentStatus.stats[id].name;
 
         NextValue();
     }
@@ -37,8 +33,8 @@ public class StatusUpgradePanel : MonoBehaviour
     {
         StatType type = (StatType)upgrade_id;
 
-        float currentValue = status.stats[upgrade_id].value;
-        float nextValue = status.NextStatValueDisplay(type);
+        float currentValue = StatusManager.Instance.currentStatus.stats[upgrade_id].value;
+        float nextValue = StatusManager.Instance.NextStatValueDisplay(type);
 
         nextUpgradeValue.text = $"{currentValue} =>\n {nextValue}";
     }

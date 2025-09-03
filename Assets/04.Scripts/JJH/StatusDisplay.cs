@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class StatusDisplay : MonoBehaviour
 {
-    public PlayerStatus status;
-
     [Header("Ui")]
     public TextMeshProUGUI currentAtk;
     public TextMeshProUGUI currentMoney;
@@ -21,9 +19,9 @@ public class StatusDisplay : MonoBehaviour
 
     public void Refresh()
     {
-        int index = status.GetStatType(StatType.attack);
+        int index = StatusManager.Instance.GetStatType(StatType.attack);
 
-        currentAtk.text = status.stats[index].value.ToString();
-        currentMoney.text = status.money.ToString();
+        currentAtk.text = StatusManager.Instance.status.stats[index].value.ToString();
+        currentMoney.text = StatusManager.Instance.status.money.ToString();
     }
 }
