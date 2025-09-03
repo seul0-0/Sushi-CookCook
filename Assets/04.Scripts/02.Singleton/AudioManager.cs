@@ -1,47 +1,69 @@
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public interface IAudioManager
-{
-}
 
+[System.Serializable]
+public class NamedBGM
+{
+    public string name;
+    public AudioClip clip;
+}
 [System.Serializable]
 public class NamedSFX
 {
     public string name;
     public AudioClip clip;
 }
+public interface IAudioManager
+{
+    float bgmVolume { get; }
+    float sfxVolume { get; }
+    public void SetBgmVolume(float volume);
+    public void SetSfxVolume(float volume);
+    void PlayBGM(string name);
+    void PlaySFX(string name);
+    UniTask FadeToBGM(string name, float duration);
+}
 
 public class AudioManager : MonoBehaviour, IAudioManager
 {
+    [Header("Mixer")]
+    [SerializeField] private AudioMixer audioMixer; // MainMixer
+    [SerializeField] private AudioMixerGroup bgmGroup;
+    [SerializeField] private AudioMixerGroup sfxGroup;
+
     [Header("BGM Clips")]
-    public AudioClip bgmStart;
-    public AudioClip bgmGame;
-    public AudioClip bgmGame2;
-    public AudioClip bgmGame3;
-    public AudioSource bgmSource;
+    [SerializeField] private List<NamedBGM> bgmList;
 
     [Header("SFX Clips")]
-    public List<NamedSFX> sfxClips;
-    private Dictionary<string, AudioClip> sfxDict = new Dictionary<string, AudioClip>();
-
-    public int sfxPoolSize = 5;
+    [SerializeField] private List<NamedSFX> sfxList;
+    public int sfxPoolSize = 5; //동시재생가능한수
 
     private List<AudioSource> sfxSources = new List<AudioSource>();
     private int currentSfxIndex = 0;
+    private AudioSource bgmSource;
 
-    [Range(0f, 1f)] public float bgmVolume = 0.25f;
-    [Range(0f, 1f)] public float sfxVolume = 1f;
+    private Dictionary<string, AudioClip> bgmDict = new Dictionary<string, AudioClip>();
+    private Dictionary<string, AudioClip> sfxDict = new Dictionary<string, AudioClip>();
+
+    [Range(0f, 1f)]
+    [SerializeField] private float _bgmVolume = 0.25f;
+    public float bgmVolume => _bgmVolume;
+    [Range(0f, 1f)]
+    [SerializeField] private float _sfxVolume = 0.5f;
+    public float sfxVolume => _sfxVolume;
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-
         // BGM 오디오 소스 생성
         bgmSource = gameObject.AddComponent<AudioSource>();
+        bgmSource.outputAudioMixerGroup = bgmGroup;
         bgmSource.loop = true;
         bgmSource.playOnAwake = false;
 
@@ -50,122 +72,108 @@ public class AudioManager : MonoBehaviour, IAudioManager
         {
             AudioSource sfx = gameObject.AddComponent<AudioSource>();
             sfx.playOnAwake = false;
+            sfx.outputAudioMixerGroup = sfxGroup;
             sfxSources.Add(sfx);
         }
 
-        // 사운드 이름-클립 매핑
-        foreach (var sfx in sfxClips)
+        // 딕셔너리 초기화
+        foreach (var bgm in bgmList)
+        {
+            if (!bgmDict.ContainsKey(bgm.name))
+                bgmDict.Add(bgm.name, bgm.clip);
+        }
+
+        foreach (var sfx in sfxList)
         {
             if (!sfxDict.ContainsKey(sfx.name))
                 sfxDict.Add(sfx.name, sfx.clip);
-            else
-                Debug.LogWarning($"[AudioManager] 중복된 SFX 이름: {sfx.name}");
         }
+
+        SetBgmVolume(_bgmVolume);
+        SetSfxVolume(_sfxVolume);
     }
 
     void Update()
     {
         // 항상 볼륨 최신화 (옵션에서 슬라이더로 조절 시 반영되게)
         bgmSource.volume = bgmVolume;
-        foreach (var sfx in sfxSources)
-        {
-            sfx.volume = sfxVolume;
-        }
-        //전역 버튼소리 활성화
+        foreach (var sfx in sfxSources) sfx.volume = _sfxVolume;
+
+        // 버튼 클릭 SFX
         if (Input.GetMouseButtonDown(0))
         {
             GameObject clicked = EventSystem.current.currentSelectedGameObject;
-
             if (clicked != null && clicked.GetComponent<Button>() != null)
-            {
-                //AudioManager.Instance.PlayClickSFX();
-            }
+                PlayClickSFX();
         }
     }
+
+    #region Mixer Volume Control
+    private float LinearToDecibel(float linear) => linear <= 0f ? -80f : Mathf.Log10(linear) * 20f;
+
+    public void SetBgmVolume(float volume)
+    {
+        _bgmVolume = Mathf.Clamp01(volume);
+        audioMixer.SetFloat("BGM_Volume", LinearToDecibel(_bgmVolume));
+    }
+
+    public void SetSfxVolume(float volume)
+    {
+        _sfxVolume = Mathf.Clamp01(volume);
+        audioMixer.SetFloat("SFX_Volume", LinearToDecibel(_sfxVolume));
+    }
+    #endregion
+
+
+    #region BGM
     public void PlayBGM(string name)
     {
-        AudioClip clipToPlay = null;
-        switch (name)
-        {
-            case "Start": clipToPlay = bgmStart; break;
-            case "Game": clipToPlay = bgmGame; break;
-            case "Game2": clipToPlay = bgmGame2; break;
-            default: Debug.LogWarning("Unknown BGM name: " + name); return;
-        }
-        PlayBGM(clipToPlay);
-    }
-
-    public void PlayBGM(AudioClip clip)
-    {
+        if (!bgmDict.TryGetValue(name, out var clip)) return;
         if (bgmSource.clip == clip) return;
         bgmSource.clip = clip;
         bgmSource.Play();
     }
 
-
-    public void PlaySFX(AudioClip clip)
+    public async UniTask FadeToBGM(string name, float duration)
     {
-        if (clip == null) return;
+        if (!bgmDict.TryGetValue(name, out var newClip)) return;
 
-        sfxSources[currentSfxIndex].PlayOneShot(clip);
-        currentSfxIndex = (currentSfxIndex + 1) % sfxPoolSize;
-    }
-    public void PlaySFX(string name)
-    {
-        if (sfxDict.ContainsKey(name))
-        {
-            AudioClip clip = sfxDict[name];
-            sfxSources[currentSfxIndex].PlayOneShot(clip);
-            currentSfxIndex = (currentSfxIndex + 1) % sfxPoolSize;
-        }
-        else
-        {
-            Debug.LogWarning($"[AudioManager] SFX '{name}' not found!");
-        }
-    }
-    public void PlayClickSFX()
-    {
-        PlaySFX("Click"); // 또는 클릭 사운드 이름에 맞게 수정
-    }
-
-
-    // 외부에서 조절용
-    public void SetBgmVolume(float volume)
-    {
-        bgmVolume = Mathf.Clamp01(volume);
-    }
-
-    public void SetSfxVolume(float volume)
-    {
-        sfxVolume = Mathf.Clamp01(volume);
-    }
-
-    IEnumerator NextBGM(AudioClip newClip, float duration)
-    { //StartCoroutine(FadeBGM(bgmGame, 5f)); // 5초 페이드
-        // 1. 현재 BGM 볼륨 줄이기
-        float startVolume = bgmSource.volume;
+        float startVolume = _bgmVolume;
         float time = 0f;
 
+        // 페이드 아웃
         while (time < duration)
         {
             time += Time.deltaTime;
-            bgmSource.volume = Mathf.Lerp(startVolume, 0f, time / duration);
-            yield return null;
+            SetBgmVolume(Mathf.Lerp(startVolume, 0f, time / duration));
+            await UniTask.Yield();
         }
 
-        // 2. 새 BGM 설정
+        // 새 클립 재생
         bgmSource.clip = newClip;
         bgmSource.Play();
 
-        // 3. 새 BGM 볼륨 올리기
+        // 페이드 인
         time = 0f;
         while (time < duration)
         {
             time += Time.deltaTime;
-            bgmSource.volume = Mathf.Lerp(0f, bgmVolume, time / duration);
-            yield return null;
+            SetBgmVolume(Mathf.Lerp(0f, startVolume, time / duration));
+            await UniTask.Yield();
         }
-
-        bgmSource.volume = bgmVolume; // 최종 볼륨 보정
     }
+    #endregion
+
+
+    #region SFX
+    public void PlaySFX(string name)
+    {
+        if (!sfxDict.TryGetValue(name, out var clip)) return;
+
+        sfxSources[currentSfxIndex].PlayOneShot(clip);
+        currentSfxIndex = (currentSfxIndex + 1) % sfxPoolSize;
+    }
+
+    public void PlayClickSFX() => PlaySFX("Click");
+    #endregion
 }
