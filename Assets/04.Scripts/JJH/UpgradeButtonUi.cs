@@ -38,7 +38,7 @@ public class UpgradeButtonUi : MonoBehaviour
             upgradeBtn.onClick.AddListener(OnClick);
 
             // === 돈 변화 감지후 ui 갱신 ===
-            PlayerStatus.OnMoneyChanged += CheckCost;
+            PlayerStatus.OnMoneyChanged += CheckButtonUi;
         }
     }
 
@@ -57,31 +57,27 @@ public class UpgradeButtonUi : MonoBehaviour
         }
     }
 
-    // === 다음 레벨 확인 ===
-    public void SetButtonPanel()
+    public IEnumerator UpgradeCorutine()
     {
-        _upgradeCost = StatusManager.Instance.status.CheckMoney(StatusManager.Instance.status.stats[_buttonindex].type);
-
-        nextCost.text = $"{_upgradeCost}";
-
-        CheckCost();
-    }
-
-    public void CheckCost()
-    {
-        // === 돈이 부족할 경우 ===
-        if (StatusManager.Instance.status.money < _upgradeCost)
+        if (_isUpgradeReady == false)
         {
-            upgradeBtn.image.color = Color.red;
-            _isUpgradeReady = false;
-            return;
+            _isClickHold = false;
+
+            yield break;
         }
 
-        upgradeBtn.image.color = Color.black;
+        UpgradeStatus();
 
-        _isUpgradeReady = true;
+        // === 2초간 누를시 자동 업글 ===
+        yield return new WaitForSeconds(2f);
+
+        while (_isClickHold)
+        {
+            UpgradeStatus();
+
+            yield return new WaitForSeconds(0.2f);
+        }
     }
-   
     public void UpgradeStatus()
     {
         if (_isUpgradeReady == false) { return; }
@@ -104,24 +100,29 @@ public class UpgradeButtonUi : MonoBehaviour
         OnStatusRefreshed?.Invoke();
     }
 
-    public IEnumerator UpgradeCorutine()
+    // === 다음 레벨 확인 ===
+    public void SetButtonPanel()
     {
-        if (_isUpgradeReady == false) 
-        {
-            _isClickHold = false;
+        _upgradeCost = StatusManager.Instance.status.CheckMoney(StatusManager.Instance.status.stats[_buttonindex].type);
 
-            yield break; 
+        nextCost.text = $"{_upgradeCost}";
+
+        CheckButtonUi();
+    }
+
+    // === 버튼 색 갱신 ===
+    public void CheckButtonUi()
+    {
+        // === 돈이 부족할 경우 ===
+        if (StatusManager.Instance.status.money < _upgradeCost)
+        {
+            upgradeBtn.image.color = Color.red;
+            _isUpgradeReady = false;
+            return;
         }
 
-        UpgradeStatus();
+        upgradeBtn.image.color = Color.black;
 
-        yield return new WaitForSeconds(2f);
-
-        while (_isClickHold)
-        {
-            UpgradeStatus();
-
-            yield return new WaitForSeconds(0.2f);
-        }
+        _isUpgradeReady = true;
     }
 }
