@@ -51,6 +51,9 @@ public class EquipmentUI : MonoBehaviour
     // 강화 시 플레이어 골드 감소 추가해야함
     public void GloveUpgrade()
     {
+        if(StatusManager.Instance.currentStatus.money < 10) 
+            return;
+        StatusManager.Instance.ChangeMoneyValue(-10);
         if (weaponDatas.Count > 0)
         {
             weaponDatas[0].ItemLevel++;
@@ -60,6 +63,9 @@ public class EquipmentUI : MonoBehaviour
     }
     public void RicePaddleUpgrade()
     {
+        if (StatusManager.Instance.currentStatus.money < 10)
+            return;
+        StatusManager.Instance.ChangeMoneyValue(-10);
         if (weaponDatas.Count > 1)
         {
             weaponDatas[1].ItemLevel++;
@@ -69,6 +75,9 @@ public class EquipmentUI : MonoBehaviour
     }
     public void ChoppingBoardUpgrade()
     {
+        if (StatusManager.Instance.currentStatus.money < 10)
+            return;
+        StatusManager.Instance.ChangeMoneyValue(-10);
         if (weaponDatas.Count > 2)
         {
             weaponDatas[2].ItemLevel++;
@@ -78,6 +87,9 @@ public class EquipmentUI : MonoBehaviour
     }
     public void KnifeUpgrade()
     {
+        if (StatusManager.Instance.currentStatus.money < 10)
+            return;
+        StatusManager.Instance.ChangeMoneyValue(-10);
         if (weaponDatas.Count > 3)
         {
             weaponDatas[3].ItemLevel++;
@@ -155,9 +167,26 @@ public class EquipmentUI : MonoBehaviour
             ItemCritical.text = "치명타 확률: " + data.CriticalChance + "%";
     }
 
-    public void OnPurchase()
+    public void BuyRicePaddle()
     {
+        if (StatusManager.Instance.currentStatus.money < 30)
+            return;
+        StatusManager.Instance.ChangeMoneyValue(-30);
         // 이 버튼이 속한 부모(UnknownItem)를 찾아서 비활성화
+        gameObject.transform.parent.gameObject.SetActive(false);
+    }
+    public void BuyChoppingBoard()
+    {
+        if (StatusManager.Instance.currentStatus.money < 60)
+            return;
+        StatusManager.Instance.ChangeMoneyValue(-60);
+        gameObject.transform.parent.gameObject.SetActive(false);
+    }
+    public void BuyKnife()
+    {
+        if (StatusManager.Instance.currentStatus.money < 60)
+            return;
+        StatusManager.Instance.ChangeMoneyValue(-60);
         gameObject.transform.parent.gameObject.SetActive(false);
     }
 }
