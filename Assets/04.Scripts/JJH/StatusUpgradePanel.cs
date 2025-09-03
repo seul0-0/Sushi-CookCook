@@ -9,8 +9,6 @@ public class StatusUpgradePanel : MonoBehaviour
     [HideInInspector]
     public int upgrade_id;                            // === 현재 panel의 번호 ===
 
-    public PlayerStatus status;
-
     [Header("Info")]
     public Image panelicon;
     public TextMeshProUGUI upgradeName;
@@ -28,7 +26,7 @@ public class StatusUpgradePanel : MonoBehaviour
 
         panelicon.sprite = staticons[id];
 
-        upgradeName.text = status.stats[id].name;
+        upgradeName.text = StatusManager.Instance.status.stats[id].name;
 
         NextValue();
     }
@@ -37,8 +35,8 @@ public class StatusUpgradePanel : MonoBehaviour
     {
         StatType type = (StatType)upgrade_id;
 
-        float currentValue = status.stats[upgrade_id].value;
-        float nextValue = status.NextStatValueDisplay(type);
+        float currentValue = StatusManager.Instance.status.stats[upgrade_id].value;
+        float nextValue = StatusManager.Instance.status.NextStatValueDisplay(type);
 
         nextUpgradeValue.text = $"{currentValue} =>\n {nextValue}";
     }

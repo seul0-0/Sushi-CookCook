@@ -123,6 +123,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &30281306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 30281308}
+  - component: {fileID: 30281307}
+  m_Layer: 0
+  m_Name: StatusManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &30281307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30281306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba27a62c48d322745adf374147db9e02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  status: {fileID: 11400000, guid: b02ba359e3f5db04986d02665c9237a4, type: 2}
+--- !u!4 &30281308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30281306}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.9093933, y: 657.84656, z: -2.904628}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3142,7 +3187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1f8f440c3a88ba41a83bf8ba89a3585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  status: {fileID: 11400000, guid: b02ba359e3f5db04986d02665c9237a4, type: 2}
   currentAtk: {fileID: 3410178653146780781}
   currentMoney: {fileID: 2881683739391582558}
 --- !u!222 &7533361535115498788
@@ -3666,7 +3710,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3417b1602f9400e46ad203a86ec39562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  status: {fileID: 11400000, guid: b02ba359e3f5db04986d02665c9237a4, type: 2}
   content: {fileID: 1700416455947787029}
   upgradeWindowPrefabs: {fileID: 2611877094659238255, guid: a88e193067684964da63e00afbe3d879, type: 3}
 --- !u!222 &8886495008825083761
@@ -3700,3 +3743,4 @@ SceneRoots:
   - {fileID: 5002685887346849230}
   - {fileID: 1773785929}
   - {fileID: 7701581631763847497}
+  - {fileID: 30281308}

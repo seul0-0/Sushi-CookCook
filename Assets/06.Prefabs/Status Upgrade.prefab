@@ -464,15 +464,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cfcbee716988204f9f44c5e8a0dcb17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holdAction:
-    m_Name: Hold
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: f1b8d12c-2f38-471c-92d0-bee696f3a096
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
   statusUpgradePanel: {fileID: 3761625539822396937}
   nextCost: {fileID: 8488117801833892708}
   upgradeBtn: {fileID: 2752020982587532484}
@@ -489,7 +480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 860edba40b8b4174694f9cd51f01ed26, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -502,19 +493,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5451132727112507066}
-        m_TargetAssemblyTypeName: UpgradeButtonUi, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 403fc26d-5099-4068-ad01-f6eaed295f80
     m_ActionName: Mouse/button[/Mouse/leftButton]
   - m_PersistentCalls:

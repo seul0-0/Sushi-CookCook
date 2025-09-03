@@ -29,7 +29,7 @@ public class UpgradeButtonUi : MonoBehaviour
 
     public void Start()
     {
-        if(statusUpgradePanel != null && statusUpgradePanel.status != null)
+        if(statusUpgradePanel != null && StatusManager.Instance.status != null)
         {
             _buttonindex = statusUpgradePanel.upgrade_id;
 
@@ -76,7 +76,7 @@ public class UpgradeButtonUi : MonoBehaviour
     // === 다음 레벨 확인 ===
     public void SetButtonPanel()
     {
-        _upgradeCost = statusUpgradePanel.status.CheckMoney(statusUpgradePanel.status.stats[_buttonindex].type);
+        _upgradeCost = StatusManager.Instance.status.CheckMoney(StatusManager.Instance.status.stats[_buttonindex].type);
 
         nextCost.text = $"{_upgradeCost}";
 
@@ -86,7 +86,7 @@ public class UpgradeButtonUi : MonoBehaviour
     public void CheckCost()
     {
         // === 돈이 부족할 경우 ===
-        if (statusUpgradePanel.status.money < _upgradeCost)
+        if (StatusManager.Instance.status.money < _upgradeCost)
         {
             upgradeBtn.image.color = Color.red;
             _isUpgradeReady = false;
@@ -103,9 +103,9 @@ public class UpgradeButtonUi : MonoBehaviour
         if (_isUpgradeReady == false) { return; }
 
         // === 업그레이드 ===
-        statusUpgradePanel.status.UpgradeValue(statusUpgradePanel.status.stats[_buttonindex].type);
+        StatusManager.Instance.status.UpgradeValue(StatusManager.Instance.status.stats[_buttonindex].type);
 
-        statusUpgradePanel.status.ChangeMoneyValue(-_upgradeCost);
+        StatusManager.Instance.status.ChangeMoneyValue(-_upgradeCost);
 
         // === 업그레이드 체크를 다시 활성화 하기 위해 ===
         _isUpgradeReady = false;
@@ -134,12 +134,12 @@ public class UpgradeButtonUi : MonoBehaviour
         while (_isClickHold && _isUpgradeReady)
         {
             // === 업그레이드 ===
-            statusUpgradePanel.status.UpgradeValue(statusUpgradePanel.status.stats[_buttonindex].type);
+            StatusManager.Instance.status.UpgradeValue(StatusManager.Instance.status.stats[_buttonindex].type);
 
-            statusUpgradePanel.status.ChangeMoneyValue(-_upgradeCost);
+            StatusManager.Instance.status.ChangeMoneyValue(-_upgradeCost);
 
             CheckCost();
-
+                
             // === 패널 창 갱신 ===
             statusUpgradePanel.NextValue();
 
