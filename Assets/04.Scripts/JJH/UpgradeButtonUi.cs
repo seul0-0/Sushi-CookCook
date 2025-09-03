@@ -23,7 +23,9 @@ public class UpgradeButtonUi : MonoBehaviour
     // === 업그레이드 true일 경우 가능 ===
     private bool _isUpgradeReady;
     // === 클릭시 활성화 ===
-    private bool _isClick;
+    private bool _isClickHold;
+    // === 코루틴 ===
+    private Coroutine _coroutine;
 
     public void Start()
     {
@@ -33,22 +35,43 @@ public class UpgradeButtonUi : MonoBehaviour
 
             SetButtonPanel();
 
-            //upgradeBtn.onClick.AddListener(OnClick);
+            upgradeBtn.onClick.AddListener(OnClick);
 
+            // === 돈 변화 감지후 ui 갱신 ===
             PlayerStatus.OnMoneyChanged += CheckCost;
         }
 
     }
 
-    // === 버튼에 할당 ===
+    // === 버튼을 누름 ===
     public void OnClick()
     {
-        Debug.Log("클릭");
-
-        _isClick = !_isClick;
-
         UpgradeStatus();
+
+        _isClickHold = false;
     }
+
+    // === 버튼을 꾹누름 ===
+    public void DuringClick()
+    {
+        _isClickHold = true;
+
+        _coroutine = StartCoroutine(UpgradeCorutine());
+    }
+
+    // === 버튼을 누르지 않음 ===
+    public void CancellClick()
+    {
+        _isClickHold = false;
+
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+
+            _coroutine = null;
+        }
+    }
+
 
     // === 다음 레벨 확인 ===
     public void SetButtonPanel()
@@ -84,8 +107,6 @@ public class UpgradeButtonUi : MonoBehaviour
 
         statusUpgradePanel.status.ChangeMoneyValue(-_upgradeCost);
 
-        // StartCoroutine(UpgradeCorutine());
-
         // === 업그레이드 체크를 다시 활성화 하기 위해 ===
         _isUpgradeReady = false;
 
@@ -101,9 +122,16 @@ public class UpgradeButtonUi : MonoBehaviour
 
     public IEnumerator UpgradeCorutine()
     {
+        if (_isUpgradeReady == false) 
+        {
+            Debug.Log("멈춤");
+            _isClickHold = false;
+            yield break; 
+        }
+
         yield return new WaitForSeconds(0.2f);
 
-        while (_isClick && _isUpgradeReady)
+        while (_isClickHold && _isUpgradeReady)
         {
             // === 업그레이드 ===
             statusUpgradePanel.status.UpgradeValue(statusUpgradePanel.status.stats[_buttonindex].type);

@@ -100,7 +100,7 @@ public class PlayerStatus : ScriptableObject
             case StatType.criticalDamage:
                 stats[index].level++;
 
-                stats[index].value += 0.01f;
+                stats[index].value += 1/100f;
 
                 return stats[index].value;
 

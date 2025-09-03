@@ -2,28 +2,68 @@
     "name": "PlayerInput",
     "maps": [
         {
-            "name": "mouse",
+            "name": "Touch",
             "id": "f3058860-bedb-4827-ab62-9eeec5202d33",
             "actions": [
                 {
-                    "name": "button",
+                    "name": "button(press)",
                     "type": "Button",
                     "id": "403fc26d-5099-4068-ad01-f6eaed295f80",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(pressPoint=0.2)",
-                    "initialStateCheck": true
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "button(hold)",
+                    "type": "Button",
+                    "id": "4c04b933-6f0c-4b20-9f90-ca05711ad3fb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "button(cancell)",
+                    "type": "Button",
+                    "id": "9d7e0c33-b935-4b94-8ddc-c837a5eb65ba",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "e63f5184-04ff-4114-a971-be5aac0bcce1",
+                    "id": "473cb241-6545-49cc-9be9-ec545c682afe",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "button",
+                    "action": "button(press)",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "10616e04-df32-4d1d-81b3-017632e62f18",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold(duration=1,pressPoint=0.5)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "button(hold)",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c055860e-1ab8-46b4-b896-f3a5670eb309",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "button(cancell)",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
