@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EventManager : Singleton<EventManager>
 {
     public static Action attackClick;
+    public static Action autoAttack;
 }
