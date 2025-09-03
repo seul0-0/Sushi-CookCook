@@ -46,24 +46,17 @@ public class UpgradeButtonUi : MonoBehaviour
     // === 버튼을 누름 ===
     public void OnClick()
     {
-        _coroutine = StartCoroutine(UpgradeCorutine());
-
-        _isClickHold = true;
-    }
-
-    // === 버튼을 누르지 않음 ===
-    public void CancellClick()
-    {
-        _isClickHold = false;
-
         if (_coroutine != null)
         {
             StopCoroutine(_coroutine);
-
             _coroutine = null;
         }
+        else 
+        {
+            _isClickHold = !_isClickHold;
+            _coroutine = StartCoroutine(UpgradeCorutine());
+        }
     }
-
 
     // === 다음 레벨 확인 ===
     public void SetButtonPanel()
@@ -117,23 +110,21 @@ public class UpgradeButtonUi : MonoBehaviour
         if (_isUpgradeReady == false) 
         {
             _isClickHold = false;
+
             yield break; 
         }
 
         UpgradeStatus();
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(2f);
 
-        if (_isClickHold == true)
+        while (_isClickHold)
         {
-            while (true) 
-            {
-                UpgradeStatus();
+            UpgradeStatus();
 
-                yield return new WaitForSeconds(0.2f);
-            }
-
+            yield return new WaitForSeconds(0.2f);
         }
+
 
     }
 }

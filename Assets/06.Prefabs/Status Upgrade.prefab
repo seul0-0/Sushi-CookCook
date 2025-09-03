@@ -186,12 +186,6 @@ MonoBehaviour:
   panelicon: {fileID: 8153416475131954867}
   upgradeName: {fileID: 3447249640586297119}
   nextUpgradeValue: {fileID: 1748938664957308431}
-  staticons:
-  - {fileID: 203524061, guid: d12d0f80e2e2eb14fab151775d41a020, type: 3}
-  - {fileID: -1624880674, guid: d12d0f80e2e2eb14fab151775d41a020, type: 3}
-  - {fileID: 1493697645, guid: bed98a114011da44b94ff5256d0f270d, type: 3}
-  - {fileID: 1717257276, guid: bed98a114011da44b94ff5256d0f270d, type: 3}
-  - {fileID: 357651013, guid: bed98a114011da44b94ff5256d0f270d, type: 3}
 --- !u!1 &3142215334593026498
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +333,6 @@ GameObject:
   - component: {fileID: 5607395788639310198}
   - component: {fileID: 2752020982587532484}
   - component: {fileID: 5451132727112507066}
-  - component: {fileID: 4575028426118020029}
   m_Layer: 5
   m_Name: 'Upgrade Button '
   m_TagString: Untagged
@@ -466,56 +459,6 @@ MonoBehaviour:
   statusUpgradePanel: {fileID: 3761625539822396937}
   nextCost: {fileID: 8488117801833892708}
   upgradeBtn: {fileID: 2752020982587532484}
---- !u!114 &4575028426118020029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3258007413560139744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 860edba40b8b4174694f9cd51f01ed26, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4c04b933-6f0c-4b20-9f90-ca05711ad3fb
-    m_ActionName: Touch/button(press)1[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5451132727112507066}
-        m_TargetAssemblyTypeName: UpgradeButtonUi, Assembly-CSharp
-        m_MethodName: CancellClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 9d7e0c33-b935-4b94-8ddc-c837a5eb65ba
-    m_ActionName: Touch/button(hold)1[/Mouse/leftButton]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Touch
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &5181518642462252415
 GameObject:
   m_ObjectHideFlags: 0
