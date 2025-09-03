@@ -11,12 +11,16 @@ public class UpgradeCreateUi : MonoBehaviour
 
     private void Start()
     {
-        MakeWindow();
+        if(StatusManager.Instance.currentStatus.stats != null)
+        {
+            MakeWindow();
+        }
+
     }
 
     private void MakeWindow()
     {
-        for (int i = 0; i < StatusManager.Instance.status.stats.Length; i++)
+        for (int i = 0; i < StatusManager.Instance.currentStatus.stats.Length; i++)
         {
             GameObject newWindow = Instantiate(upgradeWindowPrefabs);
 

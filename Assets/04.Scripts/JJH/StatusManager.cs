@@ -12,8 +12,10 @@ public class StatusManager : Singleton<StatusManager>
 
     public PlayerStatus currentStatus;
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
+
         currentStatus = Instantiate(status);
     }
 

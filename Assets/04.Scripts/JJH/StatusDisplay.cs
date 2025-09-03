@@ -21,7 +21,7 @@ public class StatusDisplay : MonoBehaviour
     {
         int index = StatusManager.Instance.GetStatType(StatType.attack);
 
-        currentAtk.text = StatusManager.Instance.status.stats[index].value.ToString();
-        currentMoney.text = StatusManager.Instance.status.money.ToString();
+        currentAtk.text = StatusManager.Instance.currentStatus.stats[index].value.ToString();
+        currentMoney.text = StatusManager.Instance.currentStatus.money.ToString();
     }
 }
