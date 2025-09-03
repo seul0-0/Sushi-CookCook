@@ -16,7 +16,6 @@ public class StatusUpgradePanel : MonoBehaviour
     [Header("Next")]
     public TextMeshProUGUI nextUpgradeValue;
 
-    public Sprite[] staticons;                         // === iconÀ» ¹Ì¸® ÇÒ´ç ===
 
     // ===   0    ,  1    ,     2    ,     3     ,  4        ===
     // ===   ³»°ø , ¼Ø¾¾  , ¼Ø¾¾ °­È­, Çà¿î ½ºÅÝ , ÀÚµ¿ Á¶¸® ===
@@ -24,7 +23,7 @@ public class StatusUpgradePanel : MonoBehaviour
     {
         upgrade_id = id;
 
-        panelicon.sprite = staticons[id];
+        panelicon.sprite = StatusManager.Instance.staticons[id];
 
         upgradeName.text = StatusManager.Instance.status.stats[id].name;
 

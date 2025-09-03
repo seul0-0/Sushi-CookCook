@@ -183,7 +183,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgrade_id: 0
-  status: {fileID: 11400000, guid: b02ba359e3f5db04986d02665c9237a4, type: 2}
   panelicon: {fileID: 8153416475131954867}
   upgradeName: {fileID: 3447249640586297119}
   nextUpgradeValue: {fileID: 1748938664957308431}
@@ -494,22 +493,6 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 403fc26d-5099-4068-ad01-f6eaed295f80
-    m_ActionName: Mouse/button[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5451132727112507066}
-        m_TargetAssemblyTypeName: UpgradeButtonUi, Assembly-CSharp
-        m_MethodName: DuringClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_ActionId: 4c04b933-6f0c-4b20-9f90-ca05711ad3fb
     m_ActionName: Touch/button(press)1[/Mouse/leftButton]
   - m_PersistentCalls:

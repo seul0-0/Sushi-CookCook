@@ -46,17 +46,9 @@ public class UpgradeButtonUi : MonoBehaviour
     // === 버튼을 누름 ===
     public void OnClick()
     {
-        UpgradeStatus();
-
-        _isClickHold = false;
-    }
-
-    // === 버튼을 꾹누름 ===
-    public void DuringClick()
-    {
-        _isClickHold = true;
-
         _coroutine = StartCoroutine(UpgradeCorutine());
+
+        _isClickHold = true;
     }
 
     // === 버튼을 누르지 않음 ===
@@ -124,32 +116,23 @@ public class UpgradeButtonUi : MonoBehaviour
     {
         if (_isUpgradeReady == false) 
         {
-            Debug.Log("멈춤");
             _isClickHold = false;
             yield break; 
         }
 
+        UpgradeStatus();
+
         yield return new WaitForSeconds(0.2f);
 
-        while (_isClickHold && _isUpgradeReady)
+        if (_isClickHold == true)
         {
-            // === 업그레이드 ===
-            StatusManager.Instance.status.UpgradeValue(StatusManager.Instance.status.stats[_buttonindex].type);
+            while (true) 
+            {
+                UpgradeStatus();
 
-            StatusManager.Instance.status.ChangeMoneyValue(-_upgradeCost);
+                yield return new WaitForSeconds(0.2f);
+            }
 
-            CheckCost();
-                
-            // === 패널 창 갱신 ===
-            statusUpgradePanel.NextValue();
-
-            // === 다음 비용 갱신 ===
-            SetButtonPanel();
-
-            // === 현재 스텟 창 갱신 ===
-            OnStatusRefreshed?.Invoke();
-
-            yield return new WaitForSeconds(0.2f);
         }
 
     }

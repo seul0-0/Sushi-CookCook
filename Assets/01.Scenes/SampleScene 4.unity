@@ -153,6 +153,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: {fileID: 11400000, guid: b02ba359e3f5db04986d02665c9237a4, type: 2}
+  staticons:
+  - {fileID: 203524061, guid: d12d0f80e2e2eb14fab151775d41a020, type: 3}
+  - {fileID: -1624880674, guid: d12d0f80e2e2eb14fab151775d41a020, type: 3}
+  - {fileID: 1493697645, guid: bed98a114011da44b94ff5256d0f270d, type: 3}
+  - {fileID: 1717257276, guid: bed98a114011da44b94ff5256d0f270d, type: 3}
+  - {fileID: 357651013, guid: bed98a114011da44b94ff5256d0f270d, type: 3}
 --- !u!4 &30281308
 Transform:
   m_ObjectHideFlags: 0
