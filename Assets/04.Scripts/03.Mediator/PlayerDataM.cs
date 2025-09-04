@@ -90,6 +90,7 @@ public class PlayerDataM : IPlayerData
 
 
 
+    // 직렬화 변환메서드
     public string[] GetEquippedWeaponNames()
     {
         return _weaponSlots.Select(w => w != null ? w.name : null).ToArray();

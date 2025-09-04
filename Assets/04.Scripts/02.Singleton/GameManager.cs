@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -36,6 +37,7 @@ public static class SceneUtility
 public interface IGameManager
 {
     void AddLevel(int value);
+    EventMediator mediator { get; }
 }
 
 public class GameManager : MonoBehaviour, IGameManager
@@ -43,11 +45,9 @@ public class GameManager : MonoBehaviour, IGameManager
     [SerializeField] private UI_SettingPanel _settingPanel;
     [Inject] private IAudioManager _audioManager;
 
-    public int gameLevel {  get;  set; }
+    public int gameLevel { get; private set; }
+    public EventMediator mediator { get; private set; }
 
-    public EventMediator mediator;
-    public PlayerDataM playerData;
-    public List<WeaponDataSO> weaponDB;
 
     private void Awake()
     {
@@ -58,17 +58,15 @@ public class GameManager : MonoBehaviour, IGameManager
 
     void Start()
     {
-        // PlayerStatsTest 로드
+        // PlayerStatsTest + 무기 DB 로드
         PlayerStatsTest statsData = Resources.Load<PlayerStatsTest>("PlayerStats");
-        // EventMediator 생성
-        // Save 불러오기
-        var saveData = SaveManager.LoadPlayer();
-        if (saveData != null)
-        {
-            playerData.LoadFromSave(saveData, weaponDB);
-        }
+        List<WeaponDataSO> weaponDB = Resources.LoadAll<WeaponDataSO>("Weapons").ToList();
+        // mediator 생성
+        mediator = new EventMediator(new PlayerDataM(statsData), weaponDB);
 
-        mediator = new EventMediator(playerData);
+
+        // Save 불러오기
+        mediator.LoadGame();
 
 
         _settingPanel.InitPanel();
@@ -89,23 +87,5 @@ public class GameManager : MonoBehaviour, IGameManager
 
     //진행중인 스테이지 관리할 로직
 
-    public void SaveGame()
-    {
-        SaveManager.SavePlayer(playerData);
-        Debug.Log("게임 저장 완료!");
-    }
 
-    public void LoadGame()
-    {
-        var saveData = SaveManager.LoadPlayer();
-        if (saveData != null)
-        {
-            playerData.LoadFromSave(saveData, weaponDB);
-            Debug.Log("게임 로드 완료!");
-        }
-        else
-        {
-            Debug.Log("저장 데이터 없음");
-        }
-    }
 }

@@ -23,7 +23,7 @@ public class UI_SettingPanel : MonoBehaviour
     [Header("Panels")]
     [SerializeField] private GameObject _startPanel;
     [SerializeField] private GameObject _savePanel;
-    [SerializeField] private GameObject _overPanel;
+    [SerializeField] private GameObject _loadPanel;
     [SerializeField] private UI_BlurFade _blurPanel;
     [SerializeField] private GameObject _loadingPanel;
 
@@ -40,6 +40,8 @@ public class UI_SettingPanel : MonoBehaviour
     [SerializeField] private Button _overDeclineButton;
 
     [Inject] private IAudioManager _audioManager;
+    [Inject] private IGameManager _gameManager;
+
 
     public void InitPanel()
     {
@@ -64,7 +66,7 @@ public class UI_SettingPanel : MonoBehaviour
                    .AddTo(this);
 
         _loadButton.OnClickAsObservable()
-                   .Subscribe(_ => OnSavePanelOpen())
+                   .Subscribe(_ => OnLoadPanelOpen())
                    .AddTo(this);
 
         _quitButton.OnClickAsObservable()
@@ -79,10 +81,28 @@ public class UI_SettingPanel : MonoBehaviour
         // 패널 초기 상태
         _startPanel.SetActive(true);
         _savePanel.SetActive(false);
-        _overPanel.SetActive(false);
+        _loadPanel.SetActive(false);
         gameObject.SetActive(false);
         _blurPanel.gameObject.SetActive(false);
         _loadingPanel.SetActive(false);
+    }
+
+    public void OnGameStart()
+    {
+        _startPanel.SetActive(false);
+        DelayAndLoad(GameScene.Level1).Forget();
+    }
+    private async UniTask DelayAndLoad(GameScene scene)
+    {
+        _loadingPanel.SetActive(true);
+        // 5초 대기
+        await UniTask.Delay(TimeSpan.FromSeconds(5));
+
+        // 로딩판넬 비활성화
+        _loadingPanel.SetActive(false);
+
+        // 블러 + 페이드 씬 전환 실행
+        await _blurPanel.LoadSceneWithBlurFade(scene);
     }
 
 
@@ -110,7 +130,7 @@ public class UI_SettingPanel : MonoBehaviour
             _saveAcceptButton.onClick.RemoveAllListeners();
             _saveAcceptButton.onClick.AddListener(() =>
             {
-                // 나중에 실제 Save 로직 연결
+                _gameManager.mediator.SaveGame();
                 _savePanel.SetActive(false);
             });
 
@@ -123,22 +143,25 @@ public class UI_SettingPanel : MonoBehaviour
         }
     }
 
-    public void OnGameStart()
+    public void OnLoadPanelOpen()
     {
-        _startPanel.SetActive(false);
-        DelayAndLoad(GameScene.Level1).Forget();
-    }
-    private async UniTask DelayAndLoad(GameScene scene)
-    {
-        _loadingPanel.SetActive(true);
-        // 5초 대기
-        await UniTask.Delay(TimeSpan.FromSeconds(5));
+        _loadPanel.SetActive(!_loadPanel.activeSelf);
 
-        // 로딩판넬 비활성화
-        _loadingPanel.SetActive(false);
+        if (_loadPanel.activeSelf)
+        {
+            _overAcceptButton.onClick.RemoveAllListeners();
+            _overAcceptButton.onClick.AddListener(() =>
+            {
+                _gameManager.mediator.LoadGame();
+                _loadPanel.SetActive(false);
+            });
 
-        // 블러 + 페이드 씬 전환 실행
-        await _blurPanel.LoadSceneWithBlurFade(scene);
+            _overDeclineButton.onClick.RemoveAllListeners();
+            _overDeclineButton.onClick.AddListener(() =>
+            {
+                _loadPanel.SetActive(false);
+            });
+        }
     }
 
 
@@ -149,9 +172,6 @@ public class UI_SettingPanel : MonoBehaviour
         OnToggleSettings();
     }
 
-    public void OnLoadPanelOpen()
-    {
-    }
 
     public void OnLoadNextScene()
     {

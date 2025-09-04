@@ -1865,7 +1865,7 @@ MonoBehaviour:
   _sfxSlider: {fileID: 4333983893949934311}
   _startPanel: {fileID: 6871594457951294647}
   _savePanel: {fileID: 3155956122435107673}
-  _overPanel: {fileID: 6629927479776117367}
+  _loadPanel: {fileID: 0}
   _blurPanel: {fileID: 1110034527338387226}
   _loadingPanel: {fileID: 263948642497902816}
   _resumeButton: {fileID: 3816288450304010142}
@@ -2961,6 +2961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _settingPanel: {fileID: 3497797874679592536}
+  weaponDB: []
 --- !u!1 &5271854778924616625
 GameObject:
   m_ObjectHideFlags: 0
@@ -3288,9 +3289,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadePanel: {fileID: 3062746311890213811}
   blurPanel: {fileID: 1700477724994366842}
-  fadeDuration: 5
-  blurScale: 1.05
-  blurAlpha: 0.3
 --- !u!1 &5728283059981878721
 GameObject:
   m_ObjectHideFlags: 0
@@ -4650,7 +4648,7 @@ GameObject:
   - component: {fileID: 1178813758002311023}
   - component: {fileID: 6399658952453603833}
   m_Layer: 5
-  m_Name: Panel_Over
+  m_Name: Panel_Load
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6357,7 +6355,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Over
+  m_text: Load
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
