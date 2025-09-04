@@ -25,6 +25,11 @@ public class MonsterSpawner : MonoBehaviour
     private int currentHealth;
     private int maxHealth;
 
+    private void Start()
+    {
+        StartStage(0); // 0번 스테이지부터 시작
+    }
+    
     // 스테이지 시작
     public void StartStage(int stageIndex)
     {
@@ -72,6 +77,7 @@ public class MonsterSpawner : MonoBehaviour
     // 체력 감소
     public void DamageEnemy(int damage)
     {
+        Debug.Log("DamageEnemy 호출됨! damage = " + damage);
         if (currentEnemyIndex < 0 || currentEnemyIndex >= clonedEnemyDatas.Count) return;
 
         currentHealth -= damage;
@@ -94,4 +100,7 @@ public class MonsterSpawner : MonoBehaviour
             healthBarImage.fillAmount = (float)currentHealth / maxHealth;
         }
     }
+    
+
+    
 }
