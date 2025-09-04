@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class WeaponSlotButton : MonoBehaviour
 {
+    // === 버튼의 고유 번호 ===
     public int index;
 
     public Button upgradeBtn;
@@ -18,6 +19,7 @@ public class WeaponSlotButton : MonoBehaviour
         equipBtn.onClick.AddListener(WeaponEquip);
     }
 
+    // === 업그레이드 비용 확인 후 업그레이드 ===
     private void CheckMoneyToEnhance()
     {
         if (StatusManager.Instance.currentStatus.money < 10)
@@ -56,6 +58,7 @@ public class WeaponSlotButton : MonoBehaviour
 
     }
 
+    // === 장비 장착 ===
     public void WeaponEquip()
     {
         EquipManager.Instance.currentWeapon.Clear();
