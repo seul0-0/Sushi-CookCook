@@ -61,12 +61,17 @@ public class WeaponSlotButton : MonoBehaviour
     // === ¿Â∫Ò ¿Â¬¯ ===
     public void WeaponEquip()
     {
+        StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value -= EquipManager.Instance.currentWeapon[0].ItemAttack;
+        StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value -= EquipManager.Instance.currentWeapon[0].CriticalChance;
+
         EquipManager.Instance.currentWeapon.Clear();
         EquipManager.Instance.currentWeapon.Add(equipUI.weaponDatas[index]);
+
+        StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value += EquipManager.Instance.currentWeapon[0].ItemAttack;
+        StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value += EquipManager.Instance.currentWeapon[0].CriticalChance;
 
         equipUI.UpdateUI();
 
         equipUI.SetCurrentWeapon(equipUI.weaponDatas[index]);
     }
-
 }
