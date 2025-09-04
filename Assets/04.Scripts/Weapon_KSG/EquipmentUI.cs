@@ -48,6 +48,8 @@ public class EquipmentUI : MonoBehaviour
         equipWindow.SetActive(false);
 
         UpdateUI();
+
+        SetCurrentWeapon(weaponDatas[0]);
     }
 
     // === ÀåºñÃ¢ ¿­°í ´Ý±â ===
@@ -118,54 +120,38 @@ public class EquipmentUI : MonoBehaviour
     }
     public void EquipGloveBtn()
     {
-        for (int i = 0; i < weaponDatas.Count; i++)
-        {
+        _equipManager.currentWeapon.Clear();
+        _equipManager.currentWeapon.Add(weaponDatas[0]);
 
-        }
-        if (weaponDatas.Count > 0)
-        {
+        UpdateUI();
 
-            UpdateUI();
-        }
         SetCurrentWeapon(weaponDatas[0]);
     }
     public void EquipRicePaddleBtn()
     {
-        for (int i = 0; i < weaponDatas.Count; i++)
-        {
+        _equipManager.currentWeapon.Clear();
+        _equipManager.currentWeapon.Add(weaponDatas[1]);
 
-        }
-        if (weaponDatas.Count > 1)
-        {
+        UpdateUI();
 
-            UpdateUI();
-        }
         SetCurrentWeapon(weaponDatas[1]);
     }
     public void EquipChoppingBoardBtn()
     {
-        for (int i = 0; i < weaponDatas.Count; i++)
-        {
+        _equipManager.currentWeapon.Clear();
+        _equipManager.currentWeapon.Add(weaponDatas[2]);
 
-        }
-        if (weaponDatas.Count > 2)
-        {
+        UpdateUI();
 
-            UpdateUI();
-        }
         SetCurrentWeapon(weaponDatas[2]);
     }
     public void EquipKnifeBtn()
     {
-        for (int i = 0; i < weaponDatas.Count; i++)
-        {
+        _equipManager.currentWeapon.Clear();
+        _equipManager.currentWeapon.Add(weaponDatas[3]);
 
-        }
-        if (weaponDatas.Count > 3)
-        {
+        UpdateUI();
 
-            UpdateUI();
-        }
         SetCurrentWeapon(weaponDatas[3]);
     }
     public void BackBtn()
@@ -181,9 +167,9 @@ public class EquipmentUI : MonoBehaviour
         if (ItemName != null)
             ItemName.text = data.ItemName;
         if (ItemAttack != null)
-            ItemAttack.text = "°ø°Ý·Â: " + data.ItemAttack;
+            ItemAttack.text = "³»°ø: " + data.ItemAttack;
         if (ItemCritical != null)
-            ItemCritical.text = "Ä¡¸íÅ¸ È®·ü: " + data.CriticalChance + "%";
+            ItemCritical.text = "¼Ø¾¾ : " + data.CriticalChance + "%";
     }
 
     public void BuyRicePaddle()
