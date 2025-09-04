@@ -53,10 +53,6 @@ public class EquipmentUI : MonoBehaviour
         UpdateUI();
 
         SetCurrentWeapon(weaponDatas[0]);
-
-        StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value += _equipManager.currentWeapon[0].ItemAttack;
-        StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value += _equipManager.currentWeapon[0].CriticalChance;
-
     }
 
     // === 장비창 열고 닫기 ===
@@ -85,6 +81,11 @@ public class EquipmentUI : MonoBehaviour
     public void SetCurrentWeapon(WeaponScriptableObject data)
     {
         _equipManager.UpdateUiDisplay(data);
+
+        StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value += _equipManager.currentWeapon[0].ItemAttack;
+        StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value += _equipManager.currentWeapon[0].CriticalChance;
+
+        WeaponSlotButton.OnWeaponChanhged?.Invoke();
     }
 }
 

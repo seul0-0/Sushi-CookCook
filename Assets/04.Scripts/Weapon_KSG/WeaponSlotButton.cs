@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine.UI;
 
 public class WeaponSlotButton : MonoBehaviour
 {
+    public static Action OnWeaponChanhged;            // === 델리 게이트 호출 ===
+
     // === 버튼의 고유 번호 ===
     public int index;
 
@@ -31,6 +34,12 @@ public class WeaponSlotButton : MonoBehaviour
 
     public void UpgradeEquip()
     {
+        if (EquipManager.Instance.currentWeapon[0] == equipUI.weaponDatas[index])
+        {
+            StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value -= EquipManager.Instance.currentWeapon[0].ItemAttack;
+            StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value -= EquipManager.Instance.currentWeapon[0].CriticalChance;
+        }
+
         equipUI.weaponDatas[index].ItemLevel++;
 
         switch (index)
@@ -56,6 +65,7 @@ public class WeaponSlotButton : MonoBehaviour
             equipUI.SetCurrentWeapon(equipUI.weaponDatas[index]);
         }
 
+        OnWeaponChanhged?.Invoke();
     }
 
     // === 장비 장착 ===
@@ -66,9 +76,6 @@ public class WeaponSlotButton : MonoBehaviour
 
         EquipManager.Instance.currentWeapon.Clear();
         EquipManager.Instance.currentWeapon.Add(equipUI.weaponDatas[index]);
-
-        StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value += EquipManager.Instance.currentWeapon[0].ItemAttack;
-        StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value += EquipManager.Instance.currentWeapon[0].CriticalChance;
 
         equipUI.UpdateUI();
 
