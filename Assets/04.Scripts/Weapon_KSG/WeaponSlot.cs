@@ -25,9 +25,9 @@ public class WeaponSlot : MonoBehaviour
             itemLv.text = "Lv " + data.ItemLevel;
 
         if (itemAttack != null)
-            itemAttack.text = "°ø°Ý·Â: " + data.ItemAttack;
+            itemAttack.text = "³»°ø: " + data.ItemAttack;
 
         if (itemCritical != null)
-            itemCritical.text = "Ä¡¸íÅ¸ È®·ü: " + data.CriticalChance + "%";
+            itemCritical.text = "¼Ø¾¾: " + data.CriticalChance + "%";
     }
 }

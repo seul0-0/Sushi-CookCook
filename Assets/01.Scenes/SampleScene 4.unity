@@ -1445,7 +1445,7 @@ GameObject:
   - component: {fileID: 5972756420762852256}
   - component: {fileID: 3007289876252049109}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Stat Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5455,11 +5455,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b8b4c49287fc05d47a6123d0b988526f, type: 2}
   - {fileID: 11400000, guid: d89f17876e50fa84985b6c4af31a5914, type: 2}
   - {fileID: 11400000, guid: 67dafdc322e7d4d48bc1c5b2ac2c5b39, type: 2}
-  weaponDatas:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  weaponDatas: []
   slots:
   - {fileID: 6121560982619303607}
   - {fileID: 7539391524959444017}
@@ -8350,7 +8346,7 @@ GameObject:
   - component: {fileID: 4725035342830509391}
   - component: {fileID: 715430906283009472}
   m_Layer: 5
-  m_Name: WeaponUI
+  m_Name: WeaponUI Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12938,7 +12934,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 2824576986346948304}
-  - {fileID: 1773785929}
-  - {fileID: 7701581631763847497}
-  - {fileID: 7384496773650369176}
   - {fileID: 2304781299707721283}
+  - {fileID: 7701581631763847497}
+  - {fileID: 1773785929}
+  - {fileID: 7384496773650369176}

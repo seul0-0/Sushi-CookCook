@@ -11,5 +11,5 @@ public class WeaponScriptableObject : ScriptableObject
     public int CriticalChance;
     public int ItemLevel;
     public Sprite ItemImage;
-    public bool isEquipped;
+    public int price;
 }

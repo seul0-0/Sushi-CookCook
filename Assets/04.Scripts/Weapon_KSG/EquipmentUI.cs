@@ -117,11 +117,11 @@ public class EquipmentUI : MonoBehaviour
     {
         for (int i = 0; i < weaponDatas.Count; i++)
         {
-            weaponDatas[i].isEquipped = false;
+
         }
         if (weaponDatas.Count > 0)
         {
-            weaponDatas[0].isEquipped = true;
+
             UpdateUI();
         }
         SetCurrentWeapon(weaponDatas[0]);
@@ -130,11 +130,11 @@ public class EquipmentUI : MonoBehaviour
     {
         for (int i = 0; i < weaponDatas.Count; i++)
         {
-            weaponDatas[i].isEquipped = false;
+
         }
         if (weaponDatas.Count > 1)
         {
-            weaponDatas[1].isEquipped = true;
+
             UpdateUI();
         }
         SetCurrentWeapon(weaponDatas[1]);
@@ -143,11 +143,11 @@ public class EquipmentUI : MonoBehaviour
     {
         for (int i = 0; i < weaponDatas.Count; i++)
         {
-            weaponDatas[i].isEquipped = false;
+
         }
         if (weaponDatas.Count > 2)
         {
-            weaponDatas[2].isEquipped = true;
+
             UpdateUI();
         }
         SetCurrentWeapon(weaponDatas[2]);
@@ -156,11 +156,11 @@ public class EquipmentUI : MonoBehaviour
     {
         for (int i = 0; i < weaponDatas.Count; i++)
         {
-            weaponDatas[i].isEquipped = false;
+
         }
         if (weaponDatas.Count > 3)
         {
-            weaponDatas[3].isEquipped = true;
+
             UpdateUI();
         }
         SetCurrentWeapon(weaponDatas[3]);
