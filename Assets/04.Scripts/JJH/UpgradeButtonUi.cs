@@ -49,7 +49,7 @@ public class UpgradeButtonUi : MonoBehaviour
             StopCoroutine(_coroutine);
             _coroutine = null;
         }
-        else 
+        else
         {
             _isClickHold = !_isClickHold;
             _coroutine = StartCoroutine(UpgradeCorutine());
@@ -69,6 +69,9 @@ public class UpgradeButtonUi : MonoBehaviour
 
         // === 2초간 누를시 자동 업글 ===
         yield return new WaitForSeconds(2f);
+
+        if (_isClickHold == false)
+            yield break;
 
         while (_isClickHold)
         {

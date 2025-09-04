@@ -23,7 +23,10 @@ public class EquipmentUI : MonoBehaviour
     public TextMeshProUGUI ItemAttack;
     public TextMeshProUGUI ItemCritical;
 
-
+    [Header("Button")] // === 장비창 열고 닫기 ===
+    public Button openWindowButton;
+    public GameObject equipWindow;
+    private bool _isClick;
 
     void Start()
     {
@@ -36,7 +39,20 @@ public class EquipmentUI : MonoBehaviour
                 weaponDatas.Add(clone);
             }
         }
+
+        // === 버튼에 할당 ===
+        openWindowButton.onClick.AddListener(OpenWindow);
+        equipWindow.SetActive(false);
+
         UpdateUI();
+    }
+
+    // === 장비창 열고 닫기 ===
+    public void OpenWindow()
+    {
+        _isClick = !_isClick;
+        
+        equipWindow.SetActive(_isClick);
     }
 
     public void UpdateUI()
