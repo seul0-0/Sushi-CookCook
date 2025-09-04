@@ -3,30 +3,21 @@ using UnityEngine.UI;
 
 public class AttackEffect : MonoBehaviour
 {
-    public Button attackButton;
-    public GameObject swordEffectUIPrefab; // UI용 칼 이펙트 프리팹
-    public Canvas canvas; // UI가 속한 캔버스
+    public GameObject swordEffectPrefab; // UI용 칼 이펙트 프리팹
 
-    void Start()
+    void OnMouseDown()
     {
-        attackButton.onClick.AddListener(SpawnEffectAtCursor);
+        Debug.Log("적공격");
+        EventManager.attackClick?.Invoke();
+        SpawnEffectAtCursor();
     }
-
-    void SpawnEffectAtCursor()
+    public void SpawnEffectAtCursor()
     {
-        // 마우스 위치 → UI 좌표 변환
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            canvas.transform as RectTransform,
-            Input.mousePosition,
-            canvas.worldCamera,
-            out Vector2 localPos
-        );
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f;
 
-        // 프리팹 생성 (Canvas 안에 자식으로)
-        GameObject effect = Instantiate(swordEffectUIPrefab, canvas.transform);
-        effect.GetComponent<RectTransform>().anchoredPosition = localPos;
+        GameObject effect = Instantiate(swordEffectPrefab, mousePosition, Quaternion.identity);
 
-        // 1초 뒤 파괴
-        Destroy(effect, 0.5f);
+        Destroy(effect, 0.3f); // 0.5초 뒤 파괴
     }
 }

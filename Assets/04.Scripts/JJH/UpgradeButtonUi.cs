@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class UpgradeButtonUi : MonoBehaviour
@@ -23,68 +22,72 @@ public class UpgradeButtonUi : MonoBehaviour
     // === 업그레이드 true일 경우 가능 ===
     private bool _isUpgradeReady;
     // === 클릭시 활성화 ===
-    private bool _isClick;
+    private bool _isClickHold;
+    // === 코루틴 ===
+    private Coroutine _coroutine;
 
     public void Start()
     {
-        if(statusUpgradePanel != null && statusUpgradePanel.status != null)
+        if(statusUpgradePanel != null && StatusManager.Instance.currentStatus != null)
         {
             _buttonindex = statusUpgradePanel.upgrade_id;
 
             SetButtonPanel();
 
-            //upgradeBtn.onClick.AddListener(OnClick);
+            upgradeBtn.onClick.AddListener(OnClick);
 
-            PlayerStatus.OnMoneyChanged += CheckCost;
+            // === 돈 변화 감지후 ui 갱신 ===
+            StatusManager.OnMoneyChanged += CheckButtonUi;
         }
-
     }
 
-    // === 버튼에 할당 ===
+    // === 버튼을 누름 ===
     public void OnClick()
     {
-        Debug.Log("클릭");
-
-        _isClick = !_isClick;
-
-        UpgradeStatus();
-    }
-
-    // === 다음 레벨 확인 ===
-    public void SetButtonPanel()
-    {
-        _upgradeCost = statusUpgradePanel.status.CheckMoney(statusUpgradePanel.status.stats[_buttonindex].type);
-
-        nextCost.text = $"{_upgradeCost}";
-
-        CheckCost();
-    }
-
-    public void CheckCost()
-    {
-        // === 돈이 부족할 경우 ===
-        if (statusUpgradePanel.status.money < _upgradeCost)
+        if (_coroutine != null)
         {
-            upgradeBtn.image.color = Color.red;
-            _isUpgradeReady = false;
-            return;
+            StopCoroutine(_coroutine);
+            _coroutine = null;
+        }
+        else
+        {
+            _isClickHold = !_isClickHold;
+            _coroutine = StartCoroutine(UpgradeCorutine());
+        }
+    }
+
+    public IEnumerator UpgradeCorutine()
+    {
+        if (_isUpgradeReady == false)
+        {
+            _isClickHold = false;
+
+            yield break;
         }
 
-        upgradeBtn.image.color = Color.black;
+        UpgradeStatus();
 
-        _isUpgradeReady = true;
+        // === 2초간 누를시 자동 업글 ===
+        yield return new WaitForSeconds(2f);
+
+        if (_isClickHold == false)
+            yield break;
+
+        while (_isClickHold)
+        {
+            UpgradeStatus();
+
+            yield return new WaitForSeconds(0.2f);
+        }
     }
-   
     public void UpgradeStatus()
     {
         if (_isUpgradeReady == false) { return; }
 
         // === 업그레이드 ===
-        statusUpgradePanel.status.UpgradeValue(statusUpgradePanel.status.stats[_buttonindex].type);
+        StatusManager.Instance.UpgradeValue(StatusManager.Instance.currentStatus.stats[_buttonindex].type);
 
-        statusUpgradePanel.status.ChangeMoneyValue(-_upgradeCost);
-
-        // StartCoroutine(UpgradeCorutine());
+        StatusManager.Instance.ChangeMoneyValue(-_upgradeCost);
 
         // === 업그레이드 체크를 다시 활성화 하기 위해 ===
         _isUpgradeReady = false;
@@ -99,30 +102,29 @@ public class UpgradeButtonUi : MonoBehaviour
         OnStatusRefreshed?.Invoke();
     }
 
-    public IEnumerator UpgradeCorutine()
+    // === 다음 레벨 확인 ===
+    public void SetButtonPanel()
     {
-        yield return new WaitForSeconds(0.2f);
+        _upgradeCost = StatusManager.Instance.CheckMoney(StatusManager.Instance.currentStatus.stats[_buttonindex].type);
 
-        while (_isClick && _isUpgradeReady)
+        nextCost.text = $"{_upgradeCost}";
+
+        CheckButtonUi();
+    }
+
+    // === 버튼 색 갱신 ===
+    public void CheckButtonUi()
+    {
+        // === 돈이 부족할 경우 ===
+        if (StatusManager.Instance.currentStatus.money < _upgradeCost)
         {
-            // === 업그레이드 ===
-            statusUpgradePanel.status.UpgradeValue(statusUpgradePanel.status.stats[_buttonindex].type);
-
-            statusUpgradePanel.status.ChangeMoneyValue(-_upgradeCost);
-
-            CheckCost();
-
-            // === 패널 창 갱신 ===
-            statusUpgradePanel.NextValue();
-
-            // === 다음 비용 갱신 ===
-            SetButtonPanel();
-
-            // === 현재 스텟 창 갱신 ===
-            OnStatusRefreshed?.Invoke();
-
-            yield return new WaitForSeconds(0.2f);
+            upgradeBtn.image.color = Color.red;
+            _isUpgradeReady = false;
+            return;
         }
 
+        upgradeBtn.image.color = Color.black;
+
+        _isUpgradeReady = true;
     }
 }

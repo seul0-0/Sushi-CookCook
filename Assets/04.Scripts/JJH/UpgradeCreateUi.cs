@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class UpgradeCreateUi : MonoBehaviour
 {
-    public PlayerStatus status;
-
     public Transform content;                 // === 생성 위치 ===
 
     [Header("upgrade")]
@@ -13,12 +11,16 @@ public class UpgradeCreateUi : MonoBehaviour
 
     private void Start()
     {
-        MakeWindow();
+        if(StatusManager.Instance.currentStatus.stats != null)
+        {
+            MakeWindow();
+        }
+
     }
 
     private void MakeWindow()
     {
-        for (int i = 0; i < status.stats.Length; i++)
+        for (int i = 0; i < StatusManager.Instance.currentStatus.stats.Length; i++)
         {
             GameObject newWindow = Instantiate(upgradeWindowPrefabs);
 
