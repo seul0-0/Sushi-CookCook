@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class EnemyStatusTest : ScriptableObject
 {
      [Header("Status")]
-    public float maxHp = 100f;
-    [HideInInspector] public float currentHp =100f;
+    public float maxHp = 1000f;
+    [HideInInspector] public float currentHp =1000f;
     public void Init()
     {
         currentHp = maxHp;
