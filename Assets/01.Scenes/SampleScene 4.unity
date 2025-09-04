@@ -4323,7 +4323,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2014758885148581603}
         m_TargetAssemblyTypeName: UnknownItem, Assembly-CSharp
-        m_MethodName: BuyChoppingBoard
+        m_MethodName: BuyKnife
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10436,7 +10436,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2719100199411970884}
         m_TargetAssemblyTypeName: UnknownItem, Assembly-CSharp
-        m_MethodName: BuyKnife
+        m_MethodName: BuyChoppingBoard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -182,28 +182,5 @@ public class EquipmentUI : MonoBehaviour
     {
         _equipManager.UpdateUiDisplay(data);
     }
-
-    public void BuyRicePaddle()
-    {
-        if (StatusManager.Instance.currentStatus.money < weaponDatas[1].price)
-            return;
-        StatusManager.Instance.ChangeMoneyValue(-weaponDatas[1].price);
-        // 이 버튼이 속한 부모(UnknownItem)를 찾아서 비활성화
-        gameObject.transform.parent.gameObject.SetActive(false);
-    }
-    public void BuyChoppingBoard()
-    {
-        if (StatusManager.Instance.currentStatus.money < weaponDatas[2].price)
-            return;
-        StatusManager.Instance.ChangeMoneyValue(-weaponDatas[2].price);
-        gameObject.transform.parent.gameObject.SetActive(false);
-    }
-    public void BuyKnife()
-    {
-        if (StatusManager.Instance.currentStatus.money < weaponDatas[3].price)
-            return;
-        StatusManager.Instance.ChangeMoneyValue(-weaponDatas[3].price);
-        gameObject.transform.parent.gameObject.SetActive(false);
-    }
 }
 
