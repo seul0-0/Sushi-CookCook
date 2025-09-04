@@ -24,6 +24,7 @@ public interface IAudioManager
 {
     float bgmVolume { get; }
     float sfxVolume { get; }
+
     public void SetBgmVolume(float volume);
     public void SetSfxVolume(float volume);
     void PlayBGM(string name);
@@ -57,7 +58,8 @@ public class AudioManager : MonoBehaviour, IAudioManager
     public float bgmVolume => _bgmVolume;
     [Range(0f, 1f)]
     [SerializeField] private float _sfxVolume = 0.5f;
-    public float sfxVolume => _sfxVolume;
+    public float sfxVolume => _bgmVolume;
+
 
     private void Awake()
     {

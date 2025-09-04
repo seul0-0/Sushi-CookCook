@@ -91,6 +91,8 @@ public class UI_SettingPanel : MonoBehaviour
     {
         _startPanel.SetActive(false);
         DelayAndLoad(GameScene.Level1).Forget();
+        _audioManager.SetBgmVolume(0.5f);
+        _audioManager.PlayBGM("2");
     }
     private async UniTask DelayAndLoad(GameScene scene)
     {
