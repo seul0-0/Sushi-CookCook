@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 01.Rice Paddle
   m_EditorClassIdentifier: 
   ItemName: "\uC8FC\uAC71"
-  ItemAttack: 0
-  CriticalChance: 0
+  ItemAttack: 3
+  CriticalChance: 5
   ItemLevel: 0
   ItemImage: {fileID: 21300000, guid: 673d2d76445d9654389cf4fc646c67e1, type: 3}
   price: 30

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,11 +42,17 @@ public class EquipmentUI : MonoBehaviour
 
         // === 버튼에 할당 ===
         openWindowButton.onClick.AddListener(OpenWindow);
-        equipWindow.SetActive(false);
 
+        if(_equipManager.currentWeapon != null)
+        {
+            equipWindow.SetActive(false);
+        }
+
+        EquipManager.Instance.currentWeapon.Add(weaponDatas[0]);
+        
         UpdateUI();
 
-        EquipGloveBtn();
+        SetCurrentWeapon(weaponDatas[0]);
     }
 
     // === 장비창 열고 닫기 ===
@@ -64,115 +72,7 @@ public class EquipmentUI : MonoBehaviour
             slots[i].SetSlot(weaponDatas[i]);
         }
     }
-    // 강화 시 플레이어 골드 감소 추가해야함
-    public void GloveUpgrade()
-    {
-        if(StatusManager.Instance.currentStatus.money < 10) 
-            return;
-        StatusManager.Instance.ChangeMoneyValue(-10);
-        if (weaponDatas.Count > 0)
-        {
-            weaponDatas[0].ItemLevel++;
-            weaponDatas[0].ItemAttack += 1;
 
-            UpdateUI();
-
-            if (_equipManager.currentWeapon[0] == weaponDatas[0])
-            {
-                SetCurrentWeapon(weaponDatas[0]);
-            }
-        }
-    }
-    public void RicePaddleUpgrade()
-    {
-        if (StatusManager.Instance.currentStatus.money < 10)
-            return;
-        StatusManager.Instance.ChangeMoneyValue(-10);
-        if (weaponDatas.Count > 1)
-        {
-            weaponDatas[1].ItemLevel++;
-            weaponDatas[1].ItemAttack += 2;
-
-            UpdateUI();
-
-            if (_equipManager.currentWeapon[0] == weaponDatas[1])
-            {
-                SetCurrentWeapon(weaponDatas[1]);
-            }
-        }
-    }
-    public void ChoppingBoardUpgrade()
-    {
-        if (StatusManager.Instance.currentStatus.money < 10)
-            return;
-        StatusManager.Instance.ChangeMoneyValue(-10);
-        if (weaponDatas.Count > 2)
-        {
-            weaponDatas[2].ItemLevel++;
-            weaponDatas[2].ItemAttack += 3;
-
-            UpdateUI();
-
-            if (_equipManager.currentWeapon[0] == weaponDatas[2])
-            {
-                SetCurrentWeapon(weaponDatas[2]);
-            }
-        }
-    }
-    public void KnifeUpgrade()
-    {
-        if (StatusManager.Instance.currentStatus.money < 10)
-            return;
-        StatusManager.Instance.ChangeMoneyValue(-10);
-        if (weaponDatas.Count > 3)
-        {
-            weaponDatas[3].ItemLevel++;
-            weaponDatas[3].ItemAttack += 3;
-
-            UpdateUI();
-
-            if (_equipManager.currentWeapon[0] == weaponDatas[3])
-            {
-                SetCurrentWeapon(weaponDatas[3]);
-            }
-        }
-    }
-    public void EquipGloveBtn()
-    {
-        _equipManager.currentWeapon.Clear();
-        _equipManager.currentWeapon.Add(weaponDatas[0]);
-
-        UpdateUI();
-
-        SetCurrentWeapon(weaponDatas[0]);
-    }
-    public void EquipRicePaddleBtn()
-    {
-        _equipManager.currentWeapon.Clear();
-        _equipManager.currentWeapon.Add(weaponDatas[1]);
-
-        UpdateUI();
-
-        SetCurrentWeapon(weaponDatas[1]);
-    }
-    public void EquipChoppingBoardBtn()
-    {
-        _equipManager.currentWeapon.Clear();
-        _equipManager.currentWeapon.Add(weaponDatas[2]);
-
-        UpdateUI();
-
-        SetCurrentWeapon(weaponDatas[2]);
-    }
-    public void EquipKnifeBtn()
-    {
-        _equipManager.currentWeapon.Clear();
-        _equipManager.currentWeapon.Add(weaponDatas[3]);
-
-        UpdateUI();
-
-        SetCurrentWeapon(weaponDatas[3]);
-    }
     public void BackBtn()
     { 
         equipmentUI.SetActive(false); 
