@@ -15,14 +15,12 @@ public enum GameScene
     [SceneName("Level2")] Level2,
     [SceneName("GameOver")] GameOver
 }
-
 [AttributeUsage(AttributeTargets.Field)]
 public class SceneNameAttribute : Attribute
 {
     public string Name { get; }
     public SceneNameAttribute(string name) => Name = name;
 }
-
 public static class SceneUtility
 {
     public static string GetSceneName(GameScene scene)
@@ -33,6 +31,7 @@ public static class SceneUtility
         return (attr.Length > 0) ? ((SceneNameAttribute)attr[0]).Name : scene.ToString();
     }
 }
+
 
 public interface IGameManager
 {
@@ -47,6 +46,8 @@ public class GameManager : MonoBehaviour, IGameManager
     public int gameLevel {  get;  set; }
 
     public EventMediator mediator;
+    public PlayerDataM playerData;
+    public List<WeaponDataSO> weaponDB;
 
     private void Awake()
     {
@@ -57,9 +58,18 @@ public class GameManager : MonoBehaviour, IGameManager
 
     void Start()
     {
-        // Mediator 생성 (PlayerDataM을 IPlayerData로 전달)
+        // PlayerStatsTest 로드
         PlayerStatsTest statsData = Resources.Load<PlayerStatsTest>("PlayerStats");
-        mediator = new EventMediator(new PlayerDataM(statsData));
+        // EventMediator 생성
+        // Save 불러오기
+        var saveData = SaveManager.LoadPlayer();
+        if (saveData != null)
+        {
+            playerData.LoadFromSave(saveData, weaponDB);
+        }
+
+        mediator = new EventMediator(playerData);
+
 
         _settingPanel.InitPanel();
 
@@ -78,4 +88,24 @@ public class GameManager : MonoBehaviour, IGameManager
     }
 
     //진행중인 스테이지 관리할 로직
+
+    public void SaveGame()
+    {
+        SaveManager.SavePlayer(playerData);
+        Debug.Log("게임 저장 완료!");
+    }
+
+    public void LoadGame()
+    {
+        var saveData = SaveManager.LoadPlayer();
+        if (saveData != null)
+        {
+            playerData.LoadFromSave(saveData, weaponDB);
+            Debug.Log("게임 로드 완료!");
+        }
+        else
+        {
+            Debug.Log("저장 데이터 없음");
+        }
+    }
 }

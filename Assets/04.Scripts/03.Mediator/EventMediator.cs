@@ -5,36 +5,20 @@ using UnityEngine;
 
 public class EventMediator
 {
-    public IPlayerData PlayerData { get; private set; }  // 인터페이스만 노출
+    private IPlayerData _playerData;
 
     public EventMediator(IPlayerData playerData)
     {
-        PlayerData = playerData;
+        _playerData = playerData;
     }
 
-    // 장비 장착 요청
-    public void EquipWeapon(WeaponDataTest weapon, int enhanceLevel)
+    public void AddGold(int amount)
     {
-        PlayerData.EquipWeapon(weapon, enhanceLevel);
-        OnStatsChanged();
+        _playerData.AddGold(amount);
     }
 
-    // 업그레이드 요청
-    public void UpgradeStat(UpgradeType type, int level)
+    public void SpendGold(int amount)
     {
-        PlayerData.SetUpgradeLevel(type, level);
-        OnStatsChanged();
-    }
-
-    // 골드 증감 요청
-    public void AddGold(int amount) => PlayerData.AddGold(amount);
-    public void SpendGold(int amount) => PlayerData.SpendGold(amount);
-
-    // 스탯 변경 시 이벤트
-    public event Action<Stats> OnStatsChangedEvent;
-
-    private void OnStatsChanged()
-    {
-        OnStatsChangedEvent?.Invoke(PlayerData.EffectiveStats);
+        _playerData.SpendGold(amount);
     }
 }
