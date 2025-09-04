@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d79b5e9a817c4f84e98448f37473d0cf, type: 3}
-  m_Name: ChoppingBoard
+  m_Name: 03.Chopping Board
   m_EditorClassIdentifier: 
   ItemName: "\uB3C4\uB9C8"
   ItemAttack: 15
   CriticalChance: 10
   ItemLevel: 0
   ItemImage: {fileID: 21300000, guid: 8e28caa7ff8e4094cb318720eda5c200, type: 3}
-  isEquipped: 0
+  price: 60

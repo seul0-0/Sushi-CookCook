@@ -5,22 +5,12 @@ using UnityEngine.UI;
 
 public class ClickEvent : MonoBehaviour
 {
-    public Button AttackButton;
-    public Toggle autoAttackToggle;
-
-    void Start()
+    void OnMouseDown()   // 2D Collider가 있는 오브젝트 클릭 시 실행
     {
-        AttackButton.onClick.AddListener(ClickButton);
-        autoAttackToggle.onValueChanged.AddListener(delegate { AutoToggleEvent(); });
-    }
+        // UI 위 클릭은 무시 (옵션: EventSystem 체크)
+        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            return;
 
-    void ClickButton()
-    {
         EventManager.attackClick?.Invoke();
     }
-    void AutoToggleEvent()
-    {
-        EventManager.autoAttack?.Invoke();
-    }
-
 }

@@ -33,7 +33,7 @@ MonoBehaviour:
     name: " \uC790\uB3D9 \uC870\uB9AC"
     value: 0
     level: 0
-  money: 10
+  money: 10000
   staticons:
   - {fileID: 203524061, guid: d12d0f80e2e2eb14fab151775d41a020, type: 3}
   - {fileID: -1624880674, guid: d12d0f80e2e2eb14fab151775d41a020, type: 3}

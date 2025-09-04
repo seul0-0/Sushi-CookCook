@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d79b5e9a817c4f84e98448f37473d0cf, type: 3}
-  m_Name: RicePaddle
+  m_Name: 01.Rice Paddle
   m_EditorClassIdentifier: 
   ItemName: "\uC8FC\uAC71"
   ItemAttack: 3
   CriticalChance: 5
   ItemLevel: 0
   ItemImage: {fileID: 21300000, guid: 673d2d76445d9654389cf4fc646c67e1, type: 3}
-  isEquipped: 0
+  price: 30
