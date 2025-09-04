@@ -6,19 +6,17 @@ public class AutoAttack : MonoBehaviour
 {
     public int autoAttackLevel = 0;
     public Toggle autoAttackToggle; 
-    public Button levelUpbutton;
     private Coroutine autoAttackRoutine;
 
     void Start()
     {
         // 토글 이벤트 연결
         autoAttackToggle.onValueChanged.AddListener(OnToggleChanged);
-        levelUpbutton.onClick.AddListener(LevelUp);
     }
 
     void OnToggleChanged(bool isOn)
     {
-        if (isOn && autoAttackLevel > 0)
+        if (isOn && StatusManager.Instance.currentStatus.stats[4].level > 0)
         {
             // 자동공격 시작
             autoAttackRoutine = StartCoroutine(AutoAttackCoroutine());
