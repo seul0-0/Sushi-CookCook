@@ -16,24 +16,40 @@ public class WeaponSlotButton : MonoBehaviour
 
     public EquipmentUI equipUI;
 
+    private bool _isUpgrade;
+
     private void Start()
     {
-        upgradeBtn.onClick.AddListener(CheckMoneyToEnhance);
+        upgradeBtn.onClick.AddListener(UpgradeEquip);
         equipBtn.onClick.AddListener(WeaponEquip);
+
+        CheckMoneyToEnhance();
+
+        // === 돈 변화 감지후 ui 갱신 ===
+        StatusManager.OnMoneyChanged += CheckMoneyToEnhance;
     }
 
     // === 업그레이드 비용 확인 후 업그레이드 ===
     private void CheckMoneyToEnhance()
     {
+        // === 돈이 부족할 경우 ===
         if (StatusManager.Instance.currentStatus.money < 10)
+        {
+            upgradeBtn.image.color = Color.red;
             return;
-        StatusManager.Instance.ChangeMoneyValue(-10);
+        }
 
-        UpgradeEquip();
+        upgradeBtn.image.color = Color.black;
+
+        _isUpgrade = true;
     }
 
     public void UpgradeEquip()
     {
+        if (_isUpgrade == false) return;
+
+        StatusManager.Instance.ChangeMoneyValue(-10);
+
         if (EquipManager.Instance.currentWeapon[0] == equipUI.weaponDatas[index])
         {
             StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value -= EquipManager.Instance.currentWeapon[0].ItemAttack;
