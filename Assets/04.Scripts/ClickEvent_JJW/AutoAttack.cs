@@ -4,14 +4,21 @@ using UnityEngine.UI;
 
 public class AutoAttack : MonoBehaviour
 {
-    public int autoAttackLevel = 0;
-    public Toggle autoAttackToggle; 
+    public Toggle autoAttackToggle;
     private Coroutine autoAttackRoutine;
+
+    private PlayerStatus _playerStatus;
 
     void Start()
     {
         // 토글 이벤트 연결
         autoAttackToggle.onValueChanged.AddListener(OnToggleChanged);
+
+        // StatusManager에서 현재 플레이어 상태 가져오기
+        if (StatusManager.Instance != null)
+        {
+            _playerStatus = StatusManager.Instance.currentStatus;
+        }
     }
 
     void OnToggleChanged(bool isOn)
@@ -31,16 +38,22 @@ public class AutoAttack : MonoBehaviour
             }
         }
     }
-
-    public void LevelUp()
+    private float CalculateFinalAttack()
     {
-        autoAttackLevel++;
-        Debug.Log("AutoAttack Level: " + autoAttackLevel);
+        float autoAttack = _playerStatus.stats[(int)StatType.autoattack].value;
+        float criticalChance = _playerStatus.stats[(int)StatType.critical].value;
+        float criticalDamage = _playerStatus.stats[(int)StatType.criticalDamage].value;
 
-        // 토글 켜져 있으면 새 레벨에 맞게 다시 코루틴 실행
-        if (autoAttackToggle.isOn)
+        float random = Random.Range(1f, 100f);
+
+        // 치명타 성공
+        if (random <= criticalChance)
         {
-            OnToggleChanged(true);
+            return autoAttack * criticalDamage;
+        }
+        else
+        {
+            return autoAttack;
         }
     }
 
@@ -48,7 +61,7 @@ public class AutoAttack : MonoBehaviour
     {
         while (true)
         {
-            float attackInterval = Mathf.Max(0.5f, 2f - autoAttackLevel * 0.2f);
+            float attackInterval = Mathf.Max(0.5f, 2f - _playerStatus.stats[(int)StatType.autoattack].level * 0.2f);
             yield return new WaitForSeconds(attackInterval);
 
             EventManager.attackClick?.Invoke();

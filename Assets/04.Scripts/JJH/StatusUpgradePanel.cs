@@ -16,6 +16,12 @@ public class StatusUpgradePanel : MonoBehaviour
     [Header("Next")]
     public TextMeshProUGUI nextUpgradeValue;
 
+    private void Start()
+    {
+        // === Àåºñ º¯°æ½Ã ½ºÅÝ°ª º¯°æ ===
+        WeaponSlotButton.OnWeaponChanhged += NextValue;
+    }
+
     // ===   0    ,  1    ,     2    ,     3     ,  4        ===
     // ===   ³»°ø , ¼Ø¾¾  , ¼Ø¾¾ °­È­, Çà¿î ½ºÅÝ , ÀÚµ¿ Á¶¸® ===
     public void SetPanel(int id)

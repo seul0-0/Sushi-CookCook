@@ -81,6 +81,11 @@ public class EquipmentUI : MonoBehaviour
     public void SetCurrentWeapon(WeaponScriptableObject data)
     {
         _equipManager.UpdateUiDisplay(data);
+
+        StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value += _equipManager.currentWeapon[0].ItemAttack;
+        StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value += _equipManager.currentWeapon[0].CriticalChance;
+
+        WeaponSlotButton.OnWeaponChanhged?.Invoke();
     }
 }
 
