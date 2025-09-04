@@ -5,15 +5,12 @@ using UnityEngine.UI;
 
 public class EquipmentUI : MonoBehaviour
 {
-    public PlayerStatus playerStatus;
-    [Header("스크립터블 오브젝트 연결 (원본)")]
-    public List<WeaponScriptableObject> originalWeaponDatas = new List<WeaponScriptableObject>();
-
+    private EquipManager _equipManager;
     [Header("클론된 무기 데이터")]
-    public List<WeaponScriptableObject> weaponDatas = new List<WeaponScriptableObject>();
+    public List<WeaponScriptableObject> weaponDatas = new();
 
     [Header("슬롯 연결")]
-    public List<WeaponSlot> slots = new List<WeaponSlot>();
+    public List<WeaponSlot> slots = new();
 
     public GameObject equipmentUI;
 
@@ -30,8 +27,14 @@ public class EquipmentUI : MonoBehaviour
 
     void Start()
     {
+        if(EquipManager.Instance != null)
+        {
+            _equipManager = EquipManager.Instance;
+        }
+
         weaponDatas.Clear();
-        foreach (var weapon in originalWeaponDatas)
+
+        foreach (var weapon in _equipManager.originalWeaponDatas)
         {
             if (weapon != null)
             {

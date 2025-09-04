@@ -215,6 +215,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &568477109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 568477111}
+  - component: {fileID: 568477110}
+  m_Layer: 0
+  m_Name: EquipManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &568477110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568477109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7ec6d77d79c24f916ea2a357fb853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStatus: {fileID: 0}
+  originalWeaponDatas:
+  - {fileID: 11400000, guid: 09e31f05f6de47c4786ac244168b8494, type: 2}
+  - {fileID: 11400000, guid: c134edc6355ba9c478faf5842a9cdf70, type: 2}
+  - {fileID: 11400000, guid: e4d91eae232446b4cb5913064ee6f0a9, type: 2}
+  - {fileID: 11400000, guid: 04ca9bc3384e02e40b6db5119c5acc42, type: 2}
+--- !u!4 &568477111
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568477109}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 380, y: 640, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1773785926
 GameObject:
   m_ObjectHideFlags: 0
@@ -5449,12 +5499,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213dfc4b055935745aeb7ed54453fbfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStatus: {fileID: 0}
-  originalWeaponDatas:
-  - {fileID: 11400000, guid: f6e0a65a04d2cfc46abc89c643477fec, type: 2}
-  - {fileID: 11400000, guid: b8b4c49287fc05d47a6123d0b988526f, type: 2}
-  - {fileID: 11400000, guid: d89f17876e50fa84985b6c4af31a5914, type: 2}
-  - {fileID: 11400000, guid: 67dafdc322e7d4d48bc1c5b2ac2c5b39, type: 2}
   weaponDatas: []
   slots:
   - {fileID: 6121560982619303607}
@@ -12938,3 +12982,4 @@ SceneRoots:
   - {fileID: 7701581631763847497}
   - {fileID: 1773785929}
   - {fileID: 7384496773650369176}
+  - {fileID: 568477111}
