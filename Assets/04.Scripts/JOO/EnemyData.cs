@@ -7,7 +7,7 @@ public class EnemyData : ScriptableObject
 {
     public string enemyName;
     public int health;
-    public Sprite enemySprite;
+    public GameObject enemyPrefab;
     public int Gold;
 }
 

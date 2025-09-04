@@ -67,9 +67,12 @@ public class MonsterSpawner : MonoBehaviour
         currentHealth = maxHealth;
 
         // UI 세팅
-        enemyNameText.text = enemy.enemyName;
-        enemySpriteImage.sprite = enemy.enemySprite;
-        UpdateHealthBar();
+        //enemyNameText.text = enemy.enemyName;
+        SpriteRenderer sr = enemy.enemyPrefab.GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            enemySpriteImage.sprite = sr.sprite;
+        }        UpdateHealthBar();
 
         Debug.Log(enemy.enemyName + " 등장! (체력 " + enemy.health + ")");
     }
