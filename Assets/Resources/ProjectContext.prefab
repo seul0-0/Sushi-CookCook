@@ -216,7 +216,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &6592264515946278917
 MonoBehaviour:
@@ -884,7 +884,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.039215688}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
@@ -901,7 +901,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 2493594358032412604}
   m_OnClick:
     m_PersistentCalls:
@@ -1865,7 +1865,7 @@ MonoBehaviour:
   _sfxSlider: {fileID: 4333983893949934311}
   _startPanel: {fileID: 6871594457951294647}
   _savePanel: {fileID: 3155956122435107673}
-  _loadPanel: {fileID: 0}
+  _loadPanel: {fileID: 6629927479776117367}
   _blurPanel: {fileID: 1110034527338387226}
   _loadingPanel: {fileID: 263948642497902816}
   _resumeButton: {fileID: 3816288450304010142}
@@ -2961,7 +2961,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _settingPanel: {fileID: 3497797874679592536}
-  weaponDB: []
 --- !u!1 &5271854778924616625
 GameObject:
   m_ObjectHideFlags: 0
@@ -3233,7 +3232,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &8985526534612537961
 MonoBehaviour:

@@ -12,7 +12,7 @@ using Zenject;
 public enum GameScene
 {
     [SceneName("CJH_GameManager")] MainMenu,
-    [SceneName("Test2")] Level1,
+    [SceneName("MainScene")] Level1,
     [SceneName("Level2")] Level2,
     [SceneName("GameOver")] GameOver
 }
@@ -59,14 +59,11 @@ public class GameManager : MonoBehaviour, IGameManager
     void Start()
     {
         // PlayerStatsTest + 무기 DB 로드
-        PlayerStatsTest statsData = Resources.Load<PlayerStatsTest>("PlayerStats");
         List<WeaponDataSO> weaponDB = Resources.LoadAll<WeaponDataSO>("Weapons").ToList();
         // mediator 생성
-        mediator = new EventMediator(new PlayerDataM(statsData), weaponDB);
 
-
-        // Save 불러오기
-        mediator.LoadGame();
+        PlayerDataM playerData = new PlayerDataM(); // 먼저 변수 선언
+        mediator = new EventMediator(playerData);           // 변수 넣기
 
 
         _settingPanel.InitPanel();
@@ -86,6 +83,8 @@ public class GameManager : MonoBehaviour, IGameManager
     }
 
     //진행중인 스테이지 관리할 로직
+
+
 
 
 }

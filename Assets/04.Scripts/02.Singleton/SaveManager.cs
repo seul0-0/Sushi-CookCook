@@ -2,70 +2,104 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using UnityEngine;
 
 
 [Serializable]
 public class PlayerSaveData
 {
-    public string[] equippedWeaponNames;     // 슬롯별 무기 이름
-    public int[] weaponEnhanceLevels;        // 슬롯별 강화 레벨
-    public int gold;                         // 보유 골드
-    public Dictionary<UpgradeType, int> upgradeLevels; // 업그레이드 상태
+    public int gold;
+    public List<StatSaveData> stats;
+    public List<WeaponSaveData> equippedWeapons; // 무기 + 강화레벨
+}
+
+[Serializable]
+public class StatSaveData
+{
+    public StatType type;
+    public float value;
+    public int level;
+}
+
+[Serializable]
+public class WeaponSaveData
+{
+    public string weaponName;
+    public int enhanceLevel;
 }
 
 public static class SaveManager
 {
-    private const string PlayerKey = "PlayerSave";
+    private static readonly string SavePath = Path.Combine(Application.persistentDataPath, "playerSave.json");
 
     // 내부용: 실제 직렬화 저장
-    public static void SavePlayer(PlayerDataM player)
+    public static void Save()
     {
+        var status = StatusManager.Instance.currentStatus;
+        var equip = EquipManager.Instance;
+
         var dto = new PlayerSaveData
         {
-            equippedWeaponNames = player.GetEquippedWeaponNames(),
-            weaponEnhanceLevels = player.GetWeaponEnhanceLevels(),
-            upgradeLevels = new Dictionary<UpgradeType, int>(player.UpgradeLevels),
-            gold = player.Gold
+            gold = status.money,
+            stats = status.stats.Select(s => new StatSaveData
+            {
+                type = s.type,
+                value = s.value,
+                level = s.level
+            }).ToList(),
+            equippedWeapons = equip.currentWeapon.Select(w => new WeaponSaveData
+            {
+                weaponName = w.ItemName,
+                enhanceLevel = w.ItemLevel   // 여기서 강화레벨까지 같이 저장!
+            }).ToList()
         };
 
-        // JSON 직렬화 (Newtonsoft)
         string json = JsonConvert.SerializeObject(dto, Formatting.Indented);
-        PlayerPrefs.SetString(PlayerKey, json);
-        PlayerPrefs.Save();
+        File.WriteAllText(SavePath, json);
+        Debug.Log($"게임 저장 완료! 경로: {SavePath}");
     }
 
     // 내부용: 실제 불러오기
-    public static PlayerSaveData LoadPlayer()
+    public static void Load()
     {
-        if (!PlayerPrefs.HasKey(PlayerKey))
-            return null;
-
-        string json = PlayerPrefs.GetString(PlayerKey);
-        // JSON 역직렬화 (Newtonsoft)
-        return JsonConvert.DeserializeObject<PlayerSaveData>(json);
-    }
-
-
-
-    // 통합: GameManager에서 바로 호출
-    public static void SaveGame(PlayerDataM player)
-    {
-        SavePlayer(player);
-        Debug.Log("게임 저장 완료!");
-    }
-
-    public static void LoadGame(PlayerDataM player, List<WeaponDataSO> weaponDB)
-    {
-        var saveData = LoadPlayer();
-        if (saveData != null)
+        if (!File.Exists(SavePath))
         {
-            player.LoadFromSave(saveData, weaponDB);
-            Debug.Log("게임 로드 완료!");
+            Debug.Log("저장 파일이 없습니다.");
+            return;
         }
-        else
+        string json = File.ReadAllText(SavePath);
+        var dto = JsonConvert.DeserializeObject<PlayerSaveData>(json);
+
+        // StatusManager 복원
+        var status = StatusManager.Instance.currentStatus;
+        status.money = dto.gold;
+
+        foreach (var s in dto.stats)
         {
-            Debug.Log("저장 데이터 없음");
+            int index = StatusManager.Instance.GetStatType(s.type);
+            status.stats[index].value = s.value;
+            status.stats[index].level = s.level;
         }
+
+        // EquipManager 복원
+        var equip = EquipManager.Instance;
+        equip.currentWeapon.Clear();
+
+        foreach (var w in dto.equippedWeapons)
+        {
+            var weapon = equip.originalWeaponDatas.FirstOrDefault(x => x.ItemName == w.weaponName);
+            if (weapon != null)
+            {
+                weapon.ItemLevel = w.enhanceLevel; // 저장된 강화레벨 적용
+                equip.currentWeapon.Add(weapon);
+            }
+        }
+
+        // UI 갱신
+        if (equip.currentWeapon.Count > 0)
+            equip.UpdateUiDisplay(equip.currentWeapon[0]);
+        Debug.Log($"게임 로드 완료! 경로: {SavePath}");
     }
 }

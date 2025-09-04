@@ -130,7 +130,8 @@ public class UI_SettingPanel : MonoBehaviour
             _saveAcceptButton.onClick.RemoveAllListeners();
             _saveAcceptButton.onClick.AddListener(() =>
             {
-                _gameManager.mediator.SaveGame();
+                SaveManager.Save();
+                Debug.Log("저장 완료");
                 _savePanel.SetActive(false);
             });
 
@@ -152,7 +153,8 @@ public class UI_SettingPanel : MonoBehaviour
             _overAcceptButton.onClick.RemoveAllListeners();
             _overAcceptButton.onClick.AddListener(() =>
             {
-                _gameManager.mediator.LoadGame();
+                Debug.Log("로드 완료");
+                SaveManager.Load();
                 _loadPanel.SetActive(false);
             });
 
