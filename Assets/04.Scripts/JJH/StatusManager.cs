@@ -115,7 +115,6 @@ public class StatusManager : Singleton<StatusManager>
     // === ¿‘∑¬«— ∏∏≈≠ µ∑¿Ã + µ  √÷º“ 0 ===
     public int ChangeMoneyValue(int amount)
     {
-        Debug.Log("µ∑");
         currentStatus.money = Mathf.Max(0, currentStatus.money + amount);
 
         OnMoneyChanged?.Invoke();
