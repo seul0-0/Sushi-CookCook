@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class EquipmentUI : MonoBehaviour
 {
     private EquipManager _equipManager;
+
     [Header("클론된 무기 데이터")]
     public List<WeaponScriptableObject> weaponDatas = new();
 
@@ -13,12 +14,6 @@ public class EquipmentUI : MonoBehaviour
     public List<WeaponSlot> slots = new();
 
     public GameObject equipmentUI;
-
-    [Header("장착중인 장비")]
-    public Image ItemImg;
-    public TextMeshProUGUI ItemName;
-    public TextMeshProUGUI ItemAttack;
-    public TextMeshProUGUI ItemCritical;
 
     [Header("Button")] // === 장비창 열고 닫기 ===
     public Button openWindowButton;
@@ -49,7 +44,7 @@ public class EquipmentUI : MonoBehaviour
 
         UpdateUI();
 
-        SetCurrentWeapon(weaponDatas[0]);
+        EquipGloveBtn();
     }
 
     // === 장비창 열고 닫기 ===
@@ -79,7 +74,13 @@ public class EquipmentUI : MonoBehaviour
         {
             weaponDatas[0].ItemLevel++;
             weaponDatas[0].ItemAttack += 1;
+
             UpdateUI();
+
+            if (_equipManager.currentWeapon[0] == weaponDatas[0])
+            {
+                SetCurrentWeapon(weaponDatas[0]);
+            }
         }
     }
     public void RicePaddleUpgrade()
@@ -91,7 +92,13 @@ public class EquipmentUI : MonoBehaviour
         {
             weaponDatas[1].ItemLevel++;
             weaponDatas[1].ItemAttack += 2;
+
             UpdateUI();
+
+            if (_equipManager.currentWeapon[0] == weaponDatas[1])
+            {
+                SetCurrentWeapon(weaponDatas[1]);
+            }
         }
     }
     public void ChoppingBoardUpgrade()
@@ -103,7 +110,13 @@ public class EquipmentUI : MonoBehaviour
         {
             weaponDatas[2].ItemLevel++;
             weaponDatas[2].ItemAttack += 3;
+
             UpdateUI();
+
+            if (_equipManager.currentWeapon[0] == weaponDatas[2])
+            {
+                SetCurrentWeapon(weaponDatas[2]);
+            }
         }
     }
     public void KnifeUpgrade()
@@ -115,7 +128,13 @@ public class EquipmentUI : MonoBehaviour
         {
             weaponDatas[3].ItemLevel++;
             weaponDatas[3].ItemAttack += 3;
+
             UpdateUI();
+
+            if (_equipManager.currentWeapon[0] == weaponDatas[3])
+            {
+                SetCurrentWeapon(weaponDatas[3]);
+            }
         }
     }
     public void EquipGloveBtn()
@@ -161,37 +180,29 @@ public class EquipmentUI : MonoBehaviour
 
     public void SetCurrentWeapon(WeaponScriptableObject data)
     {
-        if (data == null) return;
-        if (ItemImg != null && data.ItemImage != null)
-            ItemImg.sprite = data.ItemImage;
-        if (ItemName != null)
-            ItemName.text = data.ItemName;
-        if (ItemAttack != null)
-            ItemAttack.text = "내공: " + data.ItemAttack;
-        if (ItemCritical != null)
-            ItemCritical.text = "솜씨 : " + data.CriticalChance + "%";
+        _equipManager.UpdateUiDisplay(data);
     }
 
     public void BuyRicePaddle()
     {
-        if (StatusManager.Instance.currentStatus.money < 30)
+        if (StatusManager.Instance.currentStatus.money < weaponDatas[1].price)
             return;
-        StatusManager.Instance.ChangeMoneyValue(-30);
+        StatusManager.Instance.ChangeMoneyValue(-weaponDatas[1].price);
         // 이 버튼이 속한 부모(UnknownItem)를 찾아서 비활성화
         gameObject.transform.parent.gameObject.SetActive(false);
     }
     public void BuyChoppingBoard()
     {
-        if (StatusManager.Instance.currentStatus.money < 60)
+        if (StatusManager.Instance.currentStatus.money < weaponDatas[2].price)
             return;
-        StatusManager.Instance.ChangeMoneyValue(-60);
+        StatusManager.Instance.ChangeMoneyValue(-weaponDatas[2].price);
         gameObject.transform.parent.gameObject.SetActive(false);
     }
     public void BuyKnife()
     {
-        if (StatusManager.Instance.currentStatus.money < 60)
+        if (StatusManager.Instance.currentStatus.money < weaponDatas[3].price)
             return;
-        StatusManager.Instance.ChangeMoneyValue(-60);
+        StatusManager.Instance.ChangeMoneyValue(-weaponDatas[3].price);
         gameObject.transform.parent.gameObject.SetActive(false);
     }
 }
