@@ -97,7 +97,5 @@ public class WeaponSlotButton : MonoBehaviour
         equipUI.SetCurrentWeapon(_equipManager.weaponDatas[index]);
 
         equipUI.UpdateUI(); // UI °»½Å
-
-        OnWeaponChanhged?.Invoke();
     }
 }

@@ -104,6 +104,7 @@ public static class SaveManager
             if (weapon != null)
             {
                 weapon.ItemLevel = w.enhanceLevel; // 저장된 강화레벨 적용
+                equip.currentWeapon.Add(weapon);
             }
         }
         // === 가지고있던 장비들의 정보 ===
