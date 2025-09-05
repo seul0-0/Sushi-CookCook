@@ -9,9 +9,6 @@ public class EquipmentUI : MonoBehaviour
 {
     private EquipManager _equipManager;
 
-    [Header("클론된 무기 데이터")]
-    public List<WeaponScriptableObject> weaponDatas = new();
-
     [Header("슬롯 연결")]
     public List<WeaponSlot> slots = new();
 
@@ -27,16 +24,16 @@ public class EquipmentUI : MonoBehaviour
         if(EquipManager.Instance != null)
         {
             _equipManager = EquipManager.Instance;
-        }
 
-        weaponDatas.Clear();
+            _equipManager.weaponDatas.Clear();
+        }
 
         foreach (var weapon in _equipManager.originalWeaponDatas)
         {
             if (weapon != null)
             {
                 var clone = Instantiate(weapon);  // ScriptableObject 복제
-                weaponDatas.Add(clone);
+                _equipManager.weaponDatas.Add(clone);
             }
         }
 
@@ -48,11 +45,11 @@ public class EquipmentUI : MonoBehaviour
             equipWindow.SetActive(false);
         }
 
-        EquipManager.Instance.currentWeapon.Add(weaponDatas[0]);
+        EquipManager.Instance.currentWeapon.Add(_equipManager.weaponDatas[0]);
         
         UpdateUI();
 
-        SetCurrentWeapon(weaponDatas[0]);
+        SetCurrentWeapon(_equipManager.weaponDatas[0]);
     }
 
     // === 장비창 열고 닫기 ===
@@ -65,11 +62,11 @@ public class EquipmentUI : MonoBehaviour
 
     public void UpdateUI()
     {
-        int count = Mathf.Min(slots.Count, weaponDatas.Count);
+        int count = Mathf.Min(slots.Count, _equipManager.weaponDatas.Count);
 
         for (int i = 0; i < count; i++)
         {
-            slots[i].SetSlot(weaponDatas[i]);
+            slots[i].SetSlot(_equipManager.weaponDatas[i]);
         }
     }
 
@@ -80,7 +77,7 @@ public class EquipmentUI : MonoBehaviour
 
     public void SetCurrentWeapon(WeaponScriptableObject data)
     {
-        _equipManager.UpdateUiDisplay(data);
+        EquipManager.Instance.EquipItem(data, 0);
 
         StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value += _equipManager.currentWeapon[0].ItemAttack;
         StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value += _equipManager.currentWeapon[0].CriticalChance;
