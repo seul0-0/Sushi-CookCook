@@ -12,5 +12,8 @@ public class WeaponScriptableObject : ScriptableObject
     public int ItemLevel;
     public Sprite ItemImage;
     public int price;
-    public bool have;
+
+    [Header("커서 이미지")]
+    public Texture2D CursorTexture;  // 장착 시 사용할 커서 이미지
+    public Vector2 CursorHotspot = Vector2.zero;
 }

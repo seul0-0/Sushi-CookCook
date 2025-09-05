@@ -18,4 +18,5 @@ MonoBehaviour:
   ItemLevel: 0
   ItemImage: {fileID: 21300000, guid: 673d2d76445d9654389cf4fc646c67e1, type: 3}
   price: 30
-  have: 0
+  CursorTexture: {fileID: 2800000, guid: e84d6e506fed3084ab6757ab2e1591dd, type: 3}
+  CursorHotspot: {x: 0, y: 0}

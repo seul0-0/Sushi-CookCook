@@ -14,10 +14,7 @@ public class WeaponSlotButton : MonoBehaviour
     public Button upgradeBtn;
     public Button equipBtn;
 
-    public EquipmentUI equipmentUI;
-
-    [HideInInspector]
-    public EquipManager equipManager;
+    public EquipmentUI equipUI;
 
     private bool _isUpgrade;
 
@@ -27,8 +24,6 @@ public class WeaponSlotButton : MonoBehaviour
         equipBtn.onClick.AddListener(WeaponEquip);
 
         CheckMoneyToEnhance();
-
-        equipManager = EquipManager.Instance;
 
         // === µ· º¯È­ °¨ÁöÈÄ ui °»½Å ===
         StatusManager.OnMoneyChanged += CheckMoneyToEnhance;
@@ -55,35 +50,35 @@ public class WeaponSlotButton : MonoBehaviour
 
         StatusManager.Instance.ChangeMoneyValue(-10);
 
-        if (equipManager.currentWeapon[0] == equipManager.weaponDatas[index])
+        if (EquipManager.Instance.currentWeapon[0] == equipUI.weaponDatas[index])
         {
-            StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value -= equipManager.currentWeapon[0].ItemAttack;
-            StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value -= equipManager.currentWeapon[0].CriticalChance;
+            StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value -= EquipManager.Instance.currentWeapon[0].ItemAttack;
+            StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value -= EquipManager.Instance.currentWeapon[0].CriticalChance;
         }
 
-        equipManager.weaponDatas[index].ItemLevel++;
+        equipUI.weaponDatas[index].ItemLevel++;
 
         switch (index)
         {
             case 0:
-                equipManager.weaponDatas[index].ItemAttack += 1;
+                equipUI.weaponDatas[index].ItemAttack += 1;
                 break;
             case 1:
-                equipManager.weaponDatas[index].ItemAttack += 2;
+                equipUI.weaponDatas[index].ItemAttack += 2;
                 break;
             case 2:
-                equipManager.weaponDatas[index].ItemAttack += 4;
+                equipUI.weaponDatas[index].ItemAttack += 4;
                 break;
             case 3:
-                equipManager.weaponDatas[index].ItemAttack += 4;
+                equipUI.weaponDatas[index].ItemAttack += 4;
                 break;
         }
 
-        equipmentUI.UpdateUI();
+        equipUI.UpdateUI();
 
-        if (EquipManager.Instance.currentWeapon[0] == equipManager.weaponDatas[index])
+        if (EquipManager.Instance.currentWeapon[0] == equipUI.weaponDatas[index])
         {
-            equipmentUI.SetCurrentWeapon(equipManager.weaponDatas[index]);
+            equipUI.SetCurrentWeapon(equipUI.weaponDatas[index]);
         }
 
         OnWeaponChanhged?.Invoke();
@@ -95,11 +90,8 @@ public class WeaponSlotButton : MonoBehaviour
         StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value -= EquipManager.Instance.currentWeapon[0].ItemAttack;
         StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value -= EquipManager.Instance.currentWeapon[0].CriticalChance;
 
-        EquipManager.Instance.currentWeapon.Clear();
-        EquipManager.Instance.currentWeapon.Add(equipManager.weaponDatas[index]);
+        EquipManager.Instance.EquipItem(equipUI.weaponDatas[index], 0); // ½½·Ô 0¿¡ ÀåÂø
+        equipUI.UpdateUI(); // UI °»½Å
 
-        equipmentUI.UpdateUI();
-
-        equipmentUI.SetCurrentWeapon(equipManager.weaponDatas[index]);
     }
 }
