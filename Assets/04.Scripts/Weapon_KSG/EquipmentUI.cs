@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class EquipmentUI : MonoBehaviour
 {
+    public static Action OnEquip;
+
     private EquipManager _equipManager;
 
     [Header("슬롯 연결")]
@@ -17,7 +19,7 @@ public class EquipmentUI : MonoBehaviour
     [Header("Button")] // === 장비창 열고 닫기 ===
     public Button openWindowButton;
     public GameObject equipWindow;
-    private bool _isClick;
+    private bool _isClick = true;
 
     void Start()
     {
@@ -42,7 +44,7 @@ public class EquipmentUI : MonoBehaviour
 
         if(_equipManager.currentWeapon != null)
         {
-            equipWindow.SetActive(false);
+            OpenWindow();
         }
 
         EquipManager.Instance.currentWeapon.Add(_equipManager.weaponDatas[0]);
@@ -58,6 +60,8 @@ public class EquipmentUI : MonoBehaviour
         _isClick = !_isClick;
         
         equipWindow.SetActive(_isClick);
+
+        OnEquip?.Invoke();
     }
 
     public void UpdateUI()

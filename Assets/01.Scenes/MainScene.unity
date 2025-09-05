@@ -3108,9 +3108,9 @@ RectTransform:
   - {fileID: 2969906707842129719}
   m_Father: {fileID: 6359176980979980170}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -25}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1661933689801461014
@@ -3271,7 +3271,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5573574892574058969}
         m_TargetAssemblyTypeName: UnknownItem, Assembly-CSharp
-        m_MethodName: BuyRicePaddle
+        m_MethodName: BuyWeapon
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4726,7 +4726,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC7A5\uBE44\uCC3D"
+  m_text: "\uB3C4\uAD6C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7888b2131007689489114d6486b5b09c, type: 2}
   m_sharedMaterial: {fileID: 5039076036764523313, guid: 7888b2131007689489114d6486b5b09c, type: 2}
@@ -5247,9 +5247,9 @@ RectTransform:
   - {fileID: 585007453934744441}
   m_Father: {fileID: 6010183617016799952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -25}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3023953028056663096
@@ -6597,9 +6597,9 @@ RectTransform:
   - {fileID: 3379884941683372560}
   m_Father: {fileID: 6359176980979980170}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -75}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3822351716417259068
@@ -7201,7 +7201,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5611674281037050230}
         m_TargetAssemblyTypeName: UnknownItem, Assembly-CSharp
-        m_MethodName: BuyChoppingBoard
+        m_MethodName: BuyWeapon
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8732,9 +8732,9 @@ RectTransform:
   - {fileID: 5577352757881348298}
   m_Father: {fileID: 7110424092675484280}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -25}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5334989963879164501
@@ -8771,9 +8771,9 @@ RectTransform:
   - {fileID: 1169006840333211344}
   m_Father: {fileID: 6010183617016799952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -75}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5355029618082178822
@@ -9088,6 +9088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6aa9b0bc130bd4980e855a44625f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 1
 --- !u!224 &5577352757881348298
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9137,6 +9138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6aa9b0bc130bd4980e855a44625f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 3
 --- !u!222 &5630155667871485912
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9677,9 +9679,9 @@ RectTransform:
   - {fileID: 1755386064849743558}
   m_Father: {fileID: 1343205354430657386}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -25}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6058085660190781645
@@ -10326,7 +10328,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7025607852724354474}
         m_TargetAssemblyTypeName: UnknownItem, Assembly-CSharp
-        m_MethodName: BuyKnife
+        m_MethodName: BuyWeapon
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10413,9 +10415,9 @@ RectTransform:
   - {fileID: 135267143896366930}
   m_Father: {fileID: 1343205354430657386}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -75}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6581990580960294940
@@ -10463,9 +10465,9 @@ RectTransform:
   - {fileID: 7246370630644829493}
   m_Father: {fileID: 7110424092675484280}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -75}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6620853859384285721
@@ -11150,6 +11152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6aa9b0bc130bd4980e855a44625f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 2
 --- !u!114 &7084382024088351088
 MonoBehaviour:
   m_ObjectHideFlags: 0

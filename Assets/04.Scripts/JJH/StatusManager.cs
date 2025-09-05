@@ -8,7 +8,7 @@ public class StatusManager : Singleton<StatusManager>
     // === PlayerStatus 스크립터블 오브젝트를 받음 ===
     public PlayerStatus status;
 
-    public static Action OnMoneyChanged;   // === 돈 변화 델리게이트 ===
+    public Action OnMoneyChanged;   // === 돈 변화 델리게이트 ===
 
     public PlayerStatus currentStatus;
 

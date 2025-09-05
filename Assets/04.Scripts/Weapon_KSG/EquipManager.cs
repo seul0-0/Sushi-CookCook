@@ -33,12 +33,10 @@ public class EquipManager : Singleton<EquipManager>
 
         if (originalWeaponDatas.Count > 0)
         {
-            while (currentWeapon.Count < originalWeaponDatas.Count)
-                currentWeapon.Add(null);
-
             EquipItem(originalWeaponDatas[0], 0);
         }
     }
+
     public void EquipItem(WeaponScriptableObject data, int slotIndex)
     {
         if (data == null) return;
@@ -57,6 +55,7 @@ public class EquipManager : Singleton<EquipManager>
             OnCursorChanged?.Invoke(null, Vector2.zero);
         }
     }
+
     public void UpdateUiDisplay(WeaponScriptableObject data)
     {
         if (data == null) return;

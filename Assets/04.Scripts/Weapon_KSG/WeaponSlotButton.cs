@@ -30,7 +30,7 @@ public class WeaponSlotButton : MonoBehaviour
         _equipManager = EquipManager.Instance;
 
         // === 돈 변화 감지후 ui 갱신 ===
-        StatusManager.OnMoneyChanged += CheckMoneyToEnhance;
+        StatusManager.Instance.OnMoneyChanged += CheckMoneyToEnhance;
     }
 
     // === 업그레이드 비용 확인 후 업그레이드 ===
@@ -56,8 +56,8 @@ public class WeaponSlotButton : MonoBehaviour
 
         if (EquipManager.Instance.currentWeapon[0] == _equipManager.weaponDatas[index])
         {
-            StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value -= EquipManager.Instance.currentWeapon[0].ItemAttack;
-            StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value -= EquipManager.Instance.currentWeapon[0].CriticalChance;
+            StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value -= _equipManager.currentWeapon[0].ItemAttack;
+            StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value -= _equipManager.currentWeapon[0].CriticalChance;
         }
 
         _equipManager.weaponDatas[index].ItemLevel++;
@@ -91,11 +91,11 @@ public class WeaponSlotButton : MonoBehaviour
     // === 장비 장착 ===
     public void WeaponEquip()
     {
-        StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value -= EquipManager.Instance.currentWeapon[0].ItemAttack;
-        StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value -= EquipManager.Instance.currentWeapon[0].CriticalChance;
+        StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value -= _equipManager.currentWeapon[0].ItemAttack;
+        StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value -= _equipManager.currentWeapon[0].CriticalChance;
 
-        EquipManager.Instance.EquipItem(_equipManager.weaponDatas[index], 0); // 슬롯 0에 장착
+        equipUI.SetCurrentWeapon(_equipManager.weaponDatas[index]);
+
         equipUI.UpdateUI(); // UI 갱신
-
     }
 }
