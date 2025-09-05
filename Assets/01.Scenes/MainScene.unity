@@ -10078,6 +10078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoAttackToggle: {fileID: 474095907028546189}
+  enemyStatusTest: {fileID: 11400000, guid: 4deada31be65d904c92f4a427f83daa8, type: 2}
 --- !u!224 &6119701162005029096
 RectTransform:
   m_ObjectHideFlags: 0

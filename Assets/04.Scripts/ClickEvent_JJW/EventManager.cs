@@ -7,4 +7,5 @@ using UnityEngine.UI;
 public class EventManager : Singleton<EventManager>
 {
     public static Action attackClick;
+    public static Action autoAttackClick;
 }
