@@ -11,7 +11,7 @@ using Zenject;
 
 public enum GameScene
 {
-    [SceneName("CJH_GameManager")] MainMenu,
+    [SceneName("IntroScene")] MainMenu,
     [SceneName("MainScene")] Level1,
     [SceneName("Level2")] Level2,
     [SceneName("GameOver")] GameOver
