@@ -33,9 +33,6 @@ public class EquipManager : Singleton<EquipManager>
 
         if (originalWeaponDatas.Count > 0)
         {
-            while (currentWeapon.Count < originalWeaponDatas.Count)
-                currentWeapon.Add(null);
-
             EquipItem(originalWeaponDatas[0], 0);
         }
     }
