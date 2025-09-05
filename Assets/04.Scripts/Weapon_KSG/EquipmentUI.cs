@@ -26,14 +26,14 @@ public class EquipmentUI : MonoBehaviour
             _equipManager = EquipManager.Instance;
 
             _equipManager.weaponDatas.Clear();
+        }
 
-            foreach (var weapon in _equipManager.originalWeaponDatas)
+        foreach (var weapon in _equipManager.originalWeaponDatas)
+        {
+            if (weapon != null)
             {
-                if (weapon != null)
-                {
-                    var clone = Instantiate(weapon);  // ScriptableObject 복제
-                    _equipManager.weaponDatas.Add(clone);
-                }
+                var clone = Instantiate(weapon);  // ScriptableObject 복제
+                _equipManager.weaponDatas.Add(clone);
             }
         }
 
