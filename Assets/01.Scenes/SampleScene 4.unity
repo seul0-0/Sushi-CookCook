@@ -1093,9 +1093,9 @@ RectTransform:
   - {fileID: 2790435485976410251}
   m_Father: {fileID: 9065663914214189346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -25}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &545209394175022277
@@ -1513,20 +1513,26 @@ MonoBehaviour:
   enemyNameText: {fileID: 8032689641046310107}
   enemySpriteImage: {fileID: 1878244501}
   healthBarImage: {fileID: 5040242705353389542}
+  stageTitleText: {fileID: 0}
+  stageCountText: {fileID: 0}
   stageEnemyOrders:
-  - enemies:
+  - stageName: 
+    enemies:
     - {fileID: 11400000, guid: ea650e0e83e3d32409c857f3d94cbcc7, type: 2}
     - {fileID: 11400000, guid: f750ad79be6dcc4468406aa6bc540575, type: 2}
     - {fileID: 11400000, guid: fd1c74dd838b10f4dac74d2918539e41, type: 2}
-  - enemies:
+  - stageName: 
+    enemies:
     - {fileID: 11400000, guid: ea650e0e83e3d32409c857f3d94cbcc7, type: 2}
     - {fileID: 11400000, guid: f750ad79be6dcc4468406aa6bc540575, type: 2}
     - {fileID: 11400000, guid: c67d78f62189c4749a9d791446fca745, type: 2}
-  - enemies:
+  - stageName: 
+    enemies:
     - {fileID: 11400000, guid: ea650e0e83e3d32409c857f3d94cbcc7, type: 2}
     - {fileID: 11400000, guid: f750ad79be6dcc4468406aa6bc540575, type: 2}
     - {fileID: 11400000, guid: f3125c9c8aa87494aa8b98dead859dbf, type: 2}
-  - enemies:
+  - stageName: 
+    enemies:
     - {fileID: 11400000, guid: ea650e0e83e3d32409c857f3d94cbcc7, type: 2}
     - {fileID: 11400000, guid: dbed77766fc5a024cb10c529c04d65d8, type: 2}
     - {fileID: 11400000, guid: b289fea79f5fa7242964dfc8c4ff1b45, type: 2}
@@ -2578,7 +2584,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7153809002358405764}
         m_TargetAssemblyTypeName: UnknownItem, Assembly-CSharp
-        m_MethodName: BuyChoppingBoard
+        m_MethodName: BuyWeapon
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2775,7 +2781,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoAttackToggle: {fileID: 5337185409777562548}
-  enemyStatusTest: {fileID: 0}
 --- !u!1 &1772037411066900980
 GameObject:
   m_ObjectHideFlags: 0
@@ -3000,9 +3005,9 @@ RectTransform:
   - {fileID: 18014494043306466}
   m_Father: {fileID: 8567982438018440312}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -75}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1919591453903269120
@@ -3982,7 +3987,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213dfc4b055935745aeb7ed54453fbfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDatas: []
   slots:
   - {fileID: 5762331165679046301}
   - {fileID: 1673760086422715710}
@@ -6376,9 +6380,9 @@ RectTransform:
   - {fileID: 545209394175022277}
   m_Father: {fileID: 8567982438018440312}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -25}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &4076569283994912570
@@ -6556,7 +6560,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7205358846486864427}
         m_TargetAssemblyTypeName: UnknownItem, Assembly-CSharp
-        m_MethodName: BuyRicePaddle
+        m_MethodName: BuyWeapon
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8805,11 +8809,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f7ec6d77d79c24f916ea2a357fb853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStatus: {fileID: 0}
   originalWeaponDatas:
   - {fileID: 11400000, guid: 09e31f05f6de47c4786ac244168b8494, type: 2}
   - {fileID: 11400000, guid: c134edc6355ba9c478faf5842a9cdf70, type: 2}
   - {fileID: 11400000, guid: e4d91eae232446b4cb5913064ee6f0a9, type: 2}
   - {fileID: 11400000, guid: 04ca9bc3384e02e40b6db5119c5acc42, type: 2}
+  weaponDatas: []
   currentWeapon: []
   ItemImg: {fileID: 1927115934594902400}
   ItemName: {fileID: 4201041880239632270}
@@ -8917,6 +8923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6aa9b0bc130bd4980e855a44625f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 2
 --- !u!114 &5756679151625986228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11002,6 +11009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6aa9b0bc130bd4980e855a44625f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 3
 --- !u!1 &7172738036555536613
 GameObject:
   m_ObjectHideFlags: 0
@@ -11070,6 +11078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6aa9b0bc130bd4980e855a44625f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 1
 --- !u!224 &7248851238841943885
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11085,9 +11094,9 @@ RectTransform:
   - {fileID: 4512297740896099618}
   m_Father: {fileID: 9065663914214189346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -75}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7254861941165941159
@@ -11342,9 +11351,9 @@ RectTransform:
   - {fileID: 7188166860400552760}
   m_Father: {fileID: 5479348501537481098}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -25}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &7392761345268289291
@@ -12593,9 +12602,9 @@ RectTransform:
   - {fileID: 5347889138703025863}
   m_Father: {fileID: 5479348501537481098}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -75}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &8481346270132261373
@@ -12632,9 +12641,9 @@ RectTransform:
   - {fileID: 3406783608600507552}
   m_Father: {fileID: 4324516960768702616}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -75}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8526330444059578257
@@ -12748,7 +12757,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5753412820233139800}
         m_TargetAssemblyTypeName: UnknownItem, Assembly-CSharp
-        m_MethodName: BuyKnife
+        m_MethodName: BuyWeapon
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13291,9 +13300,9 @@ RectTransform:
   - {fileID: 3961937555266659636}
   m_Father: {fileID: 4324516960768702616}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -25}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9021266106943699159
