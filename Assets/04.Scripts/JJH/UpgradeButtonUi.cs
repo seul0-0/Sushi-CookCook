@@ -44,7 +44,7 @@ public class UpgradeButtonUi : MonoBehaviour
             upgradeBtn.onClick.AddListener(OnClick);
 
             // === 돈 변화 감지후 ui 갱신 ===
-            StatusManager.OnMoneyChanged += CheckButtonUi;
+            StatusManager.Instance.OnMoneyChanged += CheckButtonUi;
         }
     }
 
