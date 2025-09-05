@@ -16,3 +16,4 @@ MonoBehaviour:
   health: 10
   enemyPrefab: {fileID: 4582349960142630152, guid: 502299ef82b22714a8c6589007ee0880, type: 3}
   Gold: 10
+  image: {fileID: 21300000, guid: 3a0961aad09ff4c428e8bcd9abff9feb, type: 3}

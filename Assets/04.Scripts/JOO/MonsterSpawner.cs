@@ -14,11 +14,14 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
     [Header("UI 연결")]
     public TextMeshProUGUI enemyNameText;
     public GameObject enemySpriteImage;
-    public Image healthBarImage; // Slider 대신 Image 사용
+    public Image healthBarImage; 
+    private SpriteRenderer enemySpriteRenderer;   // SpriteRenderer 사용
+
+    public TextMeshProUGUI stageTitleText;  // 스테이지 이름
+    public TextMeshProUGUI stageCountText;  // 스테이지 카운트
 
     [Header("스테이지 구성 (원본 참조)")]
     public List<StageData> stageEnemyOrders = new List<StageData>();
-
 
     private int currentStageIndex = 0;
     [SerializeField]
@@ -26,6 +29,11 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
     private float currentHealth;
     private int maxHealth;
 
+    private void Awake()
+    {
+        enemySpriteRenderer = enemySpriteImage.GetComponent<SpriteRenderer>();
+    }
+    
     private void Start()
     {
         StartStage(0); // 0번 스테이지부터 시작
@@ -37,15 +45,17 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
         currentStageIndex = stageIndex;
         currentEnemyIndex = -1;
 
-// 스테이지용 클론 생성
+        // 스테이지용 클론 생성
         clonedEnemyDatas.Clear();
         foreach (EnemyData enemy in stageEnemyOrders[stageIndex].enemies)
         {
             EnemyData clone = Instantiate(enemy); // 런타임 클론 생성
             clonedEnemyDatas.Add(clone);
         }
+        
+        stageTitleText.text = $"{stageEnemyOrders[stageIndex].stageName} (0/{clonedEnemyDatas.Count})";
 
-
+        // 적 소환 시작
         NextEnemy();
     }
 
@@ -54,21 +64,20 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
     {
         currentEnemyIndex++;
 
-        SpriteRenderer enemysprite = enemySpriteImage.GetComponent<SpriteRenderer>();
-
         if (currentEnemyIndex < clonedEnemyDatas.Count)
         {
             EnemyData enemy = clonedEnemyDatas[currentEnemyIndex];
             maxHealth = enemy.health;
             currentHealth = maxHealth;
-            // UI 세팅
-            //enemyNameText.text = enemy.enemyName;
+            enemyNameText.text = enemy.enemyName;
 
-            if (enemy.image != null)
+            if (enemy.image != null && enemySpriteRenderer != null)
             {
-                enemysprite.sprite = enemy.image;
+                enemySpriteRenderer.sprite = enemy.image;
             }
             UpdateHealthBar();
+            
+            stageTitleText.text = $"{stageEnemyOrders[currentStageIndex].stageName} ({currentEnemyIndex}/{clonedEnemyDatas.Count})";
 
             Debug.Log(enemy.enemyName + " 등장! (체력 " + enemy.health + ")");
         }
@@ -76,12 +85,28 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
         {
             Debug.Log("스테이지 클리어!");
             enemyNameText.text = "";
-            enemysprite.sprite = null;
+            if (enemySpriteRenderer != null) enemySpriteRenderer.sprite = null;
             healthBarImage.fillAmount = 0f;
 
-            StartStage(1);
-        }
+            // 마지막 스테이지 체크
+            if (currentStageIndex + 1 < stageEnemyOrders.Count)
+            {
+                StartStage(currentStageIndex + 1); // 다음 스테이지 시작
+            }
+            else
+            {
+                Debug.Log("모든 스테이지 클리어! 🎉 게임 종료!");
+                // TODO: 엔딩 UI 표시
+                // endingCanvas.SetActive(true);
 
+                // 에디터 테스트용 종료
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit(); // 빌드 실행 시 종료
+#endif
+            }
+        }
     }
 
     // 체력 감소
@@ -107,8 +132,9 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
     {
         if (maxHealth > 0 && healthBarImage != null)
         {
-            healthBarImage.fillAmount = (float)currentHealth / maxHealth;
+            float ratio = (float)currentHealth / maxHealth;
+            Debug.Log("HealthBar FillAmount: " + ratio);
+            healthBarImage.fillAmount = ratio;
         }
     }
-    
 }

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: EnemyData_GreenOnion
   m_EditorClassIdentifier: 
   enemyName: "\uB300\uD30C"
-  health: 15
+  health: 600
   enemyPrefab: {fileID: 4582349960142630152, guid: 502299ef82b22714a8c6589007ee0880, type: 3}
   Gold: 15
+  image: {fileID: 21300000, guid: e98847e43ad355f46b4484d3735df086, type: 3}
