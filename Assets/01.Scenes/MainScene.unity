@@ -2023,12 +2023,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f7ec6d77d79c24f916ea2a357fb853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStatus: {fileID: 0}
   originalWeaponDatas:
   - {fileID: 11400000, guid: 09e31f05f6de47c4786ac244168b8494, type: 2}
   - {fileID: 11400000, guid: c134edc6355ba9c478faf5842a9cdf70, type: 2}
   - {fileID: 11400000, guid: e4d91eae232446b4cb5913064ee6f0a9, type: 2}
   - {fileID: 11400000, guid: 04ca9bc3384e02e40b6db5119c5acc42, type: 2}
+  weaponDatas: []
   currentWeapon: []
   ItemImg: {fileID: 3754241630425506418}
   ItemName: {fileID: 1507256928001074300}
@@ -2324,7 +2324,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213dfc4b055935745aeb7ed54453fbfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDatas: []
   slots:
   - {fileID: 7012151684278158703}
   - {fileID: 4151650947993122508}
@@ -3108,9 +3107,9 @@ RectTransform:
   - {fileID: 2969906707842129719}
   m_Father: {fileID: 6359176980979980170}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -25}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1661933689801461014
@@ -5247,9 +5246,9 @@ RectTransform:
   - {fileID: 585007453934744441}
   m_Father: {fileID: 6010183617016799952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -25}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3023953028056663096
@@ -6597,9 +6596,9 @@ RectTransform:
   - {fileID: 3379884941683372560}
   m_Father: {fileID: 6359176980979980170}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -75}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3822351716417259068
@@ -6735,7 +6734,8 @@ MonoBehaviour:
   index: 2
   upgradeBtn: {fileID: 7950109225954268198}
   equipBtn: {fileID: 4771204665175663417}
-  equipUI: {fileID: 940236413542831214}
+  equipmentUI: {fileID: 940236413542831214}
+  equipManager: {fileID: 0}
 --- !u!1 &3864040701915263389
 GameObject:
   m_ObjectHideFlags: 0
@@ -7234,7 +7234,8 @@ MonoBehaviour:
   index: 3
   upgradeBtn: {fileID: 2560776601917948855}
   equipBtn: {fileID: 2103535607067313111}
-  equipUI: {fileID: 940236413542831214}
+  equipmentUI: {fileID: 940236413542831214}
+  equipManager: {fileID: 0}
 --- !u!222 &4247653812110312468
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8732,9 +8733,9 @@ RectTransform:
   - {fileID: 5577352757881348298}
   m_Father: {fileID: 7110424092675484280}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -25}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5334989963879164501
@@ -8771,9 +8772,9 @@ RectTransform:
   - {fileID: 1169006840333211344}
   m_Father: {fileID: 6010183617016799952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -75}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5355029618082178822
@@ -9421,7 +9422,8 @@ MonoBehaviour:
   index: 0
   upgradeBtn: {fileID: 1713672538141911807}
   equipBtn: {fileID: 5462143280503612502}
-  equipUI: {fileID: 940236413542831214}
+  equipmentUI: {fileID: 940236413542831214}
+  equipManager: {fileID: 0}
 --- !u!224 &5777094576193117304
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9677,9 +9679,9 @@ RectTransform:
   - {fileID: 1755386064849743558}
   m_Father: {fileID: 1343205354430657386}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -25}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6058085660190781645
@@ -9867,7 +9869,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoAttackToggle: {fileID: 474095907028546189}
-  enemyStatusTest: {fileID: 11400000, guid: 4deada31be65d904c92f4a427f83daa8, type: 2}
 --- !u!224 &6119701162005029096
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10414,9 +10415,9 @@ RectTransform:
   - {fileID: 135267143896366930}
   m_Father: {fileID: 1343205354430657386}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -75}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6581990580960294940
@@ -10464,9 +10465,9 @@ RectTransform:
   - {fileID: 7246370630644829493}
   m_Father: {fileID: 7110424092675484280}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -75}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6620853859384285721
@@ -11415,7 +11416,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 70}
+  m_AnchoredPosition: {x: 0, y: 130}
   m_SizeDelta: {x: 500, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7224917954792890906
@@ -12435,7 +12436,8 @@ MonoBehaviour:
   index: 1
   upgradeBtn: {fileID: 3828132356391930528}
   equipBtn: {fileID: 7725639093005307332}
-  equipUI: {fileID: 940236413542831214}
+  equipmentUI: {fileID: 940236413542831214}
+  equipManager: {fileID: 0}
 --- !u!222 &7643536066997330581
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12689,8 +12691,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -14041,7 +14043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.2471698, b: 0.2471698, a: 0.92156863}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

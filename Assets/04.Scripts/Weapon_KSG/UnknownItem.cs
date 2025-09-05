@@ -22,7 +22,7 @@ public class UnknownItem : MonoBehaviour
         StatusManager.Instance.ChangeMoneyValue(-EquipManager.Instance.originalWeaponDatas[1].price);
         // 이 버튼이 속한 부모(UnknownItem)를 찾아서 비활성화
 
-        EquipManager.Instance.originalWeaponDatas[1].have = true;
+        EquipManager.Instance.weaponDatas[1].have = true;
 
         gameObject.SetActive(false);
     }
@@ -32,7 +32,7 @@ public class UnknownItem : MonoBehaviour
             return;
         StatusManager.Instance.ChangeMoneyValue(-EquipManager.Instance.originalWeaponDatas[2].price);
 
-        EquipManager.Instance.originalWeaponDatas[2].have = true;
+        EquipManager.Instance.weaponDatas[2].have = true;
 
         gameObject.SetActive(false);
     }
@@ -43,7 +43,7 @@ public class UnknownItem : MonoBehaviour
             return;
         StatusManager.Instance.ChangeMoneyValue(-EquipManager.Instance.originalWeaponDatas[3].price);
 
-        EquipManager.Instance.originalWeaponDatas[2].have = true;
+        EquipManager.Instance.weaponDatas[2].have = true;
 
         gameObject.SetActive(false);
     }
