@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerAttack : MonoBehaviour
 {
+    [SerializeField] private ParticleControl particleControl;
     private PlayerStatus _playerStatus;
-
     void Start()
     {
         // 공격 이벤트 구독
@@ -23,7 +23,7 @@ public class PlayerAttack : MonoBehaviour
         float damage = CalculateFinalAttack();
         MonsterSpawner.Instance.DamageEnemy(damage);
         Debug.Log("플레이어 공격력: " + damage);
-
+        particleControl.PlayAttackParticle();
         // TODO: 여기서 EnemyManager 같은 곳으로 데미지를 전달하는 로직 필요
     }
 
