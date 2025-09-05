@@ -6,22 +6,25 @@ using UnityEngine.EventSystems;
 
 public class ClickEvent : MonoBehaviour
 {
-    void OnMouseDown()   // 2D Collider가 있는 오브젝트 클릭 시 실행
+     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
             // UI 위 클릭이면 무시
-            if (EventSystem.current.IsPointerOverGameObject())
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                HandleClick();
+            }
+            else
+            {
                 return;
+            }
 
-            // 여기부터는 실제 게임 월드 클릭 처리
-            HandleClick();
         }
-        void HandleClick()
-        {
-            Debug.Log("게임 오브젝트 클릭 처리");
-            // → 공격 이벤트 호출
-            EventManager.attackClick?.Invoke();
-        }
+    }
+
+    void HandleClick()
+    {
+        EventManager.attackClick?.Invoke();
     }
 }

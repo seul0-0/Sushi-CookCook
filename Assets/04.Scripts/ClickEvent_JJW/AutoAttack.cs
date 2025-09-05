@@ -6,7 +6,6 @@ public class AutoAttack : MonoBehaviour
 {
     public Toggle autoAttackToggle;
     private Coroutine autoAttackRoutine;
-    public EnemyStatusTest enemyStatusTest;
     private PlayerStatus _playerStatus;
 
     void Start()
@@ -23,7 +22,7 @@ public class AutoAttack : MonoBehaviour
     private void OnAttack() // Player 클릭을 받아들인 후 처리
     {
         float damage = CalculateFinalAttack();
-        enemyStatusTest.TakeDamage(damage);
+        MonsterSpawner.Instance.DamageEnemy(damage);
         Debug.Log("플레이어 공격력: " + damage);
 
         // TODO: 여기서 EnemyManager 같은 곳으로 데미지를 전달하는 로직 필요
