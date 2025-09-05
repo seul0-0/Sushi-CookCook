@@ -59,7 +59,7 @@ public static class SaveManager
                 enhanceLevel = w.ItemLevel,   // 여기서 강화레벨까지 같이 저장!
                 haveWeapon = w.have
             }).ToList(),
-            haveWeapons = equip.originalWeaponDatas.Select(w => new WeaponSaveData // === 가지고있는 무기 저장 (조) ===
+            haveWeapons = equip.weaponDatas.Select(w => new WeaponSaveData // === 가지고있는 무기 저장 (조) ===
             {
                 weaponName = w.ItemName,
                 enhanceLevel = w.ItemLevel,  
@@ -107,10 +107,10 @@ public static class SaveManager
                 equip.currentWeapon.Add(weapon);
             }
         }
-
+        // === 가지고있던 장비들의 정보 ===
         foreach (var w in dto.haveWeapons)
         {
-            var weapon = equip.originalWeaponDatas.FirstOrDefault(x => x.ItemName == w.weaponName);
+            var weapon = equip.weaponDatas.FirstOrDefault(x => x.ItemName == w.weaponName);
             if (weapon != null)
             {
                 weapon.ItemLevel = w.enhanceLevel; // 저장된 강화레벨 적용

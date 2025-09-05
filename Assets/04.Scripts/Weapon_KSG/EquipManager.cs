@@ -9,6 +9,9 @@ public class EquipManager : Singleton<EquipManager>
     [Header("스크립터블 오브젝트 연결 (원본)")]
     public List<WeaponScriptableObject> originalWeaponDatas = new();
 
+    [Header("클론된 무기 데이터")]
+    public List<WeaponScriptableObject> weaponDatas = new();
+
     [Header("Current Equip")]
     public List<WeaponScriptableObject> currentWeapon = new();
 
