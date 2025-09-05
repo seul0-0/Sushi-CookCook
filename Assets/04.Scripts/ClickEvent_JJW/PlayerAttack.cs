@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class PlayerAttack : MonoBehaviour
 {
     private PlayerStatus _playerStatus;
-    public EnemyStatusTest enemyStatusTest;
 
     void Start()
     {
@@ -22,7 +21,7 @@ public class PlayerAttack : MonoBehaviour
     private void OnAttack() // Player 클릭을 받아들인 후 처리
     {
         float damage = CalculateFinalAttack();
-        enemyStatusTest.TakeDamage(damage);
+        MonsterSpawner.Instance.DamageEnemy(damage);
         Debug.Log("플레이어 공격력: " + damage);
 
         // TODO: 여기서 EnemyManager 같은 곳으로 데미지를 전달하는 로직 필요

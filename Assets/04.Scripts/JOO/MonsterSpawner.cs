@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MonsterSpawner : MonoBehaviour
+public class MonsterSpawner : Singleton<MonsterSpawner>
 {
     [Header("스크립터블 오브젝트 연결 (원본)")]
     public List<EnemyData> originalEnemyDatas = new List<EnemyData>();
@@ -13,7 +13,7 @@ public class MonsterSpawner : MonoBehaviour
 
     [Header("UI 연결")]
     public TextMeshProUGUI enemyNameText;
-    public Image enemySpriteImage;
+    public GameObject enemySpriteImage;
     public Image healthBarImage; // Slider 대신 Image 사용
 
     [Header("스테이지 구성 (원본 참조)")]
@@ -21,8 +21,9 @@ public class MonsterSpawner : MonoBehaviour
 
 
     private int currentStageIndex = 0;
+    [SerializeField]
     private int currentEnemyIndex = -1;
-    private int currentHealth;
+    private float currentHealth;
     private int maxHealth;
 
     private void Start()
@@ -53,32 +54,38 @@ public class MonsterSpawner : MonoBehaviour
     {
         currentEnemyIndex++;
 
-        if (currentEnemyIndex >= clonedEnemyDatas.Count)
+        SpriteRenderer enemysprite = enemySpriteImage.GetComponent<SpriteRenderer>();
+
+        if (currentEnemyIndex < clonedEnemyDatas.Count)
+        {
+            EnemyData enemy = clonedEnemyDatas[currentEnemyIndex];
+            maxHealth = enemy.health;
+            currentHealth = maxHealth;
+            // UI 세팅
+            //enemyNameText.text = enemy.enemyName;
+
+            if (enemy.image != null)
+            {
+                enemysprite.sprite = enemy.image;
+            }
+            UpdateHealthBar();
+
+            Debug.Log(enemy.enemyName + " 등장! (체력 " + enemy.health + ")");
+        }
+        else
         {
             Debug.Log("스테이지 클리어!");
             enemyNameText.text = "";
-            enemySpriteImage.sprite = null;
+            enemysprite.sprite = null;
             healthBarImage.fillAmount = 0f;
-            return;
+
+            StartStage(1);
         }
 
-        EnemyData enemy = clonedEnemyDatas[currentEnemyIndex];
-        maxHealth = enemy.health;
-        currentHealth = maxHealth;
-
-        // UI 세팅
-        //enemyNameText.text = enemy.enemyName;
-        SpriteRenderer sr = enemy.enemyPrefab.GetComponent<SpriteRenderer>();
-        if (sr != null)
-        {
-            enemySpriteImage.sprite = sr.sprite;
-        }        UpdateHealthBar();
-
-        Debug.Log(enemy.enemyName + " 등장! (체력 " + enemy.health + ")");
     }
 
     // 체력 감소
-    public void DamageEnemy(int damage)
+    public void DamageEnemy(float damage)
     {
         Debug.Log("DamageEnemy 호출됨! damage = " + damage);
         if (currentEnemyIndex < 0 || currentEnemyIndex >= clonedEnemyDatas.Count) return;

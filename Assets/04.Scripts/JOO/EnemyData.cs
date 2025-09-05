@@ -9,6 +9,7 @@ public class EnemyData : ScriptableObject
     public int health;
     public GameObject enemyPrefab;
     public int Gold;
+    public Sprite image;
 }
 
 
