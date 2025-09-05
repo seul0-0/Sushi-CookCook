@@ -333,6 +333,7 @@ GameObject:
   - component: {fileID: 5607395788639310198}
   - component: {fileID: 2752020982587532484}
   - component: {fileID: 5451132727112507066}
+  - component: {fileID: 2873792907838348233}
   m_Layer: 5
   m_Name: 'Upgrade Button '
   m_TagString: Untagged
@@ -459,6 +460,27 @@ MonoBehaviour:
   statusUpgradePanel: {fileID: 3761625539822396937}
   nextCost: {fileID: 8488117801833892708}
   upgradeBtn: {fileID: 2752020982587532484}
+--- !u!95 &2873792907838348233
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3258007413560139744}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1c907016a43d44a48bd046daf2f36c7f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5181518642462252415
 GameObject:
   m_ObjectHideFlags: 0

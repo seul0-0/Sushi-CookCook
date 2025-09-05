@@ -20,6 +20,8 @@ public class StatusUpgradePanel : MonoBehaviour
     {
         // === 장비 변경시 스텟값 변경 ===
         WeaponSlotButton.OnWeaponChanhged += NextValue;
+
+        SaveManager.OnDataLoaded += NextValue;
     }
 
     // ===   0    ,  1    ,     2    ,     3     ,  4        ===

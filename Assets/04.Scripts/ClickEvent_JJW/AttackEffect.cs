@@ -5,11 +5,9 @@ public class AttackEffect : MonoBehaviour
 {
     public GameObject swordEffectPrefab; // UI용 칼 이펙트 프리팹
 
-    void OnMouseDown()
+    void Start()
     {
-        Debug.Log("적공격");
-        EventManager.attackClick?.Invoke();
-        SpawnEffectAtCursor();
+        EventManager.attackClick += SpawnEffectAtCursor;
     }
     public void SpawnEffectAtCursor()
     {

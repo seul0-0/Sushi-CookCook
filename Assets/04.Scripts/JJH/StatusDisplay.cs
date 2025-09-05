@@ -17,6 +17,8 @@ public class StatusDisplay : MonoBehaviour
         UpgradeButtonUi.OnStatusRefreshed += Refresh;
 
         WeaponSlotButton.OnWeaponChanhged += Refresh;
+
+        SaveManager.OnDataLoaded += Refresh;
     }
 
     public void Refresh()
