@@ -12,4 +12,5 @@ public class WeaponScriptableObject : ScriptableObject
     public int ItemLevel;
     public Sprite ItemImage;
     public int price;
+    public bool have;
 }

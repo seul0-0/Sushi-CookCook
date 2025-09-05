@@ -13,6 +13,7 @@ public class PlayerSaveData
     public int gold;
     public List<StatSaveData> stats;
     public List<WeaponSaveData> equippedWeapons; // 무기 + 강화레벨
+    public List<WeaponSaveData> haveWeapons;     // === 가지고 있는 무기 + 강화레벨 (조) ===
 }
 
 [Serializable]
@@ -28,6 +29,7 @@ public class WeaponSaveData
 {
     public string weaponName;
     public int enhanceLevel;
+    public bool haveWeapon;
 }
 
 public static class SaveManager
@@ -54,7 +56,14 @@ public static class SaveManager
             equippedWeapons = equip.currentWeapon.Select(w => new WeaponSaveData
             {
                 weaponName = w.ItemName,
-                enhanceLevel = w.ItemLevel   // 여기서 강화레벨까지 같이 저장!
+                enhanceLevel = w.ItemLevel,   // 여기서 강화레벨까지 같이 저장!
+                haveWeapon = w.have
+            }).ToList(),
+            haveWeapons = equip.originalWeaponDatas.Select(w => new WeaponSaveData // === 가지고있는 무기 저장 (조) ===
+            {
+                weaponName = w.ItemName,
+                enhanceLevel = w.ItemLevel,  
+                haveWeapon = w.have
             }).ToList()
         };
 
@@ -96,6 +105,16 @@ public static class SaveManager
             {
                 weapon.ItemLevel = w.enhanceLevel; // 저장된 강화레벨 적용
                 equip.currentWeapon.Add(weapon);
+            }
+        }
+
+        foreach (var w in dto.haveWeapons)
+        {
+            var weapon = equip.originalWeaponDatas.FirstOrDefault(x => x.ItemName == w.weaponName);
+            if (weapon != null)
+            {
+                weapon.ItemLevel = w.enhanceLevel; // 저장된 강화레벨 적용
+                weapon.have = w.haveWeapon;        // === 구매 내역 ===
             }
         }
 
