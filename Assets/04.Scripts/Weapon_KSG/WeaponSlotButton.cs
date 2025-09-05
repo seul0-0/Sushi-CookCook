@@ -56,8 +56,8 @@ public class WeaponSlotButton : MonoBehaviour
 
         if (EquipManager.Instance.currentWeapon[0] == _equipManager.weaponDatas[index])
         {
-            StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value -= EquipManager.Instance.currentWeapon[0].ItemAttack;
-            StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value -= EquipManager.Instance.currentWeapon[0].CriticalChance;
+            StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value -= _equipManager.currentWeapon[0].ItemAttack;
+            StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value -= _equipManager.currentWeapon[0].CriticalChance;
         }
 
         _equipManager.weaponDatas[index].ItemLevel++;
@@ -91,11 +91,16 @@ public class WeaponSlotButton : MonoBehaviour
     // === ¿Â∫Ò ¿Â¬¯ ===
     public void WeaponEquip()
     {
-        StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value -= EquipManager.Instance.currentWeapon[0].ItemAttack;
-        StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value -= EquipManager.Instance.currentWeapon[0].CriticalChance;
+        StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value -= _equipManager.currentWeapon[0].ItemAttack;
+        StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value -= _equipManager.currentWeapon[0].CriticalChance;
 
-        EquipManager.Instance.EquipItem(_equipManager.weaponDatas[index], 0); // ΩΩ∑‘ 0ø° ¿Â¬¯
+        _equipManager.EquipItem(_equipManager.weaponDatas[index], 0); // ΩΩ∑‘ 0ø° ¿Â¬¯
+
+        StatusManager.Instance.currentStatus.stats[(int)StatType.attack].value += _equipManager.currentWeapon[0].ItemAttack;
+        StatusManager.Instance.currentStatus.stats[(int)StatType.critical].value += _equipManager.currentWeapon[0].CriticalChance;
+
         equipUI.UpdateUI(); // UI ∞ªΩ≈
 
+        OnWeaponChanhged?.Invoke();
     }
 }
