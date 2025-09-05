@@ -15,6 +15,8 @@ public class UpgradeButtonUi : MonoBehaviour
     public TextMeshProUGUI nextCost;
     public Button upgradeBtn;
 
+    // === 버튼 애니메이션 ===
+    private Animator _anim;
     // === 현재 버튼 번호 ===
     private int _buttonindex;
     // === 업그레이드 비용 ===
@@ -25,6 +27,11 @@ public class UpgradeButtonUi : MonoBehaviour
     private bool _isClickHold;
     // === 코루틴 ===
     private Coroutine _coroutine;
+
+    private void Awake()
+    {
+        _anim = GetComponent<Animator>();
+    }
 
     public void Start()
     {
@@ -52,6 +59,9 @@ public class UpgradeButtonUi : MonoBehaviour
         else
         {
             _isClickHold = !_isClickHold;
+            // === 자동구매 애니 멈춤 ===
+            _anim.SetBool("isComplete", false);
+
             _coroutine = StartCoroutine(UpgradeCorutine());
         }
     }
@@ -76,6 +86,8 @@ public class UpgradeButtonUi : MonoBehaviour
         while (_isClickHold)
         {
             UpgradeStatus();
+
+            _anim.SetBool("isComplete", true); 
 
             yield return new WaitForSeconds(0.2f);
         }
@@ -119,7 +131,10 @@ public class UpgradeButtonUi : MonoBehaviour
         if (StatusManager.Instance.currentStatus.money < _upgradeCost)
         {
             upgradeBtn.image.color = Color.red;
+
             _isUpgradeReady = false;
+            // === 자동구매 멈춤 ===
+            _anim.SetBool("isComplete", false);
             return;
         }
 

@@ -32,6 +32,8 @@ public class WeaponSaveData
 
 public static class SaveManager
 {
+    public static event Action OnDataLoaded;      // === Ui갱신 호출 ===
+
     private static readonly string SavePath = Path.Combine(Application.persistentDataPath, "playerSave.json");
 
     // 내부용: 실제 직렬화 저장
@@ -101,5 +103,7 @@ public static class SaveManager
         if (equip.currentWeapon.Count > 0)
             equip.UpdateUiDisplay(equip.currentWeapon[0]);
         Debug.Log($"게임 로드 완료! 경로: {SavePath}");
+
+        OnDataLoaded?.Invoke();
     }
 }
