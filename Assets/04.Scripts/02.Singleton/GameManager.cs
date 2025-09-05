@@ -11,8 +11,8 @@ using Zenject;
 
 public enum GameScene
 {
-    [SceneName("IntroScene")] MainMenu,
-    [SceneName("MainScene")] Level1,
+    [SceneName("IntroScene")] IntroScene,
+    [SceneName("MainScene")] MainScene,
     [SceneName("Level2")] Level2,
     [SceneName("GameOver")] GameOver
 }
@@ -67,8 +67,6 @@ public class GameManager : MonoBehaviour, IGameManager
 
 
         _settingPanel.InitPanel();
-
-        _audioManager.PlayBGM("1");
 
         // ESC 입력으로 UI 토글
         this.UpdateAsObservable()

@@ -498,9 +498,9 @@ MonoBehaviour:
   bgmGroup: {fileID: 2301920217948411249, guid: 0a4991d0bbd39b44381f1727e0c0e506, type: 2}
   sfxGroup: {fileID: -3327997297813668083, guid: 0a4991d0bbd39b44381f1727e0c0e506, type: 2}
   bgmList:
-  - name: 1
+  - name: IntroScene
     clip: {fileID: 8300000, guid: a15b81c18dd2d184181cf5f5c6e3ffc2, type: 3}
-  - name: 2
+  - name: MainScene
     clip: {fileID: 8300000, guid: ffeabdf4cdc70884d826fc5a5dd152f3, type: 3}
   - name: 3
     clip: {fileID: 8300000, guid: 321e0052eca3338429cf2ab317078d4b, type: 3}

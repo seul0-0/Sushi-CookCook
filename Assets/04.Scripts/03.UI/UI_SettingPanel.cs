@@ -90,7 +90,7 @@ public class UI_SettingPanel : MonoBehaviour
     public void OnGameStart()
     {
         _startPanel.SetActive(false);
-        DelayAndLoad(GameScene.Level1).Forget();
+        DelayAndLoad(GameScene.MainScene).Forget();
         _audioManager.SetBgmVolume(0.5f);
         _audioManager.PlayBGM("2");
     }
@@ -158,6 +158,7 @@ public class UI_SettingPanel : MonoBehaviour
                 Debug.Log("로드 완료");
                 SaveManager.Load();
                 _loadPanel.SetActive(false);
+                SceneManager.LoadScene(SceneUtility.GetSceneName(GameScene.IntroScene));
             });
 
             _overDeclineButton.onClick.RemoveAllListeners();
@@ -171,7 +172,7 @@ public class UI_SettingPanel : MonoBehaviour
 
     public void OnCloseTheScene()
     {
-        SceneManager.LoadScene(SceneUtility.GetSceneName(GameScene.MainMenu));
+        SceneManager.LoadScene(SceneUtility.GetSceneName(GameScene.IntroScene));
         _startPanel.SetActive(true);
         OnToggleSettings();
     }

@@ -1,10 +1,12 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -93,6 +95,17 @@ public class AudioManager : MonoBehaviour, IAudioManager
 
         SetBgmVolume(_bgmVolume);
         SetSfxVolume(_sfxVolume);
+    }
+
+    private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
+    private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (Enum.TryParse(scene.name, out GameScene gameScene))
+        {
+            string sceneName = SceneUtility.GetSceneName(gameScene);
+            PlayBGM(sceneName);
+        }
     }
 
     void Update()
