@@ -30,7 +30,7 @@ public class WeaponSlotButton : MonoBehaviour
         _equipManager = EquipManager.Instance;
 
         // === 돈 변화 감지후 ui 갱신 ===
-        StatusManager.OnMoneyChanged += CheckMoneyToEnhance;
+        StatusManager.Instance.OnMoneyChanged += CheckMoneyToEnhance;
     }
 
     // === 업그레이드 비용 확인 후 업그레이드 ===

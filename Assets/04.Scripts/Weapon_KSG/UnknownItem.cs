@@ -4,46 +4,34 @@ using UnityEngine;
 
 public class UnknownItem : MonoBehaviour
 {
+    [SerializeField]
+    private int index;
+
     private void Start()
     {
-        for(int i =0; i < EquipManager.Instance.originalWeaponDatas.Count; i++)
+        EquipmentUI.OnEquip += CheckUnknowItem;
+    }
+
+    // === 해금 상태 체크 ===
+    public void CheckUnknowItem()
+    {
+        if (EquipManager.Instance.weaponDatas[index].have == true)
         {
-            if (EquipManager.Instance.originalWeaponDatas[i].have == true)
-            {
-                gameObject.SetActive(true);
-            }
+            gameObject.SetActive(false);
+        }
+        else 
+        {
+            gameObject.SetActive(true);
         }
     }
 
-    public void BuyRicePaddle()
+    public void BuyWeapon()
     {
-        if (StatusManager.Instance.currentStatus.money < EquipManager.Instance.originalWeaponDatas[1].price)
+        if (StatusManager.Instance.currentStatus.money < EquipManager.Instance.originalWeaponDatas[index].price)
             return;
-        StatusManager.Instance.ChangeMoneyValue(-EquipManager.Instance.originalWeaponDatas[1].price);
-        // 이 버튼이 속한 부모(UnknownItem)를 찾아서 비활성화
+        StatusManager.Instance.ChangeMoneyValue(-EquipManager.Instance.originalWeaponDatas[index].price);
 
-        EquipManager.Instance.weaponDatas[1].have = true;
-
-        gameObject.SetActive(false);
-    }
-    public void BuyKnife()
-    {
-        if (StatusManager.Instance.currentStatus.money < EquipManager.Instance.originalWeaponDatas[2].price)
-            return;
-        StatusManager.Instance.ChangeMoneyValue(-EquipManager.Instance.originalWeaponDatas[2].price);
-
-        EquipManager.Instance.weaponDatas[2].have = true;
-
-        gameObject.SetActive(false);
-    }
-
-    public void BuyChoppingBoard()
-    {
-        if (StatusManager.Instance.currentStatus.money < EquipManager.Instance.originalWeaponDatas[3].price)
-            return;
-        StatusManager.Instance.ChangeMoneyValue(-EquipManager.Instance.originalWeaponDatas[3].price);
-
-        EquipManager.Instance.weaponDatas[2].have = true;
+        EquipManager.Instance.weaponDatas[index].have = true;
 
         gameObject.SetActive(false);
     }
