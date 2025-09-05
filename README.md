@@ -44,12 +44,13 @@
 
 ### 무기 장착/강화 시스템
 - 재화 소모로 무기 장착 및 강화 가능  
-<img width="288" height="132" alt="image" src="https://github.com/user-attachments/assets/3f60bf52-2ded-40d6-8772-095fd912a19a" />
+![weqpon](https://github.com/user-attachments/assets/8eeeab62-9521-4b0a-a745-bac7de5128f2)
 
 
 ### 능력치 업그레이드 시스템
-- 재화 소모로 능력치 강화 가능  
-<img width="288" height="132" alt="image" src="https://github.com/user-attachments/assets/3f60bf52-2ded-40d6-8772-095fd912a19a" />
+- 재화 소모로 능력치 강화 가능
+- 2초 후 자동으로 강화 되는 시스템
+ ![2025-09-0522-43-34-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/2faeb4ae-7038-40a8-83e4-cccefc5084e3)
 
 
 ### 공격 시스템
