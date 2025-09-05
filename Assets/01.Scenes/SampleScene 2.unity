@@ -348,7 +348,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1014758551
 Transform:
   m_ObjectHideFlags: 0
@@ -1206,8 +1206,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2177376390981983545}
-  - component: {fileID: 1793011763322260111}
   - component: {fileID: 4784789348195406618}
+  - component: {fileID: 4784789348195406619}
   m_Layer: 0
   m_Name: CursorZone
   m_TagString: Untagged
@@ -3458,20 +3458,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &1793011763322260111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477622008086912008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2774eea6eedaf84da5fb334db45a25c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cursorTexture: {fileID: 2800000, guid: 14080aafcbce2ab4caad1d862d98d035, type: 3}
-  hotSpot: {x: 0, y: 0}
 --- !u!114 &1797443487138269668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8298,6 +8284,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4784789348195406619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477622008086912008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2774eea6eedaf84da5fb334db45a25c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4786689193343264934
 MonoBehaviour:
   m_ObjectHideFlags: 0

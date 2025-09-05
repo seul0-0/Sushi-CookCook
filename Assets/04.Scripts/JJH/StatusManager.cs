@@ -117,6 +117,11 @@ public class StatusManager : Singleton<StatusManager>
     {
         currentStatus.money = Mathf.Max(0, currentStatus.money + amount);
 
+        if (amount > 0)
+        {
+            currentStatus.money += (int)(0.1f * currentStatus.stats[(int)StatType.luck].value);
+        }
+
         OnMoneyChanged?.Invoke();
 
         return currentStatus.money;

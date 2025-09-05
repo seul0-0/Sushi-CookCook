@@ -29,8 +29,10 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
     private float currentHealth;
     private int maxHealth;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         enemySpriteRenderer = enemySpriteImage.GetComponent<SpriteRenderer>();
     }
     
