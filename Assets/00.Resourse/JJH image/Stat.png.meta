@@ -139,10 +139,10 @@ TextureImporter:
       name: Stat_0
       rect:
         serializedVersion: 2
-        x: 424
-        y: 830
-        width: 610
-        height: 412
+        x: 1014
+        y: 833
+        width: 611
+        height: 407
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,29 +150,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 904bd246d01a1c947b16978656b3ab25
-      internalID: 1229782662
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Stat_1
-      rect:
-        serializedVersion: 2
-        x: 1019
-        y: 831
-        width: 607
-        height: 410
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b178ffb8f39aa5948b22438539b08315
-      internalID: -753428629
+      spriteID: 7a04c9888ceed32468efdc681d6c8559
+      internalID: 1935218444
       vertices: []
       indices: 
       edges: []
@@ -188,8 +167,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Stat_0: 1229782662
-      Stat_1: -753428629
+      Stat_0: 1935218444
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
