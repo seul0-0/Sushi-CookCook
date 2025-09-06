@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class ClickEvent : MonoBehaviour
 {
-     void Update()
+    void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
