@@ -159,6 +159,7 @@ public class UI_SettingPanel : MonoBehaviour
                 SaveManager.Load();
                 _loadPanel.SetActive(false);
                 SceneManager.LoadScene(SceneUtility.GetSceneName(GameScene.IntroScene));
+                _startPanel.SetActive(true);
             });
 
             _overDeclineButton.onClick.RemoveAllListeners();
