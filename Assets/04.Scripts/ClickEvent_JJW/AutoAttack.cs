@@ -23,7 +23,6 @@ public class AutoAttack : MonoBehaviour
     {
         float damage = CalculateFinalAttack();
         MonsterSpawner.Instance.DamageEnemy(damage);
-        Debug.Log("플레이어 공격력: " + damage);
 
         // TODO: 여기서 EnemyManager 같은 곳으로 데미지를 전달하는 로직 필요
     }
@@ -72,7 +71,6 @@ public class AutoAttack : MonoBehaviour
             yield return new WaitForSeconds(attackInterval);
 
             EventManager.autoAttackClick?.Invoke();
-            Debug.Log("자동공격 실행");
         }
     }
 }

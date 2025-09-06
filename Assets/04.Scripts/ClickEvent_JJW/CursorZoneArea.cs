@@ -21,23 +21,21 @@ public class CursorZone : MonoBehaviour
                 if (firstItem != null && firstItem.CursorTexture != null)
                 {
                     UpdateCursor(firstItem.CursorTexture, firstItem.CursorHotspot);
-                    Debug.Log($"[CursorZone] 초기 커서 세팅: {firstItem.name}");
                 }
             }
         }
     }
 
-    void OnDisable()
+    void OnDisable() // 아이템 장착 해제
     {
         if (EquipManager.Instance != null)
             EquipManager.OnCursorChanged -= UpdateCursor;
     }
 
-    void UpdateCursor(Texture2D texture, Vector2 hotspot)
+    void UpdateCursor(Texture2D texture, Vector2 hotspot) // 장비별로 존재하는 커서 이미지 업데이트
     {
         currentCursor = texture;
         hotSpot = hotspot;
-        Debug.Log($"[CursorZone] 커서 이벤트 수신: {currentCursor?.name ?? "null"}");
 
         // Collider 위에 있을 때 바로 적용
         if (isOver)
@@ -56,7 +54,6 @@ public class CursorZone : MonoBehaviour
             {
                 Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
                 isOver = false;
-                Debug.Log("[CursorZone] UI 위 - 커서 기본으로");
             }
             return;
         }
@@ -67,7 +64,6 @@ public class CursorZone : MonoBehaviour
             {
                 Cursor.SetCursor(currentCursor, hotSpot, CursorMode.Auto);
                 isOver = true;
-                Debug.Log($"[CursorZone] Collider 위 - 커서 적용: {currentCursor?.name ?? "null"}");
             }
         }
         else
@@ -76,7 +72,6 @@ public class CursorZone : MonoBehaviour
             {
                 Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
                 isOver = false;
-                Debug.Log("[CursorZone] Collider 벗어남 - 커서 기본으로");
             }
         }
     }

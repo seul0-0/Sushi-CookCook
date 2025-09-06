@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 using UnityEngine.UI;
 public class PlayerAttack : MonoBehaviour
@@ -22,8 +23,6 @@ public class PlayerAttack : MonoBehaviour
     {
         float damage = CalculateFinalAttack();
         MonsterSpawner.Instance.DamageEnemy(damage);
-        Debug.Log("플레이어 공격력: " + damage);
-        particleControl.PlayAttackParticle();
         // TODO: 여기서 EnemyManager 같은 곳으로 데미지를 전달하는 로직 필요
     }
 
@@ -41,10 +40,12 @@ public class PlayerAttack : MonoBehaviour
         // 치명타 성공
         if (random <= criticalChance)
         {
+            particleControl.PlayCriticalParticle();
             return attack * criticalDamage;
         }
         else
         {
+            particleControl.PlayNormalParticle();
             return attack;
         }
     }

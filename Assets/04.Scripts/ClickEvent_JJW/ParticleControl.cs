@@ -5,30 +5,27 @@ using UnityEngine;
 public class ParticleControl : MonoBehaviour
 {
     [Header("파티클 프리팹 or 컴포넌트")]
-    [SerializeField] private ParticleSystem attackParticle;
-    private WaitForSeconds wait;
-    private Coroutine particleCoroutine;
+    [SerializeField] private ParticleSystem attackParticlePrefab;
+    [SerializeField] private ParticleSystem criticalParticlePrefab;
 
-    private void Awake()
+    public void PlayNormalParticle()
     {
-        wait = new WaitForSeconds(1f);
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f;
+
+        ParticleSystem normalParticle = Instantiate(attackParticlePrefab, mousePosition, Quaternion.identity);
+        normalParticle.Play();
+
+        Destroy(normalParticle.gameObject, normalParticle.main.duration);
     }
-    public void PlayAttackParticle()
+    public void PlayCriticalParticle()
     {
-        if (attackParticle == null) return;
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f;
 
-        attackParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        attackParticle.Play();
+        ParticleSystem criticalParticle = Instantiate(criticalParticlePrefab, mousePosition, Quaternion.identity);
+        criticalParticle.Play();
 
-        if (particleCoroutine != null)
-        {
-            StopCoroutine(particleCoroutine);
-        }
-        particleCoroutine = StartCoroutine(StopAfterDuration());
-    }
-    private IEnumerator StopAfterDuration()
-    {
-        yield return wait;
-        attackParticle.Stop();
+        Destroy(criticalParticle.gameObject, criticalParticle.main.duration);
     }
 }
