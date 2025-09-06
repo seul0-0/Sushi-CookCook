@@ -45,6 +45,8 @@ public class EquipmentUI : MonoBehaviour
         if(_equipManager.currentWeapon != null)
         {
             OpenWindow();
+
+            SaveManager.OnDataLoaded += OpenWindow;
         }
 
         EquipManager.Instance.currentWeapon.Add(_equipManager.weaponDatas[0]);
@@ -57,6 +59,12 @@ public class EquipmentUI : MonoBehaviour
     // === 장비창 열고 닫기 ===
     public void OpenWindow()
     {
+        // === 만약 창이 열려있을 경우 ===
+        if (equipWindow.activeSelf)
+        {
+            equipWindow.SetActive(false);
+        }
+
         _isClick = !_isClick;
         
         equipWindow.SetActive(_isClick);
