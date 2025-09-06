@@ -35,8 +35,8 @@ MonoBehaviour:
     level: 0
   money: 10000
   staticons:
-  - {fileID: 203524061, guid: d12d0f80e2e2eb14fab151775d41a020, type: 3}
-  - {fileID: -1624880674, guid: d12d0f80e2e2eb14fab151775d41a020, type: 3}
-  - {fileID: 1493697645, guid: bed98a114011da44b94ff5256d0f270d, type: 3}
-  - {fileID: 1717257276, guid: bed98a114011da44b94ff5256d0f270d, type: 3}
-  - {fileID: 357651013, guid: bed98a114011da44b94ff5256d0f270d, type: 3}
+  - {fileID: 21300000, guid: cf1e65e37b3855341aa305a2378c489c, type: 3}
+  - {fileID: 21300000, guid: d12d0f80e2e2eb14fab151775d41a020, type: 3}
+  - {fileID: -1723145450, guid: 92f311c4ef5b8c2499c9328abbdee496, type: 3}
+  - {fileID: 741219222, guid: 92f311c4ef5b8c2499c9328abbdee496, type: 3}
+  - {fileID: 21300000, guid: f844cfc166ab64d449533e10920e112d, type: 3}
