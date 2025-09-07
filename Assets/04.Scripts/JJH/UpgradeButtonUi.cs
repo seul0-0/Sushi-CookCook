@@ -75,6 +75,8 @@ public class UpgradeButtonUi : MonoBehaviour
             yield break;
         }
 
+        _anim.SetBool("isComplete", true);
+
         UpgradeStatus();
 
         // === 2초간 누를시 자동 업글 ===
@@ -86,8 +88,6 @@ public class UpgradeButtonUi : MonoBehaviour
         while (_isClickHold)
         {
             UpgradeStatus();
-
-            _anim.SetBool("isComplete", true); 
 
             yield return new WaitForSeconds(0.2f);
         }
@@ -138,7 +138,8 @@ public class UpgradeButtonUi : MonoBehaviour
             return;
         }
 
-        upgradeBtn.image.color = Color.black;
+        // === 구매 가능시 약간 검정색 ===
+        upgradeBtn.image.color = new Color(0,0,0,200/255f);
 
         _isUpgradeReady = true;
     }
