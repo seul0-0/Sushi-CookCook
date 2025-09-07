@@ -12,4 +12,7 @@ public class StageData
 
     [Header("이 스테이지에 등장하는 적들")]
     public EnemyData[] enemies;   // 스테이지 적 리스트
+    
+    [Header("완성 요리 이미지")] // 방금 추가
+    public Sprite FoodSprite;
 }
