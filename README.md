@@ -38,13 +38,14 @@
 - UI 조작으로 장비와 능력 제공
 - 자동 생성되는 몬스터와의 전투
 - 강화 시스템 및 목표 지점 설계  
-<img width="288" height="132" alt="image" src="https://github.com/user-attachments/assets/252a7b90-07f9-4bec-895e-8749ea873276" />
+<img width="400" height="700" alt="image" src="https://github.com/user-attachments/assets/b9ef79d4-926b-4568-8d3b-3504e5b11c46" />
 
 
 ### 스테이지 레벨 시스템
 - 스테이지마다 강해지는 몬스터
 - 클리어 시 보상 획득  
-<img width="288" height="132" alt="image" src="https://github.com/user-attachments/assets/3f60bf52-2ded-40d6-8772-095fd912a19a" />
+<img width="400" height="700" alt="image" src="https://github.com/user-attachments/assets/2b9e7bbb-a11e-4001-86ef-7ecacc772127" />
+
 
 
 ### 무기 장착/강화 시스템
@@ -61,7 +62,7 @@
 ### 공격 시스템
 - 무기/강화/능력치를 합산하여 몬스터 공격
 - 자동 공격 시스템 지원  
-<img width="288" height="132" alt="image" src="https://github.com/user-attachments/assets/3f60bf52-2ded-40d6-8772-095fd912a19a" />
+<img width="400" height="700" alt="image" src="https://github.com/user-attachments/assets/2b9e7bbb-a11e-4001-86ef-7ecacc772127" />
 
 
 ### 사운드 및 음악
