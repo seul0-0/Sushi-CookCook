@@ -26,10 +26,12 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
     [Header("스테이지 구성 (원본 참조)")]
     public List<StageData> stageEnemyOrders = new List<StageData>();
 
-    private int currentStageIndex = 0;
-    [SerializeField]
+    [HideInInspector]
+    public int currentStageIndex = 0;
+    
     private int currentEnemyIndex = -1;
-    private float currentHealth;
+
+    public float currentHealth;
     private int maxHealth;
 
     protected override void Awake()
