@@ -40,6 +40,7 @@ public class WeaponSlotButton : MonoBehaviour
         if (StatusManager.Instance.currentStatus.money < 10)
         {
             upgradeBtn.image.color = Color.red;
+            _isUpgrade = false;
             return;
         }
 

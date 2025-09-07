@@ -8,6 +8,9 @@ public class AutoAttack : MonoBehaviour
     private Coroutine autoAttackRoutine;
     private PlayerStatus _playerStatus;
 
+    [Header("파티클 시스템")]
+    [SerializeField] private ParticleControl particleControl;
+
     void Start()
     {
         // 토글 이벤트 연결
@@ -51,14 +54,16 @@ public class AutoAttack : MonoBehaviour
         float criticalDamage = _playerStatus.stats[(int)StatType.criticalDamage].value;
 
         float random = Random.Range(1f, 100f);
-
+        Vector3 enemyPosition = MonsterSpawner.Instance.enemySpriteImage.transform.position;
         // 치명타 성공
         if (random <= criticalChance)
         {
+            particleControl.PlayCriticalParticle();
             return autoAttack * criticalDamage;
         }
         else
         {
+            particleControl.PlayNormalParticle();
             return autoAttack;
         }
     }

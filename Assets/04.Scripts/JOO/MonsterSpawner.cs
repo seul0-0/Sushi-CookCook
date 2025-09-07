@@ -20,13 +20,18 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
     public TextMeshProUGUI stageTitleText;  // 스테이지 이름
     public TextMeshProUGUI stageCountText;  // 스테이지 카운트
 
+    // === 클리어시 영수증 ===
+    public GameObject reciptPanel;
+
     [Header("스테이지 구성 (원본 참조)")]
     public List<StageData> stageEnemyOrders = new List<StageData>();
 
-    private int currentStageIndex = 0;
-    [SerializeField]
+    [HideInInspector]
+    public int currentStageIndex = 0;
+    
     private int currentEnemyIndex = -1;
-    private float currentHealth;
+
+    public float currentHealth;
     private int maxHealth;
 
     protected override void Awake()
@@ -80,12 +85,9 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
             UpdateHealthBar();
             
             stageTitleText.text = $"{stageEnemyOrders[currentStageIndex].stageName} ({currentEnemyIndex}/{clonedEnemyDatas.Count})";
-
-            Debug.Log(enemy.enemyName + " 등장! (체력 " + enemy.health + ")");
         }
         else
         {
-            Debug.Log("스테이지 클리어!");
             enemyNameText.text = "";
             if (enemySpriteRenderer != null) enemySpriteRenderer.sprite = null;
             healthBarImage.fillAmount = 0f;
@@ -94,10 +96,10 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
             if (currentStageIndex + 1 < stageEnemyOrders.Count)
             {
                 StartStage(currentStageIndex + 1); // 다음 스테이지 시작
+                StageClear();
             }
             else
             {
-                Debug.Log("모든 스테이지 클리어! 🎉 게임 종료!");
                 // TODO: 엔딩 UI 표시
                 // endingCanvas.SetActive(true);
 
@@ -114,7 +116,6 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
     // 체력 감소
     public void DamageEnemy(float damage)
     {
-        Debug.Log("DamageEnemy 호출됨! damage = " + damage);
         if (currentEnemyIndex < 0 || currentEnemyIndex >= clonedEnemyDatas.Count) return;
 
         currentHealth -= damage;
@@ -124,7 +125,6 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
 
         if (currentHealth <= 0)
         {
-            Debug.Log(clonedEnemyDatas[currentEnemyIndex].enemyName + " 처치!");
             NextEnemy();
         }
     }
@@ -135,8 +135,12 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
         if (maxHealth > 0 && healthBarImage != null)
         {
             float ratio = (float)currentHealth / maxHealth;
-            Debug.Log("HealthBar FillAmount: " + ratio);
             healthBarImage.fillAmount = ratio;
         }
+    }
+
+    private void StageClear()
+    {
+        reciptPanel.SetActive(true);
     }
 }

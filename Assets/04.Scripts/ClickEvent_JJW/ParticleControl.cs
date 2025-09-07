@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ParticleControl : MonoBehaviour
 {
+    AutoAttack autoAttack;
+
     [Header("파티클 프리팹 or 컴포넌트")]
     [SerializeField] private ParticleSystem attackParticlePrefab;
     [SerializeField] private ParticleSystem criticalParticlePrefab;
