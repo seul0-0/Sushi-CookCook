@@ -1,6 +1,10 @@
-##Game Title
+<h2 align="center">Game Title</h2>
+
 ---
-<img width="431" height="577" alt="image" src="https://github.com/user-attachments/assets/77a8797b-39f4-42a8-b1b7-df6680339f2a" />
+
+<p align="center">
+  <img width="431" height="577" alt="image" src="https://github.com/user-attachments/assets/77a8797b-39f4-42a8-b1b7-df6680339f2a" />
+</p>
 
 
 ##Flow Chart
@@ -61,9 +65,10 @@
 
 
 ### 사운드 및 음악
-- 사운드 효과와 배경 음악으로 게임 분위기 강화  
-![111](https://github.com/user-attachments/assets/9648f35b-537b-495c-8b37-02d169df8bdc)
-![222](https://github.com/user-attachments/assets/f635ce82-4927-4436-abb0-ab434e6a1313)
+- 사운드 효과와 배경 음악으로 게임 분위기 강화
+<img width="400" height="700" alt="image" src="https://github.com/user-attachments/assets/9648f35b-537b-495c-8b37-02d169df8bdc" />
+<img width="400" height="700" alt="image" src="https://github.com/user-attachments/assets/f635ce82-4927-4436-abb0-ab434e6a1313" />
+
 
 
 ---
