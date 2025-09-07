@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: fe162ef3e77d4764fb483cde4251c9ae
+<<<<<<<< HEAD:Assets/00.Resourse/JJH image.meta
+guid: c9929168220c50248b8497745d3e678a
+========
+guid: ba99e1147a44ea84ab9604e27d3ffe71
+>>>>>>>> JJW_click:Assets/00.Resourse/Fishes.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
