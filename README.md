@@ -7,9 +7,9 @@
 </p>
 
 
-##Flow Chart
+##WireFrame
 ---
-<img width="1139" height="765" alt="image" src="https://github.com/user-attachments/assets/103afc1d-ebf2-42a5-87b6-879dfbde4c57" />
+<img width="1280" height="720" alt="슬라이드1" src="https://github.com/user-attachments/assets/265dcc15-57d7-4dee-a2d7-982e415e3e8f" />
 *게임 전체 진행 흐름도*
 
 ##Diagram
