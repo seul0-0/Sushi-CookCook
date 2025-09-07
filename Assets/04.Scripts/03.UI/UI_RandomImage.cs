@@ -18,13 +18,11 @@ public class UI_RandomImage : MonoBehaviour
     {
         if (sprites == null || sprites.Length == 0)
         {
-            Debug.LogWarning("sprites 배열이 비어있습니다!");
             return;
         }
 
         if (targetImage == null)
         {
-            Debug.LogWarning("targetImage가 할당되지 않았습니다!");
             return;
         }
 

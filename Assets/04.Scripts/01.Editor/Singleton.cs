@@ -14,7 +14,6 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             if (_applicationIsQuitting)
             {
-                Debug.LogWarning($"[Singleton] {typeof(T)} 이미 종료됨. 새 인스턴스 반환하지 않음.");
                 return null;
             }
 

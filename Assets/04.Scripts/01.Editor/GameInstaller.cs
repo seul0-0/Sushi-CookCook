@@ -9,7 +9,6 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private GameManager gameManagerPrefab;
     public override void InstallBindings()
     {
-        Debug.Log("[Installer] InstallBindings 호출됨");
         // ProjectContext에서는 Prefab으로 FromComponentInNewPrefab을 사용해 한 번만 생성
         Container.Bind<IAudioManager>()
                  .To<AudioManager>()
@@ -21,7 +20,6 @@ public class GameInstaller : MonoInstaller
                  .FromComponentInHierarchy()
                  .AsSingle()
                  .NonLazy();
-        Debug.Log("[Installer] 바인딩 완료");
     }
 }
 
